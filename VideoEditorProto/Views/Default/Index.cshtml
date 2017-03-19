@@ -1,17 +1,110 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <meta charset="UTF-8">
+    <title>EDO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link href="@Url.Content("~/css/style.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div> 
-    </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Дополнения</a></li>
+                <li><a href="#">Видеохостинг</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+            <a href="#" class="logo">
+                <img src="img/logo.png" alt="">
+            </a>
+        </nav>
+        <div class="descr">редактируйте ваши лучшие моменты в <span>EDO</span></div>
+        <a href="#" class="user"><img src="img/user.png" alt=""></a>
+    </header>
+    <section class="browser">
+        <h3>браузер - все что вам нужно!</h3>
+        <a href="@Url.Action("Index", "Editor")">начать редактировать</a>
+        <div class="block">без скачиваний<img src="img/check.png" alt=""></div>
+        <div class="block">бесплатно<img src="img/check.png" alt=""></div>
+        <div class="block">без установок<img src="img/check.png" alt=""></div>
+    </section>
+    <section class="man">
+        <div class="descr1">мы даем вам максимум возможностей</div>
+        <div class="descr2"><span>EDO</span> - это онлайн видеоредактор наделенный возможностями профессионального уровня. Максимум функций, минимум затрат.</div>
+        <div class="screens">
+            <div class="screen1">
+                <p>Файлы</p>
+                <img src="img/screen1.png" alt="">
+            </div>
+            <div class="screen1">
+                <p>Эффекты</p>
+                <img src="img/screen2.png" alt="">
+            </div>
+            <div class="screen1">
+                <p>Текст</p>
+                <img src="img/screen3.png" alt="">
+            </div>
+            <div class="screen2">
+                <p>Полная свобода в управлении дорожками</p>
+                <img src="img/screen4.png" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="interface">
+        <div class="text">
+            <h3>удобный и продуманный интерфейс</h3>
+            <p>Благодаря интуитивно продуманному интерфейсу у Вас не получиться заблудится в нашем функционале. Даже если у Вас возникнет какой-то вопрос, Вам всегда поможет наш помошник, встроеный в видередактор. Вам понадобиться минимум времени на освоение программы. Работать в нашем редакторе, одно удовольствие.</p>
+        </div>
+        <img src="img/screen5.png" alt="">
+    </section>
+    <section class="hand">
+        <div class="hand-block1">
+            <h3>Улучшайте качество редактирования видео благодаря дополнительным возможностям</h3>
+            <p>Приобретайте дополнительные эффекты, которые сделают Ваше видео значительно выразительнее и эффектнее.</p>
+        </div>
+        <div class="hand-block2">Приобретайте снятие водяного знака и используйте видео в любых направлениях.</div>
+        <div class="hand-block3">Загружайте видео на наш видеохостинг, получайте балы и приобретайте за них доп. возможности</div>
+    </section>
+    <section class="hosting">
+        <div class="krug-block">
+            <p>Премиум эффекты</p>
+            <div class="krug">0,99$</div>
+        </div>
+        <div class="krug-block">
+            <p>Хостинг с видеороликами</p>
+            <div class="krug">бесплатно</div>
+        </div>
+        <div class="krug-block">
+            <p>Снятие водяного знака</p>
+            <div class="krug">0,99$</div>
+        </div>
+    </section>
+    <section class="upload">
+        <div class="polosa">
+            <h3>Загружайте видео на наш хостинг и получайте бонусы</h3>
+            <a href="#">Загрузить</a>
+        </div>
+    </section>
+    <footer>
+        <h3>есть желание с нами пообщаться?</h3>
+        <form action="#">
+            <input type="text" placeholder="Имя">
+            <input type="email" placeholder="Mail">
+            <textarea></textarea>
+            <input type="submit" value="Отправить">
+        </form>
+        <a href="#"><img src="img/fb.png" alt=""></a>
+        <a href="#"><img src="img/tw.png" alt=""></a>
+        <a href="#"><img src="img/in.png" alt=""></a>
+        <a href="#"><img src="img/vk.png" alt=""></a>
+        <a href="#"><img src="img/ok.png" alt=""></a>
+        <a href="#"><img src="img/yt.png" alt=""></a>
+        <a href="#"><img src="img/im.png" alt=""></a>
+    </footer>
 </body>
 </html>
