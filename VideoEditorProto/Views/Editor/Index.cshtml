@@ -1,0 +1,347 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <link href="@Url.Content("~/Styles/style.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="wrapp">
+        <div class="clear">
+            <div class="left">
+                <header class="mainHeader left">
+                    <div class="logo left">
+
+                    </div>
+
+                    <ul class="left">
+                        <li><a href="#">Файл</a></li>
+                        <li><a href="#">Редактировать</a></li>
+                        <li><a href="#">Эффекты</a></li>
+                        <li><a href="#">Помощь</a></li>
+                    </ul>
+
+                    <div class="buttons right">
+                        <button class="save"></button>
+                        <button class="help"></button>
+                    </div>
+                </header>
+
+                <div class="player left">
+                    <header>
+                        <p>video1.mp4</p>
+                        <time>00:00:00</time>
+                    </header>
+
+                    <div id="videoPlayer">
+                        <video>
+                            <!--<source src="~/Uploads/video/Реклама скайпа.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>-->
+                        </video>
+                    </div>
+
+                    <div class="videoControls">
+                        <div class="progressBar">
+                            <div class="innerProgressBar">
+                                <span class="runner"></span>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <time class="currentTime">00:00:00</time>
+                            <ul>
+                                <div class="volumeWrapp">
+                                    <div class="volumeBar left">
+                                        <div class="volumeLine"></div>
+                                        <div class="volumeRunner"></div>
+                                    </div>
+                                </div>
+                                <li class="mute"></li>
+                                <li class="prevFrames"></li>
+                                <li class="stop"></li>
+                                <li class="prevFrame"></li>
+                                <li class="playPause"></li>
+                                <li class="nextFrame"></li>
+                                <li class="screenShot"></li>
+                                <li class="nextFrames"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="right tabPanel">
+                <ul class="tabHeader clear">
+                    <li><a class="active" href="#files">Файлы</a></li>
+                    <li><a href="#effects">Эффекты</a></li>
+                    <li><a href="#text">Текст</a></li>
+                </ul>
+
+                <div class="tab" id="files">
+                    <form action="" method="post">
+                        <span>Загруженные файлы</span>
+                        <label class="right">Импортировать<input type="file" name="load" id="uploadFiles" multiple></label>
+                    </form>
+
+                    <ul class="filesTile clear"></ul>
+					
+					<div class="tabScrollPanel">
+						<div class="scrollArrowUp"></div>
+						<div class="scrollArrowDown"></div>
+						<div class="scrollTrack">
+							<div class="scroller"></div>
+						</div>
+					</div>
+
+                    <div class="fileProperties">
+                        <div class="properties">
+                            <span>Имя:</span>
+                            <span>Формат:</span>
+                            <span>Ширина:</span>
+                            <span>Высота:</span>
+                            <span>Продолжительность:</span>
+                            <span>Размер:</span>
+                            <span>Кадры в сек.:</span>
+                            <span>Соотношение сторон:</span>
+                            <span>Звук:</span>
+                            <span>битрейт:</span>
+                        </div>
+                        <div class="values">
+                            <span>кубик рубика</span>
+                            <span>avi</span>
+                            <span>680</span>
+                            <span>540</span>
+                            <span>00:00:36</span>
+                            <span>16 mb</span>
+                            <span>24 fps</span>
+                            <span>4:3</span>
+                            <span>есть</span>
+                            <span>44100 Hz, 16 bit, stereo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab clear" id="effects">
+                    <div class="effectNames left">
+                        <div class="colHeader">Эффект</div>
+
+                        <div class="colBody">
+                            <ul>
+                                <li class="active">
+                                    <h2>Видеоэффекты</h2>
+                                    <ul>
+                                        <li class="active">Размытие</li>
+                                        <li class="active">Цветовой баланс</li>
+                                        <li>Шум</li>
+                                        <li>Перспектива</li>
+                                        <li>Искажение</li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <h2>Аудиоэффекты</h2>
+                                    <ul>
+                                        <li>1</li>
+                                        <li>2</li>
+                                        <li>3</li>
+                                        <li>4</li>
+                                        <li>5</li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <h2>Видеопереходы</h2>
+                                    <ul>
+                                        <li>1</li>
+                                        <li>2</li>
+                                        <li>3</li>
+                                        <li>4</li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <h2>Аудиопереходы</h2>
+                                    <ul>
+                                        <li>1</li>
+                                        <li>2</li>
+                                        <li>3</li>
+                                        <li>4</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="effectProperties left">
+
+                        <div class="colHeader">Параметры эффекта</div>
+
+                        <div class="colBody">
+                            <div class="timeRow">
+                                <div class="effectsRunner"></div>
+                                <time>00;00;00</time>
+                            </div>
+
+                            <div class="property">
+                                <div class="propertyHeader">Размытие</div>
+
+                                <div class="propertyBody">
+                                    <div class="propertyPart">
+                                        <h3>Уровень размытия <p contenteditable><span contenteditable>130</span>%</p></h3>
+                                        <div class="propertyContent">
+                                            <div class="hscroll"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="propertyPart">
+                                        <h3>Уровень размытия <p><span contenteditable>130</span>%</p></h3>
+                                        <div class="propertyContent">
+                                            <div class="hscroll"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab" id="text">
+                </div>
+            </aside>
+        </div>
+
+        <section class="squencePanel">
+            <div class="controlsRow clear">
+                <div class="buttonsPanel clear left">
+                    <div class="pointer"></div>
+                    <div class="cut"></div>
+                    <div class="hand"></div>
+                    <div class="loupe"></div>
+                </div>
+
+                <div class="addRowButtons left">
+                    <div class="addVideo">+</div>
+                    <div class="addAudio">+</div>
+                </div>
+
+                <div class="scales left">
+                    <div class="scale">
+                        <ul class="clear">
+                            <!-- <li>00:01:00</li>
+                            <li>00:05:00</li>
+                            <li>00:10:00</li>
+                            <li>00:15:00</li>
+                            <li>00:20:00</li> -->
+                        </ul>
+                    </div>
+
+                    <div class="hasRowPanel"></div>
+                </div>
+            </div>
+
+            <div class="sequenceFrame">
+                <div class="controlVideoPanel clear">
+
+                    <ul class="layoutControl left">
+                        <li class="clear">
+                            <div class="showHide"></div>
+                            <div class="blockUnblock"></div>
+                        </li>
+
+                        <li class="clear">
+                            <div class="showHide"></div>
+                            <div class="blockUnblock"></div>
+                        </li>
+
+                        <li class="clear">
+                            <div class="showHide"></div>
+                            <div class="blockUnblock"></div>
+                        </li>
+                    </ul>
+
+                    <div class="left lbl">V</div>
+
+                    <div class="videoLayouts left">
+                        <div class="videoLayout">
+                            <!-- <div class="videoRow">
+                                <p class="rowHeader">Video Name.avi</p>
+                                <p class="effectsNum">Effects <span>2</span></p>
+                                <img src="Images/1.png" alt="Video Name">
+                            </div> -->
+                        </div>
+                        <div class="videoLayout">
+                        </div>
+                        <div class="videoLayout">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controlAudioPanel clear">
+
+                    <ul class="layoutControl left">
+                        <li class="clear">
+                            <div class="muteSound"></div>
+                            <div class="blockUnblock"></div>
+                        </li>
+
+                        <li class="clear">
+                            <div class="muteSound"></div>
+                            <div class="blockUnblock"></div>
+                        </li>
+
+                        <li class="clear">
+                            <div class="muteSound"></div>
+                            <div class="blockUnblock"></div>
+                        </li>
+                    </ul>
+
+                    <div class="left lbl">A</div>
+
+                    <div class="audioLayouts left">
+                        <div class="audioLayout">
+                            <!-- <div class="audioRow"></div>
+
+                            <div class="audioRow"></div>
+
+                            <div class="audioRow"></div> -->
+                        </div>
+                        <div class="audioLayout">
+                            <!-- <div class="audioRow"></div>
+
+                            <div class="audioRow"></div>
+
+                            <div class="audioRow"></div> -->
+                        </div>
+                        <div class="audioLayout">
+                            <!-- <div class="audioRow"></div>
+
+                            <div class="audioRow"></div>
+
+                            <div class="audioRow"></div> -->
+                        </div>
+                    </div>
+					
+					<div class="sequenceScrollbar">
+						<div class="trackBar">
+							<div class="scrollbar"></div>
+						</div>
+					</div>
+					
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="@Url.Content("~/Scripts/jquery-2.2.0.min.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.custom/jquery-ui.min.js")" type="text/javascript" defer></script>
+	<script src="@Url.Content("~/Scripts/baron.min.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/videoControls.js")"  type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/tabs.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/sequencePanelControls.js")" type="text/javascript" defer></script>
+    <!--Media data works-->
+    <script src="@Url.Content("~/Scripts/localforage.min.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/mediaSender.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/custom.js")" type="text/javascript" defer></script>
+</body>
+</html>

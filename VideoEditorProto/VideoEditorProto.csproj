@@ -1,0 +1,326 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A85BD95A-773A-4FCC-A68B-61B839601787}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VideoEditorProto</RootNamespace>
+    <AssemblyName>VideoEditorProto</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\css\base.css" />
+    <Content Include="Admin\css\changelists.css" />
+    <Content Include="Admin\css\dashboard.css" />
+    <Content Include="Admin\css\fonts.css" />
+    <Content Include="Admin\css\forms.css" />
+    <Content Include="Admin\css\login.css" />
+    <Content Include="Admin\css\rtl.css" />
+    <Content Include="Admin\css\widgets.css" />
+    <Content Include="Admin\fonts\LICENSE.txt" />
+    <Content Include="Admin\fonts\README.txt" />
+    <Content Include="Admin\img\calendar-icons.svg" />
+    <Content Include="Admin\img\gis\move_vertex_off.svg" />
+    <Content Include="Admin\img\gis\move_vertex_on.svg" />
+    <Content Include="Admin\img\icon-addlink.svg" />
+    <Content Include="Admin\img\icon-alert.svg" />
+    <Content Include="Admin\img\icon-calendar.svg" />
+    <Content Include="Admin\img\icon-changelink.svg" />
+    <Content Include="Admin\img\icon-clock.svg" />
+    <Content Include="Admin\img\icon-deletelink.svg" />
+    <Content Include="Admin\img\icon-no.svg" />
+    <Content Include="Admin\img\icon-unknown-alt.svg" />
+    <Content Include="Admin\img\icon-unknown.svg" />
+    <Content Include="Admin\img\icon-yes.svg" />
+    <Content Include="Admin\img\inline-delete.svg" />
+    <Content Include="Admin\img\README.txt" />
+    <Content Include="Admin\img\search.svg" />
+    <Content Include="Admin\img\selector-icons.svg" />
+    <Content Include="Admin\img\sorting-icons.svg" />
+    <Content Include="Admin\img\tooltag-add.svg" />
+    <Content Include="Admin\img\tooltag-arrowright.svg" />
+    <Content Include="Admin\js\actions.js" />
+    <Content Include="Admin\js\actions.min.js" />
+    <Content Include="Admin\js\admin\DateTimeShortcuts.js" />
+    <Content Include="Admin\js\admin\RelatedObjectLookups.js" />
+    <Content Include="Admin\js\calendar.js" />
+    <Content Include="Admin\js\collapse.js" />
+    <Content Include="Admin\js\collapse.min.js" />
+    <Content Include="Admin\js\core.js" />
+    <Content Include="Admin\js\inlines.js" />
+    <Content Include="Admin\js\inlines.min.js" />
+    <Content Include="Admin\js\jquery.init.js" />
+    <Content Include="Admin\js\prepopulate.js" />
+    <Content Include="Admin\js\prepopulate.min.js" />
+    <Content Include="Admin\js\SelectBox.js" />
+    <Content Include="Admin\js\SelectFilter2.js" />
+    <Content Include="Admin\js\timeparse.js" />
+    <Content Include="Admin\js\urlify.js" />
+    <Content Include="Admin\js\vendor\jquery\jquery.js" />
+    <Content Include="Admin\js\vendor\jquery\jquery.min.js" />
+    <Content Include="Admin\js\vendor\jquery\LICENSE-JQUERY.txt" />
+    <Content Include="Admin\js\vendor\xregexp\LICENSE-XREGEXP.txt" />
+    <Content Include="Admin\js\vendor\xregexp\xregexp.min.js" />
+    <Content Include="css\style.css" />
+    <Content Include="css\style1.css" />
+    <Content Include="files\1.png" />
+    <Content Include="files\audio\37d7e153-66e1-4ec4-98b5-766b02230ee5.mp3" />
+    <Content Include="files\audio\audio1.mp3" />
+    <Content Include="files\audio\leningrad.mp3" />
+    <Content Include="files\audio\output.mp3" />
+    <Content Include="files\img\1.png" />
+    <Content Include="files\video\thub.png" />
+    <Content Include="files\video\video.mp4" />
+    <Content Include="fonts\intro-cond.light-free.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\1.png" />
+    <Content Include="Images\2.png" />
+    <Content Include="Images\3.png" />
+    <Content Include="Images\blue-ball.png" />
+    <Content Include="Images\contacts.jpg" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\fb.png" />
+    <Content Include="Images\fon.jpg" />
+    <Content Include="Images\form.png" />
+    <Content Include="Images\hand.jpg" />
+    <Content Include="Images\header.jpg" />
+    <Content Include="Images\hosting.jpg" />
+    <Content Include="Images\im.png" />
+    <Content Include="Images\in.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\man.jpg" />
+    <Content Include="Images\ok.png" />
+    <Content Include="Images\screen.png" />
+    <Content Include="Images\screen1.jpg" />
+    <Content Include="Images\screen2.jpg" />
+    <Content Include="Images\screen3.jpg" />
+    <Content Include="Images\screen4.jpg" />
+    <Content Include="Images\success.png" />
+    <Content Include="Images\tw.png" />
+    <Content Include="Images\vk.png" />
+    <Content Include="Images\yt.png" />
+    <Content Include="img\1.png" />
+    <Content Include="img\blue-ball.png" />
+    <Content Include="img\check.png" />
+    <Content Include="img\contacts.jpg" />
+    <Content Include="img\error.png" />
+    <Content Include="img\fb.png" />
+    <Content Include="img\fon.jpg" />
+    <Content Include="img\footer.jpg" />
+    <Content Include="img\form.png" />
+    <Content Include="img\hand.jpg" />
+    <Content Include="img\header.jpg" />
+    <Content Include="img\hosting.jpg" />
+    <Content Include="img\im.png" />
+    <Content Include="img\in.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\man.jpg" />
+    <Content Include="img\ok.png" />
+    <Content Include="img\screen.png" />
+    <Content Include="img\screen1.jpg" />
+    <Content Include="img\screen1.png" />
+    <Content Include="img\screen2.jpg" />
+    <Content Include="img\screen2.png" />
+    <Content Include="img\screen3.jpg" />
+    <Content Include="img\screen3.png" />
+    <Content Include="img\screen4.jpg" />
+    <Content Include="img\screen4.png" />
+    <Content Include="img\screen5.png" />
+    <Content Include="img\success.png" />
+    <Content Include="img\tw.png" />
+    <Content Include="img\upload.png" />
+    <Content Include="img\user.png" />
+    <Content Include="img\vk.png" />
+    <Content Include="img\yt.png" />
+    <Content Include="Scripts\baron.min.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.custom\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.custom\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Scripts\localforage.min.js" />
+    <Content Include="Scripts\mediaSender.js" />
+    <Content Include="Scripts\sequencePanelControls.js" />
+    <Content Include="Scripts\tabs.js" />
+    <Content Include="Scripts\videoControls.js" />
+    <Content Include="Styles\img\contols.png" />
+    <Content Include="Styles\img\progress_bar.png" />
+    <Content Include="Styles\style.css" />
+    <Content Include="Uploads\video\Реклама скайпа.mp4" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\EditorController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Styles\fonts\HeliosCond.ttf" />
+    <Content Include="Styles\fonts\MS-Reference-Sans-Serif-Regular.ttf" />
+    <Content Include="Styles\fonts\Roboto-Medium.ttf" />
+    <Content Include="Admin\fonts\Roboto-Bold-webfont.woff" />
+    <Content Include="Admin\fonts\Roboto-Light-webfont.woff" />
+    <Content Include="Admin\fonts\Roboto-Regular-webfont.woff" />
+    <Content Include="Admin\img\LICENSE" />
+    <Content Include="fonts\intro-cond.light-free.eot" />
+    <Content Include="fonts\intro-cond.light-free.ttf" />
+    <Content Include="fonts\intro-cond.light-free.woff" />
+    <Content Include="Views\Editor\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Downloads\audio\" />
+    <Folder Include="Downloads\video\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VideoLib\VideoLib.csproj">
+      <Project>{f975d759-3c99-4340-ad1b-2910999daf2b}</Project>
+      <Name>VideoLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50015</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50015/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

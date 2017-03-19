@@ -1,0 +1,1176 @@
+@font-face
+{
+	src: url(fonts/HeliosCond.ttf);
+	font-family: HC;
+}
+
+@font-face
+{
+	src: url(fonts/MS-Reference-Sans-Serif-Regular.ttf);
+	font-family: MSRS;
+}
+
+@font-face
+{
+	src: url(fonts/Roboto-Medium.ttf);
+	font-family: RM;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baselin;
+	font-family: arial;
+	line-height: 1em;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body 
+{
+	line-height: 1em;
+	background-color: #444444;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
+.clear:after
+{
+	content: "";
+	display: block;
+	width: 0px;
+	height: 0px;
+	clear: both;
+}
+
+.wrapp
+{
+	width: 1100px;
+	margin: 0px auto;
+}
+
+.mainHeader
+{
+	height: 26px;
+	padding: 4px 28px 0px 4px;
+	width: 583px;
+	background-color: #2e2e2e;
+	position: relative;
+}
+
+header.mainHeader:after 
+{
+    width: 0px;
+    height: 0px;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -11px;
+    right: -11px;
+    border: 11px solid transparent;
+    border-top: 11px solid #ffba00;
+    transform: rotate(-45deg);
+}
+
+header.mainHeader:before 
+{
+	width: 0px;
+    height: 0px;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -14px;
+    right: -14px;
+    border: 14px solid transparent;
+    border-top: 14px solid #444;
+    transform: rotate(-45deg);
+}
+
+.player header:after {
+    width: 0px;
+    height: 0px;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 7px;
+    right: -14px;
+    border: 14px solid transparent;
+    border-top: 14px solid #444;
+    transform: rotate(-135deg);
+}
+
+.mainHeader ul li
+{
+	display: inline-block;
+	margin-right: 4px;
+}
+
+.mainHeader ul li a
+{
+	color: #fff;
+    font-size: 14px;
+    display: inline-block;
+    padding: 4px 18px;
+    text-decoration: none;
+    line-height: 1em;
+    font-family: HC;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.mainHeader ul li:hover a
+{
+	background-color: #ffba00;
+}
+
+.player
+{
+	width: 615px;
+	height: 482px;
+	margin-top: 20px;
+	background-color: #2e2e2e;
+}
+
+.player header
+{
+	height: 20px;
+	position: relative;
+}
+
+.player header p
+{
+	padding: 6px 0px 2px;
+	color: #fff;
+	padding: 4px;
+	font-family: MSRS;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 12px;
+	color: #fff;
+}
+
+.player header time
+{
+	float: right;
+	font-family: RM;
+	position: absolute;
+	top: 3px;
+	font-size: 14px;
+	right: 20px;
+	color: #fff;
+}
+
+#videoPlayer
+{
+	height: 400px;
+	background-color: #000;
+	width: 615px;
+	position: relative;
+}
+
+#videoPlayer video
+{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+    vertical-align: middle;
+	margin: auto;
+	max-width: 615px;
+	max-height: 400px;
+}
+
+#videoControls
+{
+	width: 615px;
+}
+
+.videoControls .progressBar
+{
+	height: 28px;
+	padding: 0px 32px 0px 33px;
+	background: url(img/progress_bar.png) center center no-repeat no-repeat;
+	background-position: 0px 21px;
+}
+
+.videoControls .progressBar .innerProgressBar
+{
+	height: 28px;
+	width: 533px;
+	position: relative;
+}
+
+
+.videoControls .progressBar .runner
+{
+	display: block;
+	width: 1px;
+	height: 0px;
+	border: 8px solid transparent;
+	cursor: pointer;
+	border-top: 13px solid #ffba00;
+	position: absolute;
+}
+
+.videoControls .progressBar .runner:after
+{
+	width: 1px;
+    height: 5px;
+    content: "";
+    display: block;
+    margin-left: 0px;
+    margin-top: -1px;
+    background-color: #fff;
+}
+
+.videoControls .buttons
+{
+	height: 27px;
+	padding-top: 9px;
+	position: relative;
+}
+
+.videoControls .buttons:before 
+{
+    width: 0px;
+    height: 0px;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -12px;
+    right: -14px;
+    border: 14px solid transparent;
+    border-top: 14px solid #444;
+    transform: rotate(-45deg);
+}
+
+.videoControls .buttons:after 
+{
+    width: 0px;
+    height: 0px;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -9px;
+    right: -11px;
+    border: 11px solid transparent;
+    border-top: 11px solid #ffba00;
+    transform: rotate(-45deg);
+}
+
+.videoControls .buttons ul
+{
+	width: 386px;
+    margin: 0px 0px 0px 149px;
+    position: relative;
+}
+
+.videoControls .buttons li
+{
+	display: inline-block;
+	cursor: pointer;
+	height: 19px;
+    width: 28px;
+    background-color: #ffba00;
+    box-shadow: 0px 1px 4px 2px rgba(0,0,0,0.3);
+}
+
+.videoControls .buttons li:hover
+{
+	box-shadow: 0px 0px 0px 2px #56a0d8;
+}
+
+.videoControls .buttons li:first-child
+{
+	margin-right: 1px;
+	height: 19px;
+    display: inline-block;
+    box-shadow: 0px 1px 4px 2px rgba(0,0,0,0.3);
+}
+
+.currentTime
+{
+	width: 63px;
+    float: left;
+    margin-top: 2px;
+    margin-left: 20px;
+    color: #fff;
+    font-size: 14px;
+    font-family: RM;
+}
+.playPause
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -832px -10px;
+}
+.paused
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -832px -50px;
+}
+.stop
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -766px -10px;
+}
+.prevFrame
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -799px -10px;
+}
+.nextFrame
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -866px -10px;
+}
+.screenShot
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -898px -81px;
+}
+.prevFrames
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -703px -10px;
+	margin-right: 35px;
+}
+.nextFrames
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -960px -10px;
+	margin-left: 35px;
+}
+.mute
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position: -766px -78px;
+	margin-right: 1px;
+	position: relative;
+}
+.volumeWrapp
+{
+    width: 26px;
+    border: 1px solid #fff;
+    padding-top: 3px;
+    height: 75px;
+    position: absolute;
+    display: none;
+    background-color: #ffba00;
+    top: -82px;
+}
+.volumeBar
+{
+	width: 4px;
+	height: 72px;
+	position: relative;
+	background-color: #fff;
+	margin: 0px 11px;
+}
+.volumeLine
+{
+	width: 4px;
+    height: 65px;
+    cursor: pointer;
+    display: inherit;
+    position: absolute;
+    background-color: #4cadd4;
+    bottom: 0px;
+	box-shadow: 1px 1px 1px 1px rgba(2,2,5,0.2)inset;
+}
+.volumeRunner
+{
+	width: 18px;
+    height: 5px;
+    cursor: pointer;
+    display: inherit;
+    border-top: 1px solid #848484;
+    border-bottom: 1px solid #515151;
+    position: absolute;
+    background-color: #666666;
+    left: -7px;
+    bottom: 65px;
+}
+.mutable
+{
+	background-position: -806px -78px;
+}
+
+.wrapp > div > .left
+{
+	width: 615px;
+}
+
+.tabPanel
+{
+	float: right;
+	width: 433px;
+	padding: 0px 16px 16px;
+	height: 517px;
+	background-color: #2e2e2e;
+}
+
+.tabHeader li
+{
+	display: block;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    float: left;
+    text-align: center;
+}
+
+.mainHeader button
+{
+	width: 21px;
+	height: 21px;
+	border: none;
+	background: url(img/contols.png);
+}
+
+.mainHeader .save
+{
+	background-position: -1038px -7px;
+}
+
+.mainHeader .help
+{
+	background-position: -1071px -7px;
+}
+
+.tabHeader li a 
+{
+    padding: 9px 0px;
+    text-transform: uppercase;
+    background-color: #4d4d4d;
+    width: 144px;
+    font-size: 14px;
+    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    font-family: MSRS;
+    text-shadow: 1px 1px 1px rgba(2,2,5,0.3);
+}
+
+.tabHeader .ui-state-active a,
+.tabHeader li:hover a
+{
+	background-color: #ffba00;
+}
+
+/*.tab[aria-hidden="false"] -- current tab*/
+.tab
+{
+	margin-top: 16px;
+	width: 433px;
+	background-color: #4d4d4d;
+	height: 467px;
+	position: relative;
+}
+
+.tabScrollPanel
+{
+	position: absolute;
+	height: 480px;
+	width: 11px;
+	top: 0px;
+	right: -14px;
+}
+
+.tabPane
+{
+	margin-top: 11px;
+	height: 454px;
+}
+
+.scrollPane
+{
+	position: relative;
+	width: 9px;
+	border: 1px solid #8e8e8e;
+	border-radius: 3px;
+}
+
+.scroller
+{
+	position: relative;
+	min-height: 15px;
+	width: 9px;
+	background-color: #ffba00;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.scroller:after
+{
+	display: block;
+	content: '';
+	background: url(img/contols.png);
+	background-position: -12px -170px;
+	width: 5px;
+	height: 5px;
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    margin: -2.5px 0 0 -25%;
+}
+
+.scrollArrowUp
+{
+	
+}
+
+.squencePanel
+{
+    width: 1070px;
+    height: 300px;
+    padding: 0px 15px;
+    background-color: #2e2e2e;
+    margin-top: 20px;
+}
+
+#files
+{
+	/*overflow: hidden;*/
+}
+
+#files form
+{
+	height: 12px;
+	font-size: 12px;
+	width: 407px;
+	background-color: #fff;
+	padding: 7px 13px;
+}
+
+#files form span
+{
+	line-height: 1em;
+	text-transform: uppercase;
+	color: #2e2e2e;
+    font-size: 11px;
+    font-family: MSRS;
+}
+
+#files form input
+{
+	display: none;
+}
+
+#files form label
+{
+    width: 124px;
+    background-color: #ffd800;
+	background: -moz-linear-gradient(top,  #ffd800 0%, #ffba00 100%);
+	background: -webkit-linear-gradient(top,  #ffd800 0%,#ffba00 100%);
+	background: linear-gradient(to bottom,  #ffd800 0%,#ffba00 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd800', endColorstr='#ffba00',GradientType=0 );
+    height: 14px;
+    font-size: 11px;
+    text-align: center;
+    border: 1px solid #4d4d4d;
+    color: #fff;
+    margin-top: -3px;
+    font-weight: bold;
+    font-family: MSRS;
+    text-shadow: 0px 1px 2px rgba(46, 46, 46, 4.75);
+    padding: 1px 0px;
+}
+
+#files form label:hover
+{
+    background-color:#ffba00;
+	background: -moz-linear-gradient(top,  #ffba00 0%, #ffd800 100%);
+	background: -webkit-linear-gradient(top,  #ffba00 0%,#ffd800 100%);
+	background: linear-gradient(to bottom,  #ffba00 0%,#ffd800 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffba00', endColorstr='#ffd800',GradientType=0 );
+}
+
+.filesTile
+{
+    height: 287px;
+    width: 403px;
+    display: block;
+    padding: 15px;
+}
+
+.filesTile li img
+{
+	width: 124px;
+	height: 82px;
+}
+
+.filesTile li
+{
+    width: 124px;
+    height: 82px;
+    position: relative;    float: left;
+    /*margin-right: 15px;*/
+    margin-right: 7px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 17px -3px #000;
+}
+
+.filesTile li.active
+{
+	box-shadow: 0px 0px 0px 2px #ffba00;
+}
+
+.filesTile li:nth-child(3n+3)
+{
+	margin-right: 0px;
+}
+
+.filesTile li .videoTile,
+.filesTile li .audioTile,
+.filesTile li .imageTile
+{
+	height: 28px;
+    position: absolute;
+    bottom: 0px;
+    width: 124px;
+    overflow: hidden;
+    font-size: 13px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.filesTile li .videoTile:before,
+.filesTile li .audioTile:before,
+.filesTile li .imageTile:before
+{
+	width: 28px;
+	height: 28px;
+	content: "";
+	float: left;
+	border-right: 1px solid #b2b2b1;
+	margin-right: 3px;
+	display: inline-block;
+	background: url(img/contols.png) no-repeat no-repeat;
+}
+
+.filesTile li .videoTile:before
+{
+	background-position: -145px -191px;
+}
+
+.filesTile li .audioTile:before
+{
+	background-position: -145px -231px;
+}
+
+.filesTile li .imageTile:before
+{
+	background-position: -145px -271px;
+}
+
+.fileProperties
+{
+    height: 114px;
+    background-color: #eee;
+    width: 417px;
+    padding: 3px 8px 7px;
+}
+
+.fileProperties .properties
+{
+	width: 150px;
+	float: left;
+	margin-right: 15px;
+}
+
+.fileProperties .properties span,
+.fileProperties .values span
+{
+    display: block;
+    font-family: MSRS;
+    font-size: 11px;
+    text-transform: uppercase;
+    line-height: 12px;
+}
+
+.fileProperties .values
+{
+	float: left;
+}
+
+.controlsRow
+{
+    height: 33px;
+    width: 1070px;
+    padding: 3px 0px 4px;
+}
+
+.controlsRow .buttonsPanel
+{
+	width: 128px;
+	padding: 3px 4px 3px 4px;
+    margin-right: 1px;
+}
+
+.controlsRow .buttonsPanel div
+{
+	width: 30px;
+	height: 26px;
+	float: left;
+	margin-right: 2px;
+}
+
+.controlsRow .buttonsPanel .pointer,
+.controlsRow .buttonsPanel .cut,
+.controlsRow .buttonsPanel .hand,
+.controlsRow .buttonsPanel .loupe
+{
+	background: url(img/contols.png) no-repeat no-repeat;
+	background-position-y: -8px;
+	cursor: pointer;
+}
+
+.controlsRow .buttonsPanel .pointer
+{
+	background-position-x: -516px;
+}
+
+.controlsRow .buttonsPanel .cut
+{
+	background-position-x: -554px;
+}
+
+.controlsRow .buttonsPanel .hand
+{
+	background-position-x: -593px;
+}
+
+.controlsRow .buttonsPanel .loupe
+{
+	background-position-x: -630px;
+}
+
+.addRowButtons
+{
+	width: 15px;
+	height: 32px;
+}
+
+.addRowButtons div
+{
+	width: 15px;
+	height: 15px;
+	margin-bottom: 2px;
+	font-size: 15px;
+    text-shadow: 0px 0px 6px #000;
+    cursor: pointer;
+	color: #fff;
+	text-align: center;
+}
+
+.addVideo
+{
+	background-color: #ffba00;
+}
+
+.addAudio
+{
+	background-color: #00a4d0;
+}
+
+.scale ul li
+{
+	float: left;
+    font-size: 10px;
+    margin-right: 163px;
+    color: #fff;
+}
+
+.scale ul li:first-child
+{
+	margin-right: 122px;
+}
+
+.scale ul li:last-child
+{
+	margin-right: 0px;
+}
+
+.scale
+{
+    margin-left: 4px;
+    padding-bottom: 13px;
+    background: url(img/progress_bar.png) repeat no-repeat;
+    background-position: 0px 10px;
+    width: 893px;
+    padding-left: 21px;
+}
+
+.controlVideoPanel,
+.controlAudioPanel
+{
+	overflow: hidden;
+	height: 120px;
+	width: 1070px;
+	margin-bottom: 6px;
+}
+
+.layoutControl
+{
+	width: 133px;
+	min-height: 120px;
+	background-color: #4d4d4d;
+}
+
+.lbl
+{
+	width: 15px;
+	margin: 0px 4px;
+	height: 120px;
+	background-color: #fff;
+	color: #2e2e2e;
+	font-size: 13px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 120px;
+}
+
+.layoutControl li
+{
+	width: 133px;
+	height: 40px;
+	box-sizing: border-box;
+	padding: 7px 6px;
+    box-shadow: 0px -2px 7px -3px inset;
+}
+
+.videoLayouts, 
+.audioLayouts
+{
+	width: 914px;
+    height: 120px;
+}
+
+.videoLayout,
+.audioLayout
+{
+    height: 38px;
+    min-width: 1000px;
+    background-color: #4d4d4d;
+    border: 1px solid #2e2e2e;
+    word-spacing: 0px;
+}
+
+.videoRow
+{
+	height: 32px;
+	overflow: hidden;
+	background-color: #ffba00;
+	color: #fff;
+	text-shadow: 1px 1px 8px #000;
+	display: inline-block;
+	padding: 3px 4px;
+	position: relative;
+	text-transform: uppercase;
+	font-size: 11px;
+}
+
+.videoRow .effectsNum
+{
+	display: inline-block;
+	padding: 3px 4px;
+    margin: 10px 0px 0px -4px;
+    border-radius: 3px;
+    box-shadow: -2px 2px 6px 1px #000;
+	font-size: 8px;
+	background: #c66600; /* Old browsers */
+	background: -moz-linear-gradient(left, #c66600 0%, #fcb800 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #c66600 0%,#fcb800 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #c66600 0%,#fcb800 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c66600', endColorstr='#fcb800',GradientType=1 ); /* IE6-9 */
+}
+
+.videoRow img
+{
+	position: absolute;
+    height: 38px;
+    top: 0px;
+    right: 0px;
+    z-index: 0;
+}
+
+.videoRow .effectsNum,
+.videoRow .rowHeader
+{
+	position: relative;
+    z-index: 2;
+}
+
+.showHide, .blockUnblock, .muteSound
+{
+	height: 26px;
+	width: 58px;
+	cursor: pointer;
+	float: left;
+	background: url(img/contols.png) no-repeat no-repeat;
+}
+
+.controlVideoPanel .showHide
+{
+	margin-right: 5px;
+	background-position: -354px -342px;
+}
+
+.controlVideoPanel .showHide.active
+{
+	background-position: -354px -375px;
+}
+
+.blockUnblock
+{
+	background-position: -354px -408px;
+}
+
+.blockUnblock.active
+{
+	background-position: -354px -441px;
+}
+
+.muteSound
+{
+	margin-right: 5px;
+	background-position: -354px -473px;
+}
+
+.muteSound.active
+{
+	background-position: -354px -507px;
+}
+
+#effects .effectNames
+{
+    width: 144px;
+    min-height: 467px;
+    border-right: 1px solid #606060;
+}
+
+#effects .effectNames .colHeader,
+#effects .effectProperties .colHeader
+{
+	padding: 10px 13px;
+    background-color: #fff;
+    color: #2e2e2e;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+#effects .effectProperties
+{
+	width: 287px;
+    min-height: 467px;
+    border-left: 1px solid #474747;
+}
+
+.effectNames .colBody > ul > li
+{
+	display: block;
+	padding: 7px 0px 7px 19px;
+	font-size: 11px;
+	color: #fff;
+	position: relative;	
+}
+
+.effectNames .colBody > ul > li h2
+{
+	cursor: pointer;
+}
+
+.effectNames .colBody > ul > li:before
+{
+	display: block;
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    border: 5px solid transparent;
+    border-left: 5px solid #fff;
+}
+
+.effectNames .colBody > ul > li.active,
+#effects .effectProperties .propertyPart
+{
+    border-bottom: 1px solid #606060;
+    box-shadow: 0px 1px 0px 0px #474747;
+}
+
+.effectNames .colBody > ul > li.active:before
+{
+    display: block;
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 7px;
+    border: 5px solid transparent;
+    border-top: 5px solid #ffba00;
+}
+
+.effectNames .colBody > ul > li li
+{
+	padding: 6px 0px 0px 15px;
+	position: relative;
+	cursor: pointer;
+}
+
+.effectNames .colBody  ul li ul li:before
+{
+    display: block;
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 0px;
+    width: 9px;
+    height: 9px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.effectNames .colBody  ul li ul li.active:before
+{
+	display: block;
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 0px;
+    width: 5px;
+    height: 5px;
+    background-color: #ffba00;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.effectNames .colBody > ul > li ul
+{
+	display: none;
+}
+
+.effectNames .colBody > ul > li.active ul
+{
+	display: block;
+}
+
+#effects .effectProperties .colBody .timeRow
+{
+	width: 100%;
+	height: 36px;
+	position: relative;
+	border-bottom: 1px solid #606060;
+    box-shadow: 0px 1px 0px 0px #474747;
+    background: url(img/progress_bar.png) repeat no-repeat;
+    background-position: 0px 9px;
+}
+
+#effects .effectProperties .colBody .effectsRunner
+{
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    cursor: pointer;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    border: 5px solid transparent;
+    border-top: 14px solid #ffba00;
+}
+
+#effects .effectProperties .colBody time
+{
+	font-size: 11px;
+    color: #fff;
+    float: right;
+    margin-top: 21px;
+    font-family: RM;
+    margin-right: 4px;
+}
+
+#effects .effectProperties .property .propertyHeader
+{
+	padding: 5px 8px;
+	background-color: #fff;
+	color: #4d4d4d;
+	font-size: 10px;
+	cursor: pointer;
+	position: relative;
+}
+
+#effects .effectProperties .property .propertyHeader:after
+{
+	display: block;
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 6px;
+    border: 5px solid transparent;
+    border-top: 5px solid #ffba00;
+}
+
+#effects .effectProperties .propertyPart h3
+{
+	font-size: 10px;
+	padding: 7px 17px;
+	color: #fff;
+	display: block;
+	cursor: pointer;
+	position: relative;
+}
+
+#effects .effectProperties .propertyPart h3:before
+{
+    display: block;
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    border: 5px solid transparent;
+    border-left: 5px solid #fff;
+}
+
+#effects .effectProperties .propertyPart h3 p
+{
+    display: inline-block;
+    margin-left: 30px;
+    color: #ffba00;
+}
+
+#effects .effectProperties .propertyPart .propertyContent
+{
+	display: none;
+}
