@@ -92,11 +92,28 @@
     </section>
     <footer>
         <h3>есть желание с нами пообщаться?</h3>
-        <form action="#">
-            <input type="text" placeholder="Имя">
-            <input type="email" placeholder="Mail">
-            <textarea></textarea>
-            <input type="submit" value="Отправить">
+        <div><img id="loadImg" src="img/ajax-loader.gif" /></div>
+        <div id="sendmessage">Ваше сообщение отправлено. Спасибо!</div>
+        <div id="errormessage">Сообщение не отправлено. Проверьте соединение или отправьте письмо с Вашего почтового ящика</div>
+        <form action="#" method="post" role="form" class="contactForm validateform">
+            <div class="form-group field">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя" data-rule="required" data-msg="Пожалуйста, введите имя" />
+                <div class="validation"></div>
+            </div>
+            <div class="form-group  field">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Ваш Email" data-rule="email" data-msg="Пожалуйста, введите корректный email" />
+                <div class="validation"></div>
+            </div>
+            <div class="form-group  field">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" data-rule="minlen:5" data-msg="Пожалуйста, введите минимум 5 символов" />
+                <div class="validation"></div>
+            </div>
+            <div class="form-group  field">
+                <textarea class="form-control" name="message" rows="5" data-rule="minlen:25" data-msg="Пожалуйста, введите текст сообщения (не менее 25 символов)" placeholder="Сообщение"></textarea>
+                <div class="validation"></div>
+            </div>
+
+            <div class="text-center"><button type="submit" class="btn btn-theme">Отправить</button></div>
         </form>
         <a href="#"><img src="img/fb.png" alt=""></a>
         <a href="#"><img src="img/tw.png" alt=""></a>
@@ -106,5 +123,7 @@
         <a href="#"><img src="img/yt.png" alt=""></a>
         <a href="#"><img src="img/im.png" alt=""></a>
     </footer>
+    <script src="@Url.Content("~/Scripts/jquery-2.2.0.min.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/validate.js")" type="text/javascript" defer></script>
 </body>
 </html>
