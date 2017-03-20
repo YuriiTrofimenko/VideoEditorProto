@@ -234,6 +234,7 @@
     <Content Include="Scripts\mediaSender.js" />
     <Content Include="Scripts\sequencePanelControls.js" />
     <Content Include="Scripts\tabs.js" />
+    <Content Include="Scripts\validate.js" />
     <Content Include="Scripts\videoControls.js" />
     <Content Include="Styles\img\contols.png" />
     <Content Include="Styles\img\progress_bar.png" />
@@ -249,6 +250,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Mailer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -606,6 +606,7 @@ form#contactform .validation {
 }
 
 #sendmessage {
+    width: 420px;
     color: green;
     border: 1px solid green;
     display: none;
@@ -613,9 +614,12 @@ form#contactform .validation {
     padding: 15px;
     font-weight: 600;
     margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #errormessage {
+    width: 420px;
     color: red;
     display: none;
     border: 1px solid red;
@@ -623,6 +627,8 @@ form#contactform .validation {
     padding: 15px;
     font-weight: 600;
     margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
     #sendmessage.show, #errormessage.show, .show {

@@ -139,8 +139,8 @@ jQuery(document).ready(function($) {
 		startLoadingAnimation();  // - запустим анимацию загрузки
 		//console.log("ajax");
 		  $.ajax({
-			type: 'GET',
-			url: 'tyaastudio',
+			type: 'POST',
+            url: '/Default/SendMessage',
 			//contentType: 'text/plain',
 			data: {
 				'from_name': $('input#name').val(), // get name from form
