@@ -324,4 +324,13 @@ function setData(_data) {
         });
     });
 }
+
+//context menu
+$('#menu-edit-item').click(function () {
+    console.log("edit");
+});
+$('#menu-delete-item').click(function () {
+    console.log("delete");
+});
+
 function getData() { }

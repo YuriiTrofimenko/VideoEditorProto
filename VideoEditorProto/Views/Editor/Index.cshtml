@@ -70,8 +70,8 @@
                     </div>
                 </div>
             </div>
-
-            <aside class="right tabPanel">
+            <!--Для этого блока подключено контекстное меню "context-menu-id"-->
+            <aside class="right tabPanel" contextmenu="context-menu-id">
                 <ul class="tabHeader clear">
                     <li><a class="active" href="#files">Файлы</a></li>
                     <li><a href="#effects">Эффекты</a></li>
@@ -211,8 +211,8 @@
                 </div>
             </aside>
         </div>
-
-        <section class="squencePanel">
+        <!--Для этого блока подключено контекстное меню "context-menu-id"-->
+        <section class="squencePanel" contextmenu="context-menu-id">
             <div class="controlsRow clear">
                 <div class="buttonsPanel clear left">
                     <div class="pointer"></div>
@@ -332,6 +332,11 @@
                 </div>
             </div>
         </section>
+        <!--Контекстное меню "context-menu-id"-->
+        <menu type="context" id="context-menu-id">
+            <menuitem id="menu-edit-item" icon="img/edit.png">Do something</menuitem>
+            <menuitem id="menu-delete-item" icon="img/deletered.png">Do something else</menuitem>
+        </menu>
     </div>
     <script src="@Url.Content("~/Scripts/jquery-2.2.0.min.js")" type="text/javascript" defer></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.custom/jquery-ui.min.js")" type="text/javascript" defer></script>
