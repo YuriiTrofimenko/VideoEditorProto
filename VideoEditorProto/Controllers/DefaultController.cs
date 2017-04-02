@@ -23,8 +23,10 @@ namespace VideoEditorProto.Controllers
             //Заменить "email_from_password" на пароль от второго ящика
             Boolean result = Mailer.sendMessage(
                 "smtp.google.com"
-                , "email_to"
-                , "email_from"
+                //, "email_to"
+                //, "email_from"
+                , "test@test.ua"
+                , "test@test.ua"
                 , "email_from_password"
                 , Request.Params.Get("name")
                 , Request.Params.Get("email")
