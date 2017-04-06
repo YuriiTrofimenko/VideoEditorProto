@@ -252,6 +252,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Mailer.cs" />
   </ItemGroup>
@@ -284,6 +285,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VideoEditorProto.Domain\VideoEditorProto.Domain.csproj">
+      <Project>{0759b93b-ab04-4d8b-b004-d0676cbeebf9}</Project>
+      <Name>VideoEditorProto.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VideoLib\VideoLib.csproj">
       <Project>{f975d759-3c99-4340-ad1b-2910999daf2b}</Project>
       <Name>VideoLib</Name>
