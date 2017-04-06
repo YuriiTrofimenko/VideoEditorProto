@@ -14,6 +14,12 @@ namespace VideoEditorProto.Controllers
             return View();
         }
 
+        [HttpGet]
+        public JsonResult createProject()
+        {
+            return null;
+        }
+
         [HttpPost]
         public JsonResult Upload()
         {
