@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
+using VideoEditorProto.Domain.Abstract;
+using VideoEditorProto.Domain.Concrete;
 
 namespace VideoEditorProto.Infrastructure
 {
@@ -28,6 +30,7 @@ namespace VideoEditorProto.Infrastructure
         private void AddBindings()
         {
             // конфигурирование контейнера
+            ninjectKernel.Bind<IProjectRepository>().To<EFProjectRepostory>();
         }
     }
 }

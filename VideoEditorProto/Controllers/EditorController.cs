@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VideoEditorProto.Domain.Abstract;
 
 namespace VideoEditorProto.Controllers
 {
     public class EditorController : Controller
     {
+        private IProjectRepository mRepository;
+
+        public EditorController(IProjectRepository _projectRepository) {
+
+            mRepository = _projectRepository;
+        }
+
         // GET: Editor
         public ActionResult Index()
         {
@@ -17,7 +25,10 @@ namespace VideoEditorProto.Controllers
         [HttpGet]
         public JsonResult createProject()
         {
-            return null;
+            var result =
+                from item in mRepository.Project
+                select new {item.Id, item.AudioCodecs, item.VideoCodecs };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
