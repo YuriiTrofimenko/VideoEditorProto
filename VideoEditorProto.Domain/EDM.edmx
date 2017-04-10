@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище edoModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AudioCodecs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CodecName" Type="varchar" MaxLength="64" />
+          <Property Name="CodecValue" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Effect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="EffectFile" Type="varchar" MaxLength="255" />
+          <Property Name="Version" Type="varchar" MaxLength="32" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Layer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="IdProject" Type="bigint" />
+          <Property Name="Muted_Showed" Type="tinyint" />
+          <Property Name="Blocked" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="IdUser" Type="bigint" />
+          <Property Name="IdVideoCodec" Type="bigint" />
+          <Property Name="IdAudioCodec" Type="bigint" />
+          <Property Name="Width" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="Height" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="FPS" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="Depth" Type="varchar" MaxLength="64" />
+          <Property Name="Proportions" Type="varchar" MaxLength="32" />
+          <Property Name="OptimiseFrames" Type="tinyint" />
+          <Property Name="Quality" Type="float" />
+          <Property Name="AudioFreq" Type="varchar" MaxLength="32" />
+          <Property Name="AudioChanells" Type="varchar" MaxLength="16" />
+          <Property Name="AudioBitrate" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Row">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="IdLayer" Type="bigint" />
+          <Property Name="MaterialFile" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="RowEffects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="IdRow" Type="bigint" />
+          <Property Name="IdEffect" Type="bigint" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="Surname" Type="varchar" MaxLength="32" />
+          <Property Name="Name" Type="varchar" MaxLength="32" />
+          <Property Name="Password" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="UsersEffects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="IdUser" Type="bigint" />
+          <Property Name="IdEffect" Type="bigint" />
+        </EntityType>
+        <EntityType Name="VideoCodecs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CodecName" Type="varchar" MaxLength="64" />
+          <Property Name="CodecValue" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_IdAudioCodec">
+          <End Role="AudioCodecs" Type="Self.AudioCodecs" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioCodecs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IdAudioCodec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdEffect">
+          <End Role="Effect" Type="Self.Effect" Multiplicity="0..1" />
+          <End Role="RowEffects" Type="Self.RowEffects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Effect">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RowEffects">
+              <PropertyRef Name="IdEffect" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdLayer">
+          <End Role="Layer" Type="Self.Layer" Multiplicity="0..1" />
+          <End Role="Row" Type="Self.Row" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Row">
+              <PropertyRef Name="IdLayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdProject">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Layer" Type="Self.Layer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Layer">
+              <PropertyRef Name="IdProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdRow">
+          <End Role="Row" Type="Self.Row" Multiplicity="0..1" />
+          <End Role="RowEffects" Type="Self.RowEffects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Row">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RowEffects">
+              <PropertyRef Name="IdRow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdUsersEffectsEffect">
+          <End Role="Effect" Type="Self.Effect" Multiplicity="0..1" />
+          <End Role="UsersEffects" Type="Self.UsersEffects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Effect">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersEffects">
+              <PropertyRef Name="IdEffect" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdUsersEffectsUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UsersEffects" Type="Self.UsersEffects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersEffects">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdVideoCodec">
+          <End Role="VideoCodecs" Type="Self.VideoCodecs" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VideoCodecs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IdVideoCodec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище edoModelContainer">
+          <EntitySet Name="AudioCodecs" EntityType="Self.AudioCodecs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Effect" EntityType="Self.Effect" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Layer" EntityType="Self.Layer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Row" EntityType="Self.Row" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RowEffects" EntityType="Self.RowEffects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersEffects" EntityType="Self.UsersEffects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VideoCodecs" EntityType="Self.VideoCodecs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_IdAudioCodec" Association="Self.FK_IdAudioCodec">
+            <End Role="AudioCodecs" EntitySet="AudioCodecs" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdEffect" Association="Self.FK_IdEffect">
+            <End Role="Effect" EntitySet="Effect" />
+            <End Role="RowEffects" EntitySet="RowEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdLayer" Association="Self.FK_IdLayer">
+            <End Role="Layer" EntitySet="Layer" />
+            <End Role="Row" EntitySet="Row" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdProject" Association="Self.FK_IdProject">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Layer" EntitySet="Layer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdRow" Association="Self.FK_IdRow">
+            <End Role="Row" EntitySet="Row" />
+            <End Role="RowEffects" EntitySet="RowEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdUser" Association="Self.FK_IdUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdUsersEffectsEffect" Association="Self.FK_IdUsersEffectsEffect">
+            <End Role="Effect" EntitySet="Effect" />
+            <End Role="UsersEffects" EntitySet="UsersEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdUsersEffectsUser" Association="Self.FK_IdUsersEffectsUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="UsersEffects" EntitySet="UsersEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdVideoCodec" Association="Self.FK_IdVideoCodec">
+            <End Role="VideoCodecs" EntitySet="VideoCodecs" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="edoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AudioCodec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CodecName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CodecValue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_IdAudioCodec" FromRole="AudioCodecs" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Effect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="EffectFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Version" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="RowEffects" Relationship="Self.FK_IdEffect" FromRole="Effect" ToRole="RowEffects" />
+          <NavigationProperty Name="UsersEffects" Relationship="Self.FK_IdUsersEffectsEffect" FromRole="Effect" ToRole="UsersEffects" />
+        </EntityType>
+        <EntityType Name="Layer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="IdProject" Type="Int64" />
+          <Property Name="Muted_Showed" Type="Byte" />
+          <Property Name="Blocked" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Rows" Relationship="Self.FK_IdLayer" FromRole="Layer" ToRole="Row" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_IdProject" FromRole="Layer" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="IdUser" Type="Int64" />
+          <Property Name="IdVideoCodec" Type="Int64" />
+          <Property Name="IdAudioCodec" Type="Int64" />
+          <Property Name="Width" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Height" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="FPS" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Depth" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Proportions" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="OptimiseFrames" Type="Byte" />
+          <Property Name="Quality" Type="Double" />
+          <Property Name="AudioFreq" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AudioChanells" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="AudioBitrate" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AudioCodec" Relationship="Self.FK_IdAudioCodec" FromRole="Project" ToRole="AudioCodecs" />
+          <NavigationProperty Name="Layers" Relationship="Self.FK_IdProject" FromRole="Project" ToRole="Layer" />
+          <NavigationProperty Name="User" Relationship="Self.FK_IdUser" FromRole="Project" ToRole="User" />
+          <NavigationProperty Name="VideoCodec" Relationship="Self.FK_IdVideoCodec" FromRole="Project" ToRole="VideoCodecs" />
+        </EntityType>
+        <EntityType Name="Row">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="IdLayer" Type="Int64" />
+          <Property Name="MaterialFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Layer" Relationship="Self.FK_IdLayer" FromRole="Row" ToRole="Layer" />
+          <NavigationProperty Name="RowEffects" Relationship="Self.FK_IdRow" FromRole="Row" ToRole="RowEffects" />
+        </EntityType>
+        <EntityType Name="RowEffect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="IdRow" Type="Int64" />
+          <Property Name="IdEffect" Type="Int64" />
+          <NavigationProperty Name="Effect" Relationship="Self.FK_IdEffect" FromRole="RowEffects" ToRole="Effect" />
+          <NavigationProperty Name="Row" Relationship="Self.FK_IdRow" FromRole="RowEffects" ToRole="Row" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_IdUser" FromRole="User" ToRole="Project" />
+          <NavigationProperty Name="UsersEffects" Relationship="Self.FK_IdUsersEffectsUser" FromRole="User" ToRole="UsersEffects" />
+        </EntityType>
+        <EntityType Name="UsersEffect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="IdUser" Type="Int64" />
+          <Property Name="IdEffect" Type="Int64" />
+          <NavigationProperty Name="Effect" Relationship="Self.FK_IdUsersEffectsEffect" FromRole="UsersEffects" ToRole="Effect" />
+          <NavigationProperty Name="User" Relationship="Self.FK_IdUsersEffectsUser" FromRole="UsersEffects" ToRole="User" />
+        </EntityType>
+        <EntityType Name="VideoCodec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CodecName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CodecValue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_IdVideoCodec" FromRole="VideoCodecs" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_IdAudioCodec">
+          <End Role="AudioCodecs" Type="Self.AudioCodec" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioCodecs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IdAudioCodec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdEffect">
+          <End Role="Effect" Type="Self.Effect" Multiplicity="0..1" />
+          <End Role="RowEffects" Type="Self.RowEffect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Effect">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RowEffects">
+              <PropertyRef Name="IdEffect" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdUsersEffectsEffect">
+          <End Role="Effect" Type="Self.Effect" Multiplicity="0..1" />
+          <End Role="UsersEffects" Type="Self.UsersEffect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Effect">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersEffects">
+              <PropertyRef Name="IdEffect" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdLayer">
+          <End Role="Layer" Type="Self.Layer" Multiplicity="0..1" />
+          <End Role="Row" Type="Self.Row" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Row">
+              <PropertyRef Name="IdLayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdProject">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Layer" Type="Self.Layer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Layer">
+              <PropertyRef Name="IdProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdVideoCodec">
+          <End Role="VideoCodecs" Type="Self.VideoCodec" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VideoCodecs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="IdVideoCodec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdRow">
+          <End Role="Row" Type="Self.Row" Multiplicity="0..1" />
+          <End Role="RowEffects" Type="Self.RowEffect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Row">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RowEffects">
+              <PropertyRef Name="IdRow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdUsersEffectsUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UsersEffects" Type="Self.UsersEffect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersEffects">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="edoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AudioCodecs" EntityType="Self.AudioCodec" />
+          <EntitySet Name="Effects" EntityType="Self.Effect" />
+          <EntitySet Name="Layers" EntityType="Self.Layer" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Rows" EntityType="Self.Row" />
+          <EntitySet Name="RowEffects" EntityType="Self.RowEffect" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UsersEffects" EntityType="Self.UsersEffect" />
+          <EntitySet Name="VideoCodecs" EntityType="Self.VideoCodec" />
+          <AssociationSet Name="FK_IdAudioCodec" Association="Self.FK_IdAudioCodec">
+            <End Role="AudioCodecs" EntitySet="AudioCodecs" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdEffect" Association="Self.FK_IdEffect">
+            <End Role="Effect" EntitySet="Effects" />
+            <End Role="RowEffects" EntitySet="RowEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdUsersEffectsEffect" Association="Self.FK_IdUsersEffectsEffect">
+            <End Role="Effect" EntitySet="Effects" />
+            <End Role="UsersEffects" EntitySet="UsersEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdLayer" Association="Self.FK_IdLayer">
+            <End Role="Layer" EntitySet="Layers" />
+            <End Role="Row" EntitySet="Rows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdProject" Association="Self.FK_IdProject">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Layer" EntitySet="Layers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdUser" Association="Self.FK_IdUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdVideoCodec" Association="Self.FK_IdVideoCodec">
+            <End Role="VideoCodecs" EntitySet="VideoCodecs" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdRow" Association="Self.FK_IdRow">
+            <End Role="Row" EntitySet="Rows" />
+            <End Role="RowEffects" EntitySet="RowEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdUsersEffectsUser" Association="Self.FK_IdUsersEffectsUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UsersEffects" EntitySet="UsersEffects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище edoModelContainer" CdmEntityContainer="edoEntities">
+          <EntitySetMapping Name="AudioCodecs">
+            <EntityTypeMapping TypeName="edoModel.AudioCodec">
+              <MappingFragment StoreEntitySet="AudioCodecs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CodecName" ColumnName="CodecName" />
+                <ScalarProperty Name="CodecValue" ColumnName="CodecValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Effects">
+            <EntityTypeMapping TypeName="edoModel.Effect">
+              <MappingFragment StoreEntitySet="Effect">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EffectFile" ColumnName="EffectFile" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Layers">
+            <EntityTypeMapping TypeName="edoModel.Layer">
+              <MappingFragment StoreEntitySet="Layer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProject" ColumnName="IdProject" />
+                <ScalarProperty Name="Muted_Showed" ColumnName="Muted_Showed" />
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="edoModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdVideoCodec" ColumnName="IdVideoCodec" />
+                <ScalarProperty Name="IdAudioCodec" ColumnName="IdAudioCodec" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="FPS" ColumnName="FPS" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+                <ScalarProperty Name="Proportions" ColumnName="Proportions" />
+                <ScalarProperty Name="OptimiseFrames" ColumnName="OptimiseFrames" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="AudioFreq" ColumnName="AudioFreq" />
+                <ScalarProperty Name="AudioChanells" ColumnName="AudioChanells" />
+                <ScalarProperty Name="AudioBitrate" ColumnName="AudioBitrate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rows">
+            <EntityTypeMapping TypeName="edoModel.Row">
+              <MappingFragment StoreEntitySet="Row">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdLayer" ColumnName="IdLayer" />
+                <ScalarProperty Name="MaterialFile" ColumnName="MaterialFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RowEffects">
+            <EntityTypeMapping TypeName="edoModel.RowEffect">
+              <MappingFragment StoreEntitySet="RowEffects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+                <ScalarProperty Name="IdEffect" ColumnName="IdEffect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="edoModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersEffects">
+            <EntityTypeMapping TypeName="edoModel.UsersEffect">
+              <MappingFragment StoreEntitySet="UsersEffects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdEffect" ColumnName="IdEffect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoCodecs">
+            <EntityTypeMapping TypeName="edoModel.VideoCodec">
+              <MappingFragment StoreEntitySet="VideoCodecs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CodecName" ColumnName="CodecName" />
+                <ScalarProperty Name="CodecValue" ColumnName="CodecValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

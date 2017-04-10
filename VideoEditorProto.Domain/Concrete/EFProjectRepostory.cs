@@ -9,8 +9,8 @@ namespace VideoEditorProto.Domain.Concrete
     {
         public edoEntities context = new edoEntities();
 
-        IQueryable<Project> IProjectRepository.Project { get => context.Project; }
-        IQueryable<AudioCodecs> IProjectRepository.AudioCodecs { get => context.AudioCodecs; }
-        IQueryable<VideoCodecs> IProjectRepository.VideoCodecs { get => context.VideoCodecs; }
+        IQueryable<Project> IProjectRepository.Project { get => context.Projects.Include("AudioCodec").Include("VideoCodec"); }
+        IQueryable<AudioCodec> IProjectRepository.AudioCodecs { get => context.AudioCodecs; }
+        IQueryable<VideoCodec> IProjectRepository.VideoCodecs { get => context.VideoCodecs; }
     }
 }

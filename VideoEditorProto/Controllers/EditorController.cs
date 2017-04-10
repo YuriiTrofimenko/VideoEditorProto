@@ -11,7 +11,8 @@ namespace VideoEditorProto.Controllers
     {
         private IProjectRepository mRepository;
 
-        public EditorController(IProjectRepository _projectRepository) {
+        public EditorController(IProjectRepository _projectRepository)
+        {
 
             mRepository = _projectRepository;
         }
@@ -27,8 +28,9 @@ namespace VideoEditorProto.Controllers
         {
             var result =
                 from item in mRepository.Project
-                select new {item.Id, item.AudioCodecs, item.VideoCodecs };
+                select new { item.Id, item.AudioCodec, item.VideoCodec };
             return Json(result, JsonRequestBehavior.AllowGet);
+            //return new JsonResult { };
         }
 
         [HttpPost]
