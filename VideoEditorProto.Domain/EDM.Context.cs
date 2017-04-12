@@ -18,6 +18,7 @@ namespace VideoEditorProto.Domain
         public edoEntities()
             : base("name=edoEntities")
         {
+            //Отключаем режим "ленивой загрузки"
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
         }
