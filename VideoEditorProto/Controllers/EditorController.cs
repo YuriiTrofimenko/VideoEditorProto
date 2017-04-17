@@ -59,7 +59,7 @@ namespace VideoEditorProto.Controllers
         }
 
         //localhost:50015/editor/getProjectsByUserId?_userId=1
-        [HttpGet]
+        /*[HttpGet]
         public JsonResult getProjectsByUserId(string _userId)
         {
             var result =
@@ -68,7 +68,9 @@ namespace VideoEditorProto.Controllers
                 select new { item.Id, item.User, item.Width, item.Height };
             return Json(result, JsonRequestBehavior.AllowGet);
             //return new JsonResult { };
-        }
+        }*/
+
+        /*Production POST actions for AJAX*/
 
         [HttpPost]
         public JsonResult CreateUser()
@@ -113,6 +115,26 @@ namespace VideoEditorProto.Controllers
                 };
 
             return Json(user);
+        }
+
+        [HttpPost]
+        public JsonResult getProjectNamesByUserId(string _userId)
+        {
+            var result =
+                from projectItem in mRepository.Project
+                where (projectItem.IdUser == _userId)
+                select new { projectItem.Id, projectItem.Name };
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult getProjectsByUserId(string _userId)
+        {
+            var result =
+                from projectItem in mRepository.Project
+                where (projectItem.IdUser == _userId)
+                select new { projectItem.Id, projectItem.User, projectItem.Width, projectItem.Height };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //Демо-действие загрузки медиа-файлов на сервер

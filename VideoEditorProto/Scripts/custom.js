@@ -181,7 +181,110 @@ jQuery(document).ready(function ($) {
     }
 
     function showProjectsPopUp() {
-        alert('Projects');
+        //alert('Projects');
+        var userId;
+        localforage.getItem("user", function (err, blob) {
+
+            //console.log("user: " + blob.id);
+            userId = blob.id;
+            $.ajax({
+                type: "POST",
+                url: '/Editor/getProjectNamesByUserId',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: "{'_userId':'" + userId + "'}",
+                success: function (result) {
+                    //
+                    var resultJS = JSON.parse(JSON.stringify(result));
+                    console.log("The projects was gotten: " + resultJS);
+                    if (resultJS == '') {
+
+                        alert('Projects not exists');
+                        if (confirm('Do you want to create the new project?')) {
+
+                            var projectName = prompt('Input project name: ', '');
+                            if (projectName != '') {
+
+                                //TODO send ajax post request for create the new project
+                                //and get his data from response
+                            }
+                        }
+
+                    } else {
+
+                        console.log("The projects was gotten: " + resultJS);
+                        /*console.log("The projects was gotten: "
+                            + resultJS.id
+                            + " " + resultJS.name
+                            + " " + resultJS.email
+                            + " " + resultJS.password
+                        );*/
+                    }
+
+
+                    /*localforage.setItem("user", resultJS, function (err, blob) {
+                        //nothing
+                    }).then(function () {
+
+                        localforage.getItem("user", function (err, blob) {
+
+                            var localBlobUrl = window.URL.createObjectURL(blob);
+
+                            jsProjectModel.user = localBlobUrl;
+                            console.log("jsProjectModel.user: " + jsProjectModel.user);
+                        });
+                    });*/
+                },
+                error: function (xhr, status, p3) {
+                    //
+                    console.log("Error: " + xhr.responseText);
+                }
+            });
+        });
+        //
+        /*$.ajax({
+            type: "POST",
+            url: '/Editor/getProjectNamesByUserId',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            data: newUserFormData,
+            success: function (result) {
+                //
+                var resultJS = JSON.parse(JSON.stringify(result));
+                console.log("New user was gotten: " + resultJS);
+                if (resultJS == '') {
+
+                    alert('User not exists');
+                } else {
+
+                    console.log("New user was gotten: "
+                        + resultJS.id
+                        + " " + resultJS.name
+                        + " " + resultJS.email
+                        + " " + resultJS.password
+                    );
+                }
+
+
+                localforage.setItem("user", resultJS, function (err, blob) {
+                    //nothing
+                }).then(function () {
+
+                    localforage.getItem("user", function (err, blob) {
+
+                        var localBlobUrl = window.URL.createObjectURL(blob);
+
+                        jsProjectModel.user = localBlobUrl;
+                        console.log("jsProjectModel.user: " + jsProjectModel.user);
+                    });
+                });
+            },
+            error: function (xhr, status, p3) {
+                //
+                console.log("Error: " + xhr.responseText);
+            }
+        });*/
     }
 });
 
