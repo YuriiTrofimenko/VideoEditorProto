@@ -14,9 +14,10 @@ namespace VideoEditorProto.Domain
     
     public partial class UsersEffect
     {
-        public long Id { get; set; }
-        public Nullable<long> IdUser { get; set; }
-        public Nullable<long> IdEffect { get; set; }
+        public string Id { get; set; }
+        public string IdUser { get; set; }
+        public string IdEffect { get; set; }
+        public long VersionNum { get; set; }
     
         public virtual Effect Effect { get; set; }
         public virtual User User { get; set; }

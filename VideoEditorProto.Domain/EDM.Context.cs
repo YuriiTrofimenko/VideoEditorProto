@@ -13,9 +13,9 @@ namespace VideoEditorProto.Domain
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class edoEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public edoEntities()
+        public Entities()
             : base("name=edoEntities")
         {
             //Отключаем режим "ленивой загрузки"

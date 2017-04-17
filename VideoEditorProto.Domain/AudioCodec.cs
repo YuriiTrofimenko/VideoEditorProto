@@ -20,9 +20,10 @@ namespace VideoEditorProto.Domain
             this.Projects = new HashSet<Project>();
         }
     
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string CodecName { get; set; }
         public string CodecValue { get; set; }
+        public long VersionNum { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }

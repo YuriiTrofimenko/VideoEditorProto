@@ -1,28 +1,31 @@
 ﻿CREATE TABLE AudioCodecs (
-  Id bigint NOT NULL,
+  Id varchar(100) NOT NULL,
   CodecName varchar(64) DEFAULT NULL,
   CodecValue varchar(255) DEFAULT NULL
+  ,VersionNum bigint NOT NULL
 );
 
 CREATE TABLE Effect (
-  Id bigint NOT NULL,
+  Id varchar(100) NOT NULL,
   EffectFile varchar(255) DEFAULT NULL,
   Version varchar(32) DEFAULT NULL,
   Price float DEFAULT NULL
+  ,VersionNum bigint NOT NULL
 );
 
 CREATE TABLE Layer (
-  Id bigint NOT NULL,
-  IdProject bigint DEFAULT NULL,
+  Id varchar(100) NOT NULL,
+  IdProject varchar(100) DEFAULT NULL,
   Muted_Showed tinyint DEFAULT NULL,
   Blocked varbinary(MAX)
+  ,VersionNum bigint NOT NULL
 );
 
 CREATE TABLE Project (
-  Id bigint NOT NULL,
-  IdUser bigint DEFAULT NULL,
-  IdVideoCodec bigint DEFAULT NULL,
-  IdAudioCodec bigint DEFAULT NULL,
+  Id varchar(100) NOT NULL,
+  IdUser varchar(100) DEFAULT NULL,
+  IdVideoCodec varchar(100) DEFAULT NULL,
+  IdAudioCodec varchar(100) DEFAULT NULL,
   Width decimal(10,0) DEFAULT NULL,
   Height decimal(10,0) DEFAULT NULL,
   FPS decimal(10,0) DEFAULT NULL,
@@ -33,22 +36,27 @@ CREATE TABLE Project (
   AudioFreq varchar(32) DEFAULT NULL,
   AudioChanells varchar(16) DEFAULT NULL,
   AudioBitrate varchar(16) DEFAULT NULL
+  ,[Name] varchar(64)
+  ,[Description] varchar(255)
+  ,VersionNum bigint NOT NULL
 );
 
 CREATE TABLE Row (
-  Id bigint NOT NULL,
-  IdLayer bigint DEFAULT NULL,
+  Id varchar(100) NOT NULL,
+  IdLayer varchar(100) DEFAULT NULL,
   MaterialFile varchar(255) DEFAULT NULL
+  ,VersionNum bigint NOT NULL
 );
 
 CREATE TABLE RowEffects (
-  Id bigint NOT NULL,
-  IdRow bigint DEFAULT NULL,
-  IdEffect bigint DEFAULT NULL
+  Id varchar(100) NOT NULL,
+  IdRow varchar(100) DEFAULT NULL,
+  IdEffect varchar(100) DEFAULT NULL
+  ,VersionNum bigint NOT NULL
 );
 
 CREATE TABLE [User] (
-  Id bigint NOT NULL,
+  Id varchar(100) NOT NULL,
   Email varchar(64) DEFAULT NULL,
   Surname varchar(32) DEFAULT NULL,
   Name varchar(32) DEFAULT NULL,
@@ -56,15 +64,17 @@ CREATE TABLE [User] (
 );
 
 CREATE TABLE UsersEffects (
-  Id bigint NOT NULL,
-  IdUser bigint DEFAULT NULL,
-  IdEffect bigint DEFAULT NULL
+  Id varchar(100) NOT NULL,
+  IdUser varchar(100) DEFAULT NULL,
+  IdEffect varchar(100) DEFAULT NULL
+  ,VersionNum bigint NOT NULL
 );
 
 CREATE TABLE VideoCodecs (
-  Id bigint NOT NULL,
+  Id varchar(100) NOT NULL,
   CodecName varchar(64) DEFAULT NULL,
   CodecValue varchar(255) DEFAULT NULL
+  ,VersionNum bigint NOT NULL
 );
 
 ALTER TABLE AudioCodecs

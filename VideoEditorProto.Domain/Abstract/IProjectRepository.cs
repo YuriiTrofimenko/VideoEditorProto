@@ -8,7 +8,10 @@ namespace VideoEditorProto.Domain.Abstract
     {
         IQueryable<Project> Project { get; }
         IQueryable<Project> EagerProject { get; }
-        bool SaveProject(Project project);
+        bool SaveProject(Project _project);
+
+        IQueryable<User> User { get; }
+        User SaveUser(User _user);
 
         IQueryable<AudioCodec> AudioCodecs { get; }
 

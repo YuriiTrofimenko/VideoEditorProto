@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using VideoEditorProto.Domain;
 using VideoEditorProto.Domain.Abstract;
+using VideoEditorProto.Utils;
 
 namespace VideoEditorProto.Controllers
 {
@@ -30,13 +31,13 @@ namespace VideoEditorProto.Controllers
 
         //localhost:50015/editor/createProject?_projectId=1
         [HttpGet]
-        public JsonResult createProject(int _projectId)
+        public JsonResult createProject(string _projectId)
         {
             //TODO добавить поля name и description в модель "Проект",
             //поле version - во все модели (для синхронизации клиента и сервера)
             Project newProject = new Project();
-            newProject.Id = 1;
-            newProject.IdUser = 1;
+            newProject.Id = "1";
+            newProject.IdUser = "1";
             newProject.Width = 600;
             newProject.Height = 480;
             var result = new { result = mRepository.SaveProject(newProject) };
@@ -46,7 +47,7 @@ namespace VideoEditorProto.Controllers
 
         //localhost:50015/editor/getProjectById?_projectId=1
         [HttpGet]
-        public JsonResult getProjectById(int _projectId)
+        public JsonResult getProjectById(string _projectId)
         {
             //TODO add fields: name, description, version
             var result =
@@ -59,7 +60,7 @@ namespace VideoEditorProto.Controllers
 
         //localhost:50015/editor/getProjectsByUserId?_userId=1
         [HttpGet]
-        public JsonResult getProjectsByUserId(int _userId)
+        public JsonResult getProjectsByUserId(string _userId)
         {
             var result =
                 from item in mRepository.Project
@@ -67,6 +68,51 @@ namespace VideoEditorProto.Controllers
                 select new { item.Id, item.User, item.Width, item.Height };
             return Json(result, JsonRequestBehavior.AllowGet);
             //return new JsonResult { };
+        }
+
+        [HttpPost]
+        public JsonResult CreateUser()
+        {
+            string newUserId = IdCreator.createUserGuid();
+            string encodedPassword = StringsEncoder.MD5Hash(Request["password"]);
+
+            User newUser = new Domain.User();
+            newUser.Id = newUserId;
+            newUser.Name = Request["name"];
+            newUser.Email = Request["email"];
+            newUser.Password = encodedPassword;
+
+            var result = mRepository.SaveUser(newUser);
+                //from user in mRepository.User
+                //where (user.Id == newUserId)
+                //select new { item.Id, item.User, item.Width, item.Height };
+
+            return Json(
+                new { id = result.Id
+                    ,name = result.Name
+                    , email = result.Email
+                    , password = result.Password
+                });
+        }
+
+        [HttpPost]
+        public JsonResult GetUser()
+        {
+            string name = Request["name"];//do not remove this tmp variable!
+            string encodedPassword = StringsEncoder.MD5Hash(Request["password"]);
+
+            var user =
+                from userItem in mRepository.User
+                where (userItem.Name == name
+                        && userItem.Password == encodedPassword)
+                select new {
+                    id = userItem.Id
+                    , name = userItem.Name
+                    , email = userItem.Email
+                    , password = userItem.Password
+                };
+
+            return Json(user);
         }
 
         //Демо-действие загрузки медиа-файлов на сервер

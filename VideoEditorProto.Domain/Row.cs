@@ -20,9 +20,10 @@ namespace VideoEditorProto.Domain
             this.RowEffects = new HashSet<RowEffect>();
         }
     
-        public long Id { get; set; }
-        public Nullable<long> IdLayer { get; set; }
+        public string Id { get; set; }
+        public string IdLayer { get; set; }
         public string MaterialFile { get; set; }
+        public long VersionNum { get; set; }
     
         public virtual Layer Layer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

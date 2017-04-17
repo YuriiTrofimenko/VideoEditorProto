@@ -21,10 +21,11 @@ namespace VideoEditorProto.Domain
             this.UsersEffects = new HashSet<UsersEffect>();
         }
     
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string EffectFile { get; set; }
         public string Version { get; set; }
         public Nullable<double> Price { get; set; }
+        public long VersionNum { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RowEffect> RowEffects { get; set; }

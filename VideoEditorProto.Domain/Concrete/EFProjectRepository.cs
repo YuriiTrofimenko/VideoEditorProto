@@ -7,9 +7,9 @@ namespace VideoEditorProto.Domain.Concrete
 {
     /*Реализация репозитория данных проектов.
      Является прослойкой между кодом контроллеров и EF6*/
-    public class EFProjectRepostory : IProjectRepository
+    public class EFProjectRepository : IProjectRepository
     {
-        public edoEntities context = new edoEntities();
+        public Entities context = new Entities();
 
         IQueryable<Project> IProjectRepository.Project { get => context.Projects; }
         //Вариант с явным указанием заранее включаемых в результат полей данных
@@ -20,6 +20,38 @@ namespace VideoEditorProto.Domain.Concrete
                 /*.Include("AudioCodec")
                 .Include("VideoCodec")*/;
         }
+
+        IQueryable<User> IProjectRepository.User { get => context.Users; }
+
+        public User SaveUser(User _user)
+        {
+            User result = null;
+            try
+            {
+                User dbEntry = context.Users.Find(_user.Id);
+                //Если запись о проекте существует - обновляем ее данные
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = _user.Name;
+                    dbEntry.Surname = _user.Surname;
+                    dbEntry.Email = _user.Email;
+                    dbEntry.Password = _user.Password;
+                }
+                //Если нет - создаем запись
+                else
+                {
+                    context.Users.Add(_user);
+                }
+                context.SaveChanges();
+                result = context.Users.Find(_user.Id);
+            }
+            catch (Exception)
+            {
+
+            }
+            return result;
+        }
+
         public bool SaveProject(Project _project)
         {
             bool result = true;

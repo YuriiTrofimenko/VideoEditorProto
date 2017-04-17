@@ -60,7 +60,7 @@
     <Compile Include="AudioCodec.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Concrete\EFProjectRepostory.cs" />
+    <Compile Include="Concrete\EFProjectRepository.cs" />
     <Compile Include="EDM.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

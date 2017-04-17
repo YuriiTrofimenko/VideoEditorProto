@@ -9,36 +9,39 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CodecName" Type="varchar" MaxLength="64" />
           <Property Name="CodecValue" Type="varchar" MaxLength="255" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Effect">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="EffectFile" Type="varchar" MaxLength="255" />
           <Property Name="Version" Type="varchar" MaxLength="32" />
           <Property Name="Price" Type="float" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Layer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="IdProject" Type="bigint" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdProject" Type="varchar" MaxLength="100" />
           <Property Name="Muted_Showed" Type="tinyint" />
           <Property Name="Blocked" Type="varbinary(max)" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="IdUser" Type="bigint" />
-          <Property Name="IdVideoCodec" Type="bigint" />
-          <Property Name="IdAudioCodec" Type="bigint" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="100" />
+          <Property Name="IdVideoCodec" Type="varchar" MaxLength="100" />
+          <Property Name="IdAudioCodec" Type="varchar" MaxLength="100" />
           <Property Name="Width" Type="decimal" Precision="10" Scale="0" />
           <Property Name="Height" Type="decimal" Precision="10" Scale="0" />
           <Property Name="FPS" Type="decimal" Precision="10" Scale="0" />
@@ -49,28 +52,33 @@
           <Property Name="AudioFreq" Type="varchar" MaxLength="32" />
           <Property Name="AudioChanells" Type="varchar" MaxLength="16" />
           <Property Name="AudioBitrate" Type="varchar" MaxLength="16" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Row">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="IdLayer" Type="bigint" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdLayer" Type="varchar" MaxLength="100" />
           <Property Name="MaterialFile" Type="varchar" MaxLength="255" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="RowEffects">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="IdRow" Type="bigint" />
-          <Property Name="IdEffect" Type="bigint" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdRow" Type="varchar" MaxLength="100" />
+          <Property Name="IdEffect" Type="varchar" MaxLength="100" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="64" />
           <Property Name="Surname" Type="varchar" MaxLength="32" />
           <Property Name="Name" Type="varchar" MaxLength="32" />
@@ -80,17 +88,19 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="IdUser" Type="bigint" />
-          <Property Name="IdEffect" Type="bigint" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="100" />
+          <Property Name="IdEffect" Type="varchar" MaxLength="100" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="VideoCodecs">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CodecName" Type="varchar" MaxLength="64" />
           <Property Name="CodecValue" Type="varchar" MaxLength="255" />
+          <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_IdAudioCodec">
           <End Role="AudioCodecs" Type="Self.AudioCodecs" Multiplicity="0..1" />
@@ -256,19 +266,21 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CodecName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="CodecValue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Projects" Relationship="Self.FK_IdAudioCodec" FromRole="AudioCodecs" ToRole="Project" />
         </EntityType>
         <EntityType Name="Effect">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EffectFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Version" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Double" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="RowEffects" Relationship="Self.FK_IdEffect" FromRole="Effect" ToRole="RowEffects" />
           <NavigationProperty Name="UsersEffects" Relationship="Self.FK_IdUsersEffectsEffect" FromRole="Effect" ToRole="UsersEffects" />
         </EntityType>
@@ -276,10 +288,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="IdProject" Type="Int64" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdProject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Muted_Showed" Type="Byte" />
           <Property Name="Blocked" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Rows" Relationship="Self.FK_IdLayer" FromRole="Layer" ToRole="Row" />
           <NavigationProperty Name="Project" Relationship="Self.FK_IdProject" FromRole="Layer" ToRole="Project" />
         </EntityType>
@@ -287,10 +300,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="IdUser" Type="Int64" />
-          <Property Name="IdVideoCodec" Type="Int64" />
-          <Property Name="IdAudioCodec" Type="Int64" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdUser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdVideoCodec" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdAudioCodec" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Width" Type="Decimal" Precision="10" Scale="0" />
           <Property Name="Height" Type="Decimal" Precision="10" Scale="0" />
           <Property Name="FPS" Type="Decimal" Precision="10" Scale="0" />
@@ -301,6 +314,9 @@
           <Property Name="AudioFreq" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="AudioChanells" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="AudioBitrate" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="AudioCodec" Relationship="Self.FK_IdAudioCodec" FromRole="Project" ToRole="AudioCodecs" />
           <NavigationProperty Name="Layers" Relationship="Self.FK_IdProject" FromRole="Project" ToRole="Layer" />
           <NavigationProperty Name="User" Relationship="Self.FK_IdUser" FromRole="Project" ToRole="User" />
@@ -310,9 +326,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="IdLayer" Type="Int64" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdLayer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MaterialFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Layer" Relationship="Self.FK_IdLayer" FromRole="Row" ToRole="Layer" />
           <NavigationProperty Name="RowEffects" Relationship="Self.FK_IdRow" FromRole="Row" ToRole="RowEffects" />
         </EntityType>
@@ -320,9 +337,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="IdRow" Type="Int64" />
-          <Property Name="IdEffect" Type="Int64" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdRow" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdEffect" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Effect" Relationship="Self.FK_IdEffect" FromRole="RowEffects" ToRole="Effect" />
           <NavigationProperty Name="Row" Relationship="Self.FK_IdRow" FromRole="RowEffects" ToRole="Row" />
         </EntityType>
@@ -330,7 +348,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
@@ -342,9 +360,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="IdUser" Type="Int64" />
-          <Property Name="IdEffect" Type="Int64" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdUser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdEffect" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Effect" Relationship="Self.FK_IdUsersEffectsEffect" FromRole="UsersEffects" ToRole="Effect" />
           <NavigationProperty Name="User" Relationship="Self.FK_IdUsersEffectsUser" FromRole="UsersEffects" ToRole="User" />
         </EntityType>
@@ -352,9 +371,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CodecName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="CodecValue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Projects" Relationship="Self.FK_IdVideoCodec" FromRole="VideoCodecs" ToRole="Project" />
         </EntityType>
         <Association Name="FK_IdAudioCodec">
@@ -465,7 +485,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="edoEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AudioCodecs" EntityType="Self.AudioCodec" />
           <EntitySet Name="Effects" EntityType="Self.Effect" />
           <EntitySet Name="Layers" EntityType="Self.Layer" />
@@ -517,13 +537,14 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище edoModelContainer" CdmEntityContainer="edoEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище edoModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="AudioCodecs">
             <EntityTypeMapping TypeName="edoModel.AudioCodec">
               <MappingFragment StoreEntitySet="AudioCodecs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CodecName" ColumnName="CodecName" />
                 <ScalarProperty Name="CodecValue" ColumnName="CodecValue" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -534,6 +555,7 @@
                 <ScalarProperty Name="EffectFile" ColumnName="EffectFile" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -544,6 +566,7 @@
                 <ScalarProperty Name="IdProject" ColumnName="IdProject" />
                 <ScalarProperty Name="Muted_Showed" ColumnName="Muted_Showed" />
                 <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -564,6 +587,9 @@
                 <ScalarProperty Name="AudioFreq" ColumnName="AudioFreq" />
                 <ScalarProperty Name="AudioChanells" ColumnName="AudioChanells" />
                 <ScalarProperty Name="AudioBitrate" ColumnName="AudioBitrate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -573,6 +599,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdLayer" ColumnName="IdLayer" />
                 <ScalarProperty Name="MaterialFile" ColumnName="MaterialFile" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -582,6 +609,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdRow" ColumnName="IdRow" />
                 <ScalarProperty Name="IdEffect" ColumnName="IdEffect" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -602,6 +630,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdEffect" ColumnName="IdEffect" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -611,6 +640,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CodecName" ColumnName="CodecName" />
                 <ScalarProperty Name="CodecValue" ColumnName="CodecValue" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -30,7 +30,7 @@ namespace VideoEditorProto.Infrastructure
         private void AddBindings()
         {
             // конфигурирование контейнера
-            ninjectKernel.Bind<IProjectRepository>().To<EFProjectRepostory>();
+            ninjectKernel.Bind<IProjectRepository>().To<EFProjectRepository>();
         }
     }
 }

@@ -20,10 +20,11 @@ namespace VideoEditorProto.Domain
             this.Rows = new HashSet<Row>();
         }
     
-        public long Id { get; set; }
-        public Nullable<long> IdProject { get; set; }
+        public string Id { get; set; }
+        public string IdProject { get; set; }
         public Nullable<byte> Muted_Showed { get; set; }
         public byte[] Blocked { get; set; }
+        public long VersionNum { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Row> Rows { get; set; }

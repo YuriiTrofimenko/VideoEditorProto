@@ -1,4 +1,191 @@
-﻿/*function showMessage() {
+﻿//Когда страница редактирования загрузилась
+jQuery(document).ready(function ($) {
+    "use strict";
+
+    //JS Project Model
+    var jsProjectModel = jsProjectModel || {};
+
+    //проверяем, есть ли в локальном хранилище информация о пользователе
+        //если есть -
+            //проверяем, есть ли на сервере проекты с ИД пользователя, показываем список проектов, создать проект
+                //при загрузке проекта -
+                    //1. аякс со списком of items like this: "тип объекта - id - версия",
+                    //2. на сервере смотрим все записи в БД по проекту, возвращаем джейсон
+                        //с объектами, которых нет на клиенте, или у которых версии устарели
+                    //3. на клиенте визуализируем текущее состояние проекта
+        //если нет - предлагаем:
+            //1. sign in / зарегистрироваться (поп - ап окно: имя, е-мэйл, пароль) -
+                //аякс(создаем запись в БД, возвращаем объект Пользователь)
+            //2. создать проект (поп - ап окно: пустой список проектов, создать проект(передаем юзера)) -
+                //аякс(создаем запись в БД, возвращаем объект Проект)
+    localforage.getItem("user", function (err, blob) {
+
+        //
+        console.log("user: " + blob);
+
+        if (blob == null) {
+
+            showRequestAccountPopUp();
+        } else {
+
+            showProjectsPopUp();
+        }
+    });
+
+    function showRequestAccountPopUp() {
+
+        var result = '';
+        while (result == '') {
+
+            result = prompt('Input 1 for SignIn or 2 for SignUp: ', '');
+        }
+        if (result == 1) {
+
+            showSignInPopUp();
+        } else if (result == 2) {
+
+            showSignUpPopUp();
+        }
+    }
+
+    function showSignUpPopUp() {
+        //alert('SignUp');
+        var userName = '';
+        var userEMail = '';
+        var userPassword = '';
+        while (userName == '') {
+
+            userName = prompt('Input your name:', '');
+        }
+        while (userEMail == '') {
+
+            userEMail = prompt('Input e-mail:', '');
+        }
+        while (userPassword == '') {
+
+            userPassword = prompt('Input password:', '');
+        }
+
+        //console.log("name: " + userName + " " + userEMail + " " + userPassword);
+        if (userName != '' && userEMail != '' && userPassword != '') {
+
+            var newUserFormData = new FormData();
+
+            newUserFormData.append("name", userName);
+            newUserFormData.append("email", userEMail);
+            newUserFormData.append("password", userPassword);
+
+            $.ajax({
+                type: "POST",
+                //url: '/Default/Upload',
+                url: '/Editor/CreateUser',
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                data: newUserFormData,
+                success: function (result) {
+                    //a
+                    var resultJS = JSON.parse(JSON.stringify(result));
+                    console.log("New user was created: "
+                        + resultJS.id
+                        + " " + resultJS.name
+                        + " " + resultJS.email
+                        + " " + resultJS.password
+                    );
+                    localforage.setItem("user", resultJS, function (err, blob) {
+                        //nothing
+                    }).then(function () {
+
+                        localforage.getItem("user", function (err, blob) {
+
+                            var localBlobUrl = window.URL.createObjectURL(blob);
+
+                            jsProjectModel.user = localBlobUrl;
+                            console.log("jsProjectModel.user: " + jsProjectModel.user);
+                        });
+                    });
+                },
+                error: function (xhr, status, p3) {
+                    //
+                    console.log("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    function showSignInPopUp()
+    {
+        var userName = '';
+        var userPassword = '';
+        while (userName == '') {
+
+            userName = prompt('Input your name:', '');
+        }
+        while (userPassword == '') {
+
+            userPassword = prompt('Input password:', '');
+        }
+
+        //console.log("name: " + userName + " " + userPassword);
+        if (userName != '' && userPassword != '') {
+
+            var newUserFormData = new FormData();
+
+            newUserFormData.append("name", userName);
+            newUserFormData.append("password", userPassword);
+
+            $.ajax({
+                type: "POST",
+                url: '/Editor/GetUser',
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                data: newUserFormData,
+                success: function (result) {
+                    //
+                    var resultJS = JSON.parse(JSON.stringify(result));
+                    console.log("New user was gotten: " + resultJS);
+                    if (resultJS == '') {
+
+                        alert('User not exists');
+                    } else {
+
+                        console.log("New user was gotten: "
+                            + resultJS.id
+                            + " " + resultJS.name
+                            + " " + resultJS.email
+                            + " " + resultJS.password
+                        );
+                    }
+                    
+
+                    localforage.setItem("user", resultJS, function (err, blob) {
+                        //nothing
+                    }).then(function () {
+
+                        localforage.getItem("user", function (err, blob) {
+
+                            var localBlobUrl = window.URL.createObjectURL(blob);
+
+                            jsProjectModel.user = localBlobUrl;
+                            console.log("jsProjectModel.user: " + jsProjectModel.user);
+                        });
+                    });
+                },
+                error: function (xhr, status, p3) {
+                    //
+                    console.log("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    function showProjectsPopUp() {
+        alert('Projects');
+    }
+});
+
+/*function showMessage() {
     alert('Hi!');
 }
 

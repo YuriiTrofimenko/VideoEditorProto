@@ -14,9 +14,10 @@ namespace VideoEditorProto.Domain
     
     public partial class RowEffect
     {
-        public long Id { get; set; }
-        public Nullable<long> IdRow { get; set; }
-        public Nullable<long> IdEffect { get; set; }
+        public string Id { get; set; }
+        public string IdRow { get; set; }
+        public string IdEffect { get; set; }
+        public long VersionNum { get; set; }
     
         public virtual Effect Effect { get; set; }
         public virtual Row Row { get; set; }

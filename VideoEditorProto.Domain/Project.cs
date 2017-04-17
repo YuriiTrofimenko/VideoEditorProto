@@ -20,10 +20,10 @@ namespace VideoEditorProto.Domain
             this.Layers = new HashSet<Layer>();
         }
     
-        public long Id { get; set; }
-        public Nullable<long> IdUser { get; set; }
-        public Nullable<long> IdVideoCodec { get; set; }
-        public Nullable<long> IdAudioCodec { get; set; }
+        public string Id { get; set; }
+        public string IdUser { get; set; }
+        public string IdVideoCodec { get; set; }
+        public string IdAudioCodec { get; set; }
         public Nullable<decimal> Width { get; set; }
         public Nullable<decimal> Height { get; set; }
         public Nullable<decimal> FPS { get; set; }
@@ -34,6 +34,9 @@ namespace VideoEditorProto.Domain
         public string AudioFreq { get; set; }
         public string AudioChanells { get; set; }
         public string AudioBitrate { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public long VersionNum { get; set; }
     
         public virtual AudioCodec AudioCodec { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
