@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Editor</title>
+		<link rel="stylesheet" href="styles/style.css">
+		<!-- <link rel="stylesheet" href="js/jquery-ui.min.css"> -->
+	</head>
+	<body>
+		<div class="mask"></div>
+		
+		<form method="post" action="" class="modal createSequence">
+			<div class="videoPanel">
+				<p class="panelTitle">Видео</p>
+				<div class="panelContent clear">
+					<div class="headers">
+						<ul>
+							<li><label for="">Видео кодек</label></li>
+							<li><label for="">Ширина</label></li>
+							<li><label for="">Высота</label></li>
+							<li><label for="">Кадры в секунду</label></li>
+							<li><label for="">Пропорции</label></li>
+							<li><label for="">Глубина цвета</label></li>
+							<li><label for="">Оптим. кадры</label></li>
+							<li><label for="">Качество</label></li>
+						</ul>	
+					</div>
+					<div class="fields">
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">H.264</option>
+								<option value="2">DivX</option>
+								<option value="3">Daala</option>
+								<option value="4">VP9</option>
+							</select>
+						</div>
+
+						<div class="wrap"><input name="width" type="text"></div>
+
+						<div class="wrap"><input name="height" type="text"></div>
+
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">24</option>
+								<option value="2">25</option>
+								<option value="3">60</option>
+								<option value="4">90</option>
+							</select>
+						</div>
+
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">16:9</option>
+								<option value="2">16:10</option>
+							</select>
+						</div>
+
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">24 bit</option>
+								<option value="2">32 bit</option>
+							</select>
+						</div>
+
+						<div class="wrap"><input type="checkbox"></div>
+
+						<div class="wrap">
+							<div class="slider-range" id="slider-range"></div> 
+							<p>
+								<input class="notinput" type="text" name="quality" readonly style="width:100px; border:0; color:#f6931f; font-weight:bold;">
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="audioPanel">
+				<p class="panelTitle">Аудио</p>
+				<div class="panelContent clear">
+					<div class="headers">
+						<ul>
+							<li><label for="">Аудио кодек</label></li>
+							<li><label for="">Частота</label></li>
+							<li><label for="">Каналы</label></li>
+							<li><label for="">Битрейт</label></li>
+						</ul>	
+					</div>
+					<div class="fields">
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">ALAC</option>
+								<option value="2">FLAC</option>
+								<option value="3">OFR</option>
+								<option value="4">WV</option>
+							</select>
+						</div>
+
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">44100 Hz</option>
+								<option value="2">48000 Hz</option>
+								<option value="3">96000 Hz</option>
+							</select>
+						</div>
+
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="4">5</option>
+								<option value="4">6</option>
+							</select>
+						</div>
+
+						<div class="wrap">
+							<select class="dropdownList">
+								<option value="1">16</option>
+								<option value="3">20</option>
+								<option value="2">24</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="submitField">
+				<div class="wrap">
+					<p>Назвние проекта</p>
+					<input type="text" name="projectName">
+				</div>
+				<input class="right" type="submit" value="Готово">
+			</div>
+		</form>
+
+		<div class="wrapp">
+			<div class="clear">
+				<div class="left">
+					<header class="mainHeader left">
+						<div class="logo left">
+							
+						</div>
+
+						<ul class="left">
+							<li><a href="#">Файл</a></li>
+							<li><a href="#">Редактирование</a></li>
+							<li><a href="#">Эффекты</a></li>
+							<li><a href="#">Помощь</a></li>
+						</ul>
+
+						<div class="buttons right">
+							<button class="save"></button>
+							<button class="help"></button>
+						</div>
+					</header>
+
+					<div class="player left">
+						<header>
+							<p>video1.mp4</p>
+							<time>00:00:00</time>
+						</header>
+
+						<div id="videoPlayer">
+							<video>
+								<source src="video/Реклама скайпа.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+							</video>
+						</div>
+
+						<div class="videoControls">
+							<div class="progressBar">
+								<div class="innerProgressBar">
+									<span class="runner"></span>
+								</div>
+							</div>
+							<div class="buttons">
+								<time class="currentTime">00:00:00</time>
+								<ul>
+									<div class="volumeWrapp">
+										<div class="volumeBar left">
+											<div class="volumeLine"></div>
+											<div class="volumeRunner"></div>
+										</div>
+									</div>
+									<li class="mute"></li>
+									<li class="prevFrames" ></li>
+									<li class="stop" ></li>
+									<li class="prevFrame" ></li>
+									<li class="playPause" ></li>
+									<li class="nextFrame" ></li>
+									<li class="screenShot" ></li>
+									<li class="nextFrames" ></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<aside class="right tabPanel">
+					<ul class="tabHeader clear">
+						<li><a class="active" href="#files">Файлы</a></li>
+						<li><a href="#effects">Эффекты</a></li>
+						<li><a href="#text">Текст</a></li>
+					</ul>
+
+					<div class="tab" id="files">
+						<form class="form-head" action="/editor/load_row_file/" enctype="multipart/form-data" method="post">
+							<span>Загруженные файлы</span>
+							<label class="right">Импортировать<input type="file" name="upload"></label>
+						</form>
+						
+						<ul class="filesTile clear">
+						</ul>
+
+						<div class="tabScrollPanel">
+							<div class="scrollArrowUp"></div>
+							<div class="scrollArrowDown"></div>
+							<div class="scrollTrack">
+								<div class="scroller"></div>
+							</div>
+						</div>
+
+						<div class="fileProperties">
+							<div class="properties">
+								<span>Имя:</span>
+								<span>Формат:</span>
+								<span>Ширина:</span>
+								<span>Высота:</span>
+								<span>Продолжительность:</span>
+								<span>Размер:</span>
+								<span>Кадры в сек.:</span>
+								<span>Соотношение сторон:</span>
+								<span>Звук:</span>
+								<span>битрейт:</span>
+							</div>
+							<div class="values">
+								<span>кубик рубика</span>
+								<span>avi</span>
+								<span>680</span>
+								<span>540</span>
+								<span>00:00:36</span>
+								<span>16 mb</span>
+								<span>24 fps</span>
+								<span>4:3</span>
+								<span>есть</span>
+								<span>44100 Hz, 16 bit, stereo</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab clear" id="effects">
+						<div class="effectNames left">
+							<div class="colHeader">Эффект</div>
+
+							<div class="colBody">
+								<ul>
+									<li class="active">
+										<h2>Видеоэффекты</h2>
+										<ul>
+											<li class="active">Размытие</li>
+											<li class="active">Цветовой баланс</li>
+											<li>Шум</li>
+											<li>Перспектива</li>
+											<li>Искажение</li>
+										</ul>
+									</li>
+
+									<li>
+										<h2>Аудиоэффекты</h2>
+										<ul>
+											<li>1</li>
+											<li>2</li>
+											<li>3</li>
+											<li>4</li>
+											<li>5</li>
+										</ul>
+									</li>
+
+									<li>
+										<h2>Видеопереходы</h2>
+										<ul>
+											<li>1</li>
+											<li>2</li>
+											<li>3</li>
+											<li>4</li>
+										</ul>
+									</li>
+
+									<li>
+										<h2>Аудиопереходы</h2>
+										<ul>
+											<li>1</li>
+											<li>2</li>
+											<li>3</li>
+											<li>4</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="effectProperties left">
+
+							<div class="colHeader">Параметры эффекта</div>
+							
+							<div class="colBody">
+								<div class="timeRow">
+									<div class="effectsRunner"></div>
+									<time>00;00;00</time>
+								</div>
+
+								<div class="property">
+									<div class="propertyHeader">Размытие</div>
+
+									<div class="propertyBody">
+										<div class="propertyPart">
+											<h3>Уровень размытия <p contenteditable><span contenteditable>130</span>%</p></h3>
+											<div class="propertyContent">
+												<div class="hscroll"></div>
+											</div>
+										</div>
+
+										<div class="propertyPart">
+											<h3>Уровень размытия <p><span contenteditable>130</span>%</p></h3>
+											<div class="propertyContent">
+												<div class="hscroll"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="tab" id="text">
+						<form class="form-head" action="/editor/load_row_file/" enctype="multipart/form-data" method="post">
+							<div>
+								<div class="cursor"></div>
+								<div class="text"></div>
+								<div class="square"></div>
+								<div class="circle"></div>
+								<div class="triangle"></div>
+								<div class="line"></div>
+							</div>
+							<label class="right">Сохранить титры<input type="file" name="upload"></label>
+						</form>
+
+
+					</div>
+				</aside>
+			</div>
+
+			<section class="squencePanel">
+				<div class="controlsRow clear">
+					<div class="buttonsPanel clear left">
+						<div class="pointer"></div>
+						<div class="cut"></div>
+						<div class="hand"></div>
+						<div class="loupe"></div>
+					</div>
+
+					<div class="addRowButtons left">
+						<div class="addVideo">+</div>
+						<div class="addAudio">+</div>
+					</div>
+
+					<div class="scales left">
+						<div class="scale">
+							<ul class="clear">
+							</ul>
+						</div>
+
+						<div class="hasRowPanel"></div>
+					</div>
+				</div>
+
+				<div class="sequenceFrame">
+					<div class="controlVideoPanel clear">
+
+						<ul class="layoutControl left">
+							<li class="clear">
+								<div class="showHide"></div>
+								<div class="blockUnblock"></div>
+							</li>
+
+							<li class="clear">
+								<div class="showHide"></div>
+								<div class="blockUnblock"></div>
+							</li>
+
+							<li class="clear">
+								<div class="showHide"></div>
+								<div class="blockUnblock"></div>
+							</li>
+						</ul>
+
+						<div class="left lbl">V</div>
+
+						<div class="videoLayouts left">
+							<div class="videoLayout">
+<!-- 								<div class="videoRow">
+									<p class="rowHeader">Video Name.avi</p>
+									<p class="effectsNum">Effects <span>2</span></p>
+									<img src="/static/img/1.png" alt="Video Name">
+								</div> -->
+							</div>
+							<div class="videoLayout">
+							</div>
+							<div class="videoLayout">
+							</div>
+						</div>
+					</div>
+
+					<div class="controlAudioPanel clear">
+						
+						<ul class="layoutControl left">
+							<li class="clear">
+								<div class="muteSound"></div>
+								<div class="blockUnblock"></div>
+							</li>
+
+							<li class="clear">
+								<div class="muteSound"></div>
+								<div class="blockUnblock"></div>
+							</li>
+
+							<li class="clear">
+								<div class="muteSound"></div>
+								<div class="blockUnblock"></div>
+							</li>
+						</ul>
+
+						<div class="left lbl">A</div>
+
+						<div class="audioLayouts left">
+							<div class="audioLayout">
+<!-- 								<div class="audioRow">
+									<p class="rowHeader">Audio Name.mp3</p>
+									<p class="effectsNum">Effects <span>2</span></p>
+									<img src="/static/img/1.png" alt="Video Name">
+								</div> -->
+							</div>
+							<div class="audioLayout">
+							</div>
+							<div class="audioLayout">
+							</div>
+						</div>
+
+						<div class="sequenceScrollbar">
+							<div class="trackBar">
+								<div class="scrollbar"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript" defer></script>
+		<script src="js/jquery-ui-1.11.4.custom/jquery-ui.min.js" defer></script> 
+		<script src="js/baron.min.js"  type="text/javascript" defer></script>
+		<script src="js/tabs.js" type="text/javascript" defer></script> <!--IMPORTANT! AFTER JQUERY!-->
+		<script src="js/uicontrols.js" type="text/javascript" defer></script>
+		<script src="js/sequencePanelControls.js" type="text/javascript" defer></script>
+		<script src="js/videoControls.js" type="text/javascript" defer></script>
+	</body>
+</html>
