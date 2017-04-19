@@ -8,7 +8,7 @@ namespace VideoEditorProto.Domain.Abstract
     {
         IQueryable<Project> Project { get; }
         IQueryable<Project> EagerProject { get; }
-        bool SaveProject(Project _project);
+        Project SaveProject(Project _project);
 
         IQueryable<User> User { get; }
         User SaveUser(User _user);

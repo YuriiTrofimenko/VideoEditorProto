@@ -1,7 +1,7 @@
 ﻿//Когда страница редактирования загрузилась
 jQuery(document).ready(function ($) {
     "use strict";
-
+    //localforage.clear();
     //JS Project Model
     var jsProjectModel = jsProjectModel || {};
 
@@ -87,20 +87,20 @@ jQuery(document).ready(function ($) {
                     //a
                     var resultJS = JSON.parse(JSON.stringify(result));
                     console.log("New user was created: "
-                        + resultJS.id
-                        + " " + resultJS.name
-                        + " " + resultJS.email
-                        + " " + resultJS.password
+                        + resultJS[0].id
+                        + " " + resultJS[0].name
+                        + " " + resultJS[0].email
+                        + " " + resultJS[0].password
                     );
-                    localforage.setItem("user", resultJS, function (err, blob) {
+                    localforage.setItem("user", resultJS[0], function (err, blob) {
                         //nothing
                     }).then(function () {
 
                         localforage.getItem("user", function (err, blob) {
 
-                            var localBlobUrl = window.URL.createObjectURL(blob);
+                            //var localBlobUrl = window.URL.createObjectURL(blob);
 
-                            jsProjectModel.user = localBlobUrl;
+                            jsProjectModel.user = blob;
                             console.log("jsProjectModel.user: " + jsProjectModel.user);
                         });
                     });
@@ -144,30 +144,31 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     //
                     var resultJS = JSON.parse(JSON.stringify(result));
-                    console.log("New user was gotten: " + resultJS);
+                    console.log("New user was gotten: " + resultJS[0]);
                     if (resultJS == '') {
 
                         alert('User not exists');
                     } else {
 
+                        console.dir(resultJS[0]);
                         console.log("New user was gotten: "
-                            + resultJS.id
-                            + " " + resultJS.name
-                            + " " + resultJS.email
-                            + " " + resultJS.password
+                            + resultJS[0].id
+                            + " " + resultJS[0].name
+                            + " " + resultJS[0].email
+                            + " " + resultJS[0].password
                         );
                     }
                     
 
-                    localforage.setItem("user", resultJS, function (err, blob) {
+                    localforage.setItem("user", resultJS[0], function (err, blob) {
                         //nothing
                     }).then(function () {
 
                         localforage.getItem("user", function (err, blob) {
 
-                            var localBlobUrl = window.URL.createObjectURL(blob);
+                            //var localBlobUrl = window.URL.createObjectURL(blob);
 
-                            jsProjectModel.user = localBlobUrl;
+                            jsProjectModel.user = blob;
                             console.log("jsProjectModel.user: " + jsProjectModel.user);
                         });
                     });
@@ -205,20 +206,58 @@ jQuery(document).ready(function ($) {
                             var projectName = prompt('Input project name: ', '');
                             if (projectName != '') {
 
-                                //TODO send ajax post request for create the new project
+                                //send ajax post request for create new project
                                 //and get his data from response
+
+                                var newProjectFormData = new FormData();
+
+                                newProjectFormData.append("userid", userId);
+                                newProjectFormData.append("name", projectName);
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: '/Editor/CreateProject',
+                                    dataType: 'json',
+                                    contentType: false,
+                                    processData: false,
+                                    data: newProjectFormData,
+                                    success: function (result) {
+                                        //
+                                        var resultJS = JSON.parse(JSON.stringify(result));
+                                        console.log("New project was created: "
+                                            + resultJS.id
+                                            + " " + resultJS.name
+                                            + " " + resultJS.userid
+                                        );
+                                        localforage.setItem("project", resultJS, function (err, blob) {
+                                            //nothing
+                                        }).then(function () {
+
+                                            localforage.getItem("project", function (err, blob) {
+
+                                                //var localBlobUrl = window.URL.createObjectURL(blob);
+
+                                                jsProjectModel.user = blob;
+                                                console.log("jsProjectModel.user: " + jsProjectModel.user);
+                                            });
+                                        });
+                                    },
+                                    error: function (xhr, status, p3) {
+                                        //
+                                        console.log("Error: " + xhr.responseText);
+                                    }
+                                });
                             }
                         }
 
                     } else {
 
                         console.log("The projects was gotten: " + resultJS);
-                        /*console.log("The projects was gotten: "
+                        console.log("The projects was gotten: "
                             + resultJS.id
                             + " " + resultJS.name
-                            + " " + resultJS.email
-                            + " " + resultJS.password
-                        );*/
+                            + " " + resultJS.userid
+                        );
                     }
 
 
@@ -241,50 +280,6 @@ jQuery(document).ready(function ($) {
                 }
             });
         });
-        //
-        /*$.ajax({
-            type: "POST",
-            url: '/Editor/getProjectNamesByUserId',
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            data: newUserFormData,
-            success: function (result) {
-                //
-                var resultJS = JSON.parse(JSON.stringify(result));
-                console.log("New user was gotten: " + resultJS);
-                if (resultJS == '') {
-
-                    alert('User not exists');
-                } else {
-
-                    console.log("New user was gotten: "
-                        + resultJS.id
-                        + " " + resultJS.name
-                        + " " + resultJS.email
-                        + " " + resultJS.password
-                    );
-                }
-
-
-                localforage.setItem("user", resultJS, function (err, blob) {
-                    //nothing
-                }).then(function () {
-
-                    localforage.getItem("user", function (err, blob) {
-
-                        var localBlobUrl = window.URL.createObjectURL(blob);
-
-                        jsProjectModel.user = localBlobUrl;
-                        console.log("jsProjectModel.user: " + jsProjectModel.user);
-                    });
-                });
-            },
-            error: function (xhr, status, p3) {
-                //
-                console.log("Error: " + xhr.responseText);
-            }
-        });*/
     }
 });
 

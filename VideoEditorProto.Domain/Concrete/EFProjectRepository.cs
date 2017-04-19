@@ -52,17 +52,16 @@ namespace VideoEditorProto.Domain.Concrete
             return result;
         }
 
-        public bool SaveProject(Project _project)
+        public Project SaveProject(Project _project)
         {
-            bool result = true;
+            Project result = null;
             try
             {
                 Project dbEntry = context.Projects.Find(_project.Id);
                 //Если запись о проекте существует - обновляем ее данные
                 if (dbEntry != null)
                 {
-                    dbEntry.Width = _project.Width;
-                    dbEntry.Height = _project.Height;
+                    dbEntry.Name = _project.Name;
                 }
                 //Если нет - создаем запись
                 else
@@ -70,11 +69,11 @@ namespace VideoEditorProto.Domain.Concrete
                     context.Projects.Add(_project);
                 }
                 context.SaveChanges();
+                result = context.Projects.Find(_project.Id);
             }
             catch (Exception)
             {
 
-                result = false;
             }
             return result;
         }

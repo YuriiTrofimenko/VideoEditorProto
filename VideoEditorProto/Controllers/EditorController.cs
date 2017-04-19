@@ -118,6 +118,27 @@ namespace VideoEditorProto.Controllers
         }
 
         [HttpPost]
+        public JsonResult CreateProject()
+        {
+            string newProjectId = IdCreator.createProjectGuid();
+
+            Project newProject = new Domain.Project();
+            newProject.Id = newProjectId;
+            newProject.Name = Request["name"];
+            newProject.IdUser = Request["userid"];
+
+            var result = mRepository.SaveProject(newProject);
+
+            return Json(
+                new
+                {
+                    id = result.Id
+                    ,name = result.Name
+                    ,userid = result.IdUser
+                });
+        }
+
+        [HttpPost]
         public JsonResult getProjectNamesByUserId(string _userId)
         {
             var result =

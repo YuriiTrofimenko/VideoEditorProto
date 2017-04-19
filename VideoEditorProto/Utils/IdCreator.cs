@@ -12,7 +12,7 @@ namespace VideoEditorProto.Utils
             return "u-" + Guid.NewGuid().ToString();
         }
 
-        public string createProjectGuid()
+        public static string createProjectGuid()
         {
             return "p-" + Guid.NewGuid().ToString();
         }
