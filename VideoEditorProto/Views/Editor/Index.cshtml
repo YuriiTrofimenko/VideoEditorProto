@@ -4,11 +4,137 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <meta charset="UTF-8">
+    <title>Editor</title>
     <link href="@Url.Content("~/Styles/style.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <div class="mask"></div>
+
+    <form method="post" action="" class="modal createSequence">
+        <div class="videoPanel">
+            <p class="panelTitle">Видео</p>
+            <div class="panelContent clear">
+                <div class="headers">
+                    <ul>
+                        <li><label for="">Видео кодек</label></li>
+                        <li><label for="">Ширина</label></li>
+                        <li><label for="">Высота</label></li>
+                        <li><label for="">Кадры в секунду</label></li>
+                        <li><label for="">Пропорции</label></li>
+                        <li><label for="">Глубина цвета</label></li>
+                        <li><label for="">Оптим. кадры</label></li>
+                        <li><label for="">Качество</label></li>
+                    </ul>
+                </div>
+                <div class="fields">
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">H.264</option>
+                            <option value="2">DivX</option>
+                            <option value="3">Daala</option>
+                            <option value="4">VP9</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap"><input name="width" type="text"></div>
+
+                    <div class="wrap"><input name="height" type="text"></div>
+
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">24</option>
+                            <option value="2">25</option>
+                            <option value="3">60</option>
+                            <option value="4">90</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">16:9</option>
+                            <option value="2">16:10</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">24 bit</option>
+                            <option value="2">32 bit</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap"><input type="checkbox"></div>
+
+                    <div class="wrap">
+                        <div class="slider-range" id="slider-range"></div>
+                        <p>
+                            <input class="notinput" type="text" name="quality" readonly style="width:100px; border:0; color:#f6931f; font-weight:bold;">
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="audioPanel">
+            <p class="panelTitle">Аудио</p>
+            <div class="panelContent clear">
+                <div class="headers">
+                    <ul>
+                        <li><label for="">Аудио кодек</label></li>
+                        <li><label for="">Частота</label></li>
+                        <li><label for="">Каналы</label></li>
+                        <li><label for="">Битрейт</label></li>
+                    </ul>
+                </div>
+                <div class="fields">
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">ALAC</option>
+                            <option value="2">FLAC</option>
+                            <option value="3">OFR</option>
+                            <option value="4">WV</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">44100 Hz</option>
+                            <option value="2">48000 Hz</option>
+                            <option value="3">96000 Hz</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="4">5</option>
+                            <option value="4">6</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap">
+                        <select class="dropdownList">
+                            <option value="1">16</option>
+                            <option value="3">20</option>
+                            <option value="2">24</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="submitField">
+            <div class="wrap">
+                <p>Назвние проекта</p>
+                <input type="text" name="projectName">
+            </div>
+            <input class="right" type="submit" value="Готово">
+        </div>
+    </form>
+
     <div class="wrapp">
         <div class="clear">
             <div class="left">
@@ -341,9 +467,10 @@
     <script src="@Url.Content("~/Scripts/jquery-2.2.0.min.js")" type="text/javascript" defer></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.custom/jquery-ui.min.js")" type="text/javascript" defer></script>
 	<script src="@Url.Content("~/Scripts/baron.min.js")" type="text/javascript" defer></script>
-    <script src="@Url.Content("~/Scripts/videoControls.js")"  type="text/javascript" defer></script>
     <script src="@Url.Content("~/Scripts/tabs.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/uicontrols.js")" type="text/javascript" defer></script>
     <script src="@Url.Content("~/Scripts/sequencePanelControls.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/videoControls.js")" type="text/javascript" defer></script>
     <!--Media data works-->
     <script src="@Url.Content("~/Scripts/localforage.min.js")" type="text/javascript" defer></script>
     <script src="@Url.Content("~/Scripts/mediaSender.js")" type="text/javascript" defer></script>

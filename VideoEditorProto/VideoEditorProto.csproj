@@ -234,11 +234,14 @@
     <Content Include="Scripts\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.custom\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.custom\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui.structure.min.css" />
     <Content Include="Scripts\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="Scripts\localforage.min.js" />
     <Content Include="Scripts\mediaSender.js" />
     <Content Include="Scripts\sequencePanelControls.js" />
     <Content Include="Scripts\tabs.js" />
+    <Content Include="Scripts\uicontrols.js" />
     <Content Include="Scripts\validate.js" />
     <Content Include="Scripts\videoControls.js" />
     <Content Include="Styles\img\contols.png" />
@@ -277,6 +280,7 @@
     <Content Include="fonts\intro-cond.light-free.ttf" />
     <Content Include="fonts\intro-cond.light-free.woff" />
     <Content Include="Views\Editor\Index.cshtml" />
+    <Content Include="Styles\img\controls.xcf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
