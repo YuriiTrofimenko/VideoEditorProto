@@ -144,7 +144,7 @@ namespace VideoEditorProto.Controllers
             var result =
                 from projectItem in mRepository.Project
                 where (projectItem.IdUser == _userId)
-                select new { projectItem.Id, projectItem.Name };
+                select new { id = projectItem.Id, name = projectItem.Name };
             return Json(result);
         }
 

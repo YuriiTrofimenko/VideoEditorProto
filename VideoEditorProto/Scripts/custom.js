@@ -253,13 +253,19 @@ jQuery(document).ready(function ($) {
                     } else {
 
                         console.log("The projects was gotten: " + resultJS);
-                        console.log("The projects was gotten: "
-                            + resultJS.id
-                            + " " + resultJS.name
-                            + " " + resultJS.userid
-                        );
-                    }
+                        //console.dir(resultJS);
+                        if (resultJS.length > 0) {
 
+                            resultJS.forEach(function (item, i, resultJS) {
+
+                                console.log("The project #"
+                                    + i
+                                    + ": " + item.Id
+                                    + "; " + item.Name
+                                );
+                            });
+                        }                        
+                    }
 
                     /*localforage.setItem("user", resultJS, function (err, blob) {
                         //nothing
