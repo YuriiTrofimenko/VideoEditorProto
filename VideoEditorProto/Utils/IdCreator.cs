@@ -7,14 +7,29 @@ namespace VideoEditorProto.Utils
 {
     public class IdCreator
     {
+        public static string createGuid(string _prefix)
+        {
+            return _prefix + Guid.NewGuid().ToString();
+        }
+
         public static string createUserGuid()
         {
-            return "u-" + Guid.NewGuid().ToString();
+            return createGuid("u-");
         }
 
         public static string createProjectGuid()
         {
-            return "p-" + Guid.NewGuid().ToString();
+            return createGuid("p-");
+        }
+
+        public static string createLayerGuid()
+        {
+            return createGuid("l-");
+        }
+
+        public static string createRowGuid()
+        {
+            return createGuid("r-");
         }
     }
 }

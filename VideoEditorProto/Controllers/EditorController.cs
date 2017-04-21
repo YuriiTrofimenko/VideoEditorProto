@@ -162,18 +162,6 @@ namespace VideoEditorProto.Controllers
         [HttpPost]
         public JsonResult Upload()
         {
-            /*foreach (string file in Request.Files)
-            {
-                var upload = Request.Files[file];
-                if (upload != null)
-                {
-                    // получаем имя файла
-                    string fileName = System.IO.Path.GetFileName(upload.FileName);
-                    // сохраняем файл в папку Files в проекте
-                    upload.SaveAs(Server.MapPath("~/Uploads/video/" + fileName));
-                }
-            }
-            return Json("файл загружен");*/
             string fileName = "";
             foreach (string file in Request.Files)
             {
@@ -193,6 +181,33 @@ namespace VideoEditorProto.Controllers
                 }
             }
             return Json("/Uploads/video/" + fileName);
+        }
+
+        //Демо-действие загрузки медиа-файлов на сервер
+        [HttpPost]
+        public JsonResult CreateRow()
+        {
+            string fileName = "";
+            foreach (string file in Request.Files)
+            {
+                var upload = Request.Files[file];
+                if (upload != null)
+                {
+                    // получаем имя файла
+                    fileName = System.IO.Path.GetFileName(upload.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    //TODO создавать отдельные каталоги для медиафайлов каждого пользователя
+                    upload.SaveAs(Server.MapPath("~/Uploads/video/" + fileName));
+                    //Устанавливаем путь для загруженных на сервер файлов
+                    String inputPath = Server.MapPath("~/Uploads/");
+                    //Устанавливаем путь для скачиваемых с сервера файлов
+                    String outputPath = Server.MapPath("~/Downloads/");
+                    //Берем исходный медиа-файл и создаем его сжатую версию для предпросмотра
+                    //TODO создавать отдельные каталоги для preview медиафайлов каждого пользователя
+                    VideoLib.VideoProcessor.processResource(fileName, inputPath, outputPath);
+                }
+            }
+            return Json("/Downloads/video/" + fileName);
         }
     }
 }

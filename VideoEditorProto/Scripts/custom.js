@@ -413,8 +413,8 @@ $('#uploadFiles').on('change', function (e) {
                         data.append("file" + x, files[x]);
                         $.ajax({
                             type: "POST",
-                            //url: '/Default/Upload',
-                            url: '/Editor/Upload',
+                            //url: '/Editor/Upload',
+                            url: '/Editor/CreateRow',
                             contentType: false,
                             processData: false,
                             data: data,
