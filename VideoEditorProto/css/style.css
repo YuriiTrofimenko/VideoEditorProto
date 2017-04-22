@@ -427,9 +427,27 @@ footer a {
     margin: 4px;
 }
 
+.mask
+{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+
+}
+
+.signin
+{
+
+}
+
+.signup
+{
+
+}
+
 @media (max-width:1560px) {
     .user {
-        display:none;
+        /*display:none;*/
     }
     header {
         min-height:600px;

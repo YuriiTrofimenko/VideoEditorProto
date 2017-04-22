@@ -12,6 +12,27 @@
     <link href="@Url.Content("~/css/style.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<div class="mask"></div>
+
+    <form class="signin modal" action="" method="post">
+    	<div class="panel">
+	        <label>E-mail<input type="text" name="mail" value="" /></label>
+	        <label>Пароль<input type="password" name="password" value="" /></label>
+	    </div>
+        <input type="submit" name="submit" value="Войти" />
+    </form>
+
+	<form class="signup modal" action="" method="post">
+		<div class="panel">
+			<label>Имя<input type="text" name="name" value="" /></label>
+	        <label>Фамилия<input type="text" name="suraname" value="" /></label>
+	        <label>E-mail<input type="email" name="mail" value="" /></label>
+	        <label>Пароль<input type="password" name="password" value="" /></label>
+	        <label>Повтор пароля<input type="password" name="password1" value="" /></label>
+		</div>
+        <input type="submit" name="submit" value="Зарегистрироваться" />
+    </form>    
+
     <header>
         <nav>
             <ul>
@@ -20,15 +41,18 @@
                 <li><a href="#">Контакты</a></li>
             </ul>
             <a href="#" class="logo">
-                <img src="img/logo.png" alt="">
+                <img src="@Url.Content("~/img/logo.png")" alt="">
             </a>
         </nav>
         <div class="descr">редактируйте ваши лучшие моменты в <span>EDO</span></div>
-        <a href="#" class="user"><img src="img/user.png" alt=""></a>
+        <!--<a href="#" class="user"><img src="@Url.Content("~/img/user.png")" alt=""></a>-->
     </header>
+
     <section class="browser">
         <h3>браузер - все что вам нужно!</h3>
-        <a href="@Url.Action("Index", "Editor")">начать редактировать</a>
+        <!--<a href="@Url.Action("Index", "Editor")">начать редактировать</a>-->
+        <a href="#">Войти</a>
+        <a href="#">Зарегистрироваться</a>
         <div class="block">без скачиваний<img src="img/check.png" alt=""></div>
         <div class="block">бесплатно<img src="img/check.png" alt=""></div>
         <div class="block">без установок<img src="img/check.png" alt=""></div>

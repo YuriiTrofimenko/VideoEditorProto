@@ -57,7 +57,6 @@ blockquote, q {
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
-	content: none;
 }
 
 .left
@@ -149,7 +148,7 @@ header.mainHeader:before
     padding: 4px 18px;
     text-decoration: none;
     line-height: 1em;
-    font-family: HC;
+    font-family: MSRS;
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -224,15 +223,16 @@ header.mainHeader:before
 .videoControls .progressBar
 {
 	height: 28px;
-	padding: 0px 32px 0px 33px;
-	background: url(img/progress_bar.png) center center no-repeat no-repeat;
+	padding: 0px 11px 0px 21px;
+	width: 584px;
+	background: url(img/progress_bar.png) center center repeat no-repeat;
 	background-position: 0px 21px;
 }
 
 .videoControls .progressBar .innerProgressBar
 {
 	height: 28px;
-	width: 533px;
+	width: 575px;
 	position: relative;
 }
 
@@ -242,7 +242,7 @@ header.mainHeader:before
 	display: block;
 	width: 1px;
 	height: 0px;
-	border: 8px solid transparent;
+	border: 4px solid transparent;
 	cursor: pointer;
 	border-top: 13px solid #ffba00;
 	position: absolute;
@@ -459,6 +459,7 @@ header.mainHeader:before
 	height: 21px;
 	border: none;
 	background: url(img/contols.png);
+	cursor: pointer;
 }
 
 .mainHeader .save
@@ -507,9 +508,14 @@ header.mainHeader:before
 	height: 480px;
 	width: 11px;
 	top: 0px;
-	right: -14px;
+	right: 0px;
 }
-
+.scrollTrack
+{
+	position: absolute;
+	top: 30px;
+    height: 313px;
+}
 .tabPane
 {
 	margin-top: 11px;
@@ -567,7 +573,8 @@ header.mainHeader:before
 	/*overflow: hidden;*/
 }
 
-#files form
+#files form,
+.form-head
 {
 	height: 12px;
 	font-size: 12px;
@@ -576,7 +583,9 @@ header.mainHeader:before
 	padding: 7px 13px;
 }
 
-#files form span
+#files form span,
+.form-head span,
+.form-head div
 {
 	line-height: 1em;
 	text-transform: uppercase;
@@ -585,12 +594,57 @@ header.mainHeader:before
     font-family: MSRS;
 }
 
-#files form input
+.form-head div .cursor,
+.form-head div .text,
+.form-head div .square,
+.form-head div .circle,
+.form-head div .triangle,
+.form-head div .line
+{
+	width: 19px;
+	height: 18px;
+	float: left;
+	margin-right: 6px;
+	background: url(img/contols.png);
+	margin-top: -3px;
+	cursor: pointer;
+	background-position: -604px -236px;
+}
+
+.form-head div .text
+{
+	background-position: -628px -236px;	
+}
+
+.form-head div .square
+{
+	background-position: -667px -236px;		
+}
+
+.form-head div .circle
+{
+	background-position: -691px -236px;
+}
+
+.form-head div .triangle
+{
+	background-position: -715px -236px;
+}
+
+.form-head div .line
+{
+	background-position: -739px -236px;
+}
+
+#files form input,
+.form-head input
 {
 	display: none;
 }
 
-#files form label
+#files form label,
+.form-head label,
+.submitField input[type="submit"]
 {
     width: 124px;
     background-color: #ffd800;
@@ -610,7 +664,8 @@ header.mainHeader:before
     padding: 1px 0px;
 }
 
-#files form label:hover
+#files form label:hover,
+.form-head label:hover
 {
     background-color:#ffba00;
 	background: -moz-linear-gradient(top,  #ffba00 0%, #ffd800 100%);
@@ -621,16 +676,11 @@ header.mainHeader:before
 
 .filesTile
 {
-    height: 287px;
+    height: 317px;
     width: 403px;
+    overflow-y: scroll;
     display: block;
     padding: 15px;
-}
-
-.filesTile li img
-{
-	width: 124px;
-	height: 82px;
 }
 
 .filesTile li
@@ -659,10 +709,10 @@ header.mainHeader:before
 .filesTile li .audioTile,
 .filesTile li .imageTile
 {
-	height: 28px;
+    height: 28px;
     position: absolute;
     bottom: 0px;
-    width: 124px;
+    width: 125px;
     overflow: hidden;
     font-size: 13px;
     background-color: rgba(255, 255, 255, 0.7);
@@ -810,14 +860,16 @@ header.mainHeader:before
 .scale ul li
 {
 	float: left;
-    font-size: 10px;
-    margin-right: 163px;
-    color: #fff;
+	font-size: 10px;
+	margin-right: 80px;
+	color: #fff;
+	width: 45px;
 }
 
 .scale ul li:first-child
 {
-	margin-right: 122px;
+	margin-right: 55px;
+	margin-left: 5px;
 }
 
 .scale ul li:last-child
@@ -829,19 +881,28 @@ header.mainHeader:before
 {
     margin-left: 4px;
     padding-bottom: 13px;
-    background: url(img/progress_bar.png) repeat no-repeat;
     background-position: 0px 10px;
     width: 893px;
-    padding-left: 21px;
+	overflow: hidden;
+    height: 28px;
+    overflow-x: scroll;
+}
+
+.scale ul
+{
+	background: url(img/progress_bar.png) center center repeat no-repeat;
+    background-position: 0px 12px;
+    height: 32px;
 }
 
 .controlVideoPanel,
 .controlAudioPanel
 {
-	overflow: hidden;
+	overflow: visible !important;
 	height: 120px;
 	width: 1070px;
 	margin-bottom: 6px;
+	position: relative;
 }
 
 .layoutControl
@@ -878,6 +939,14 @@ header.mainHeader:before
 {
 	width: 914px;
     height: 120px;
+    overflow-x: scroll;
+}
+
+.audioLayouts::-webkit-scrollbar,
+.scale::-webkit-scrollbar,
+.videoLayouts::-webkit-scrollbar
+{
+	display: none;
 }
 
 .videoLayout,
@@ -886,11 +955,12 @@ header.mainHeader:before
     height: 38px;
     min-width: 1000px;
     background-color: #4d4d4d;
-    border: 1px solid #2e2e2e;
+	margin: 1px;
     word-spacing: 0px;
 }
 
-.videoRow
+.videoRow,
+.audioRow
 {
 	height: 32px;
 	overflow: hidden;
@@ -902,9 +972,16 @@ header.mainHeader:before
 	position: relative;
 	text-transform: uppercase;
 	font-size: 11px;
+	top: 0px !important;
 }
 
-.videoRow .effectsNum
+.audioRow
+{
+	background-color: #00a4d0;
+}
+
+.videoRow .effectsNum,
+.audioRow .effectsNum
 {
 	display: inline-block;
 	padding: 3px 4px;
@@ -919,7 +996,8 @@ header.mainHeader:before
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c66600', endColorstr='#fcb800',GradientType=1 ); /* IE6-9 */
 }
 
-.videoRow img
+.videoRow img,
+.audioRow img
 {
 	position: absolute;
     height: 38px;
@@ -929,7 +1007,9 @@ header.mainHeader:before
 }
 
 .videoRow .effectsNum,
-.videoRow .rowHeader
+.videoRow .rowHeader,
+.audioRow .effectsNum,
+.audioRow .rowHeader
 {
 	position: relative;
     z-index: 2;
@@ -1173,4 +1253,279 @@ header.mainHeader:before
 #effects .effectProperties .propertyPart .propertyContent
 {
 	display: none;
+}
+
+.sequenceScrollbar
+{
+	position: absolute;
+    bottom: -11px;
+    right: 0px;
+    height: 12px;
+    width: 913px;
+}
+
+.trackBar
+{
+	position: absolute;
+	width: 913px;
+	right: 0px;
+}
+
+.scrollbar
+{
+	height: 12px;
+	width: 100px;
+	display: inline-block;
+	position: relative;
+	border-radius: 5px;
+	background-color: #ffba00;
+}
+
+.scrollbar:after
+{
+	display: block;
+	content: '';
+	background: url(img/contols.png);
+	background-position: -12px -170px;
+	transform: rotate(90deg);
+	width: 5px;
+	height: 5px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+    margin: -2.5px 0px 0px -2.5px;
+}
+
+.mask
+{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 3;
+}
+
+.modal
+{
+	position: absolute;
+	z-index: 4;
+	left: 50%;
+	top: 50%;
+}
+
+.createSequence
+{
+	width: 556px;
+	background-color: #444444;
+	padding: 22px 25px; 
+	margin-top: -280px;
+	margin-left: -303px;
+}
+
+.createSequence .panelTitle
+{
+	width: 145px;
+	text-align: center;
+	font-size: 11px;
+	text-transform: uppercase;
+	color: #fff;
+	padding: 11px 0px 8px;
+	background-color: #ffba00;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(2,2,5,0.3);
+	display: inline-block;
+	font-family: MSRS;
+}
+
+.createSequence .panelContent
+{
+	background-color: #2e2e2e;
+	color: #fff;
+	padding: 13px 0px;
+	margin-bottom: 10px;
+}
+
+.createSequence .panelContent .headers
+{
+	float: left;
+	width: 129px;
+	border-right: 1px solid #606060;
+}
+
+.createSequence .panelContent .headers label
+{
+	display: inline;
+}
+
+.createSequence .panelContent .headers li
+{
+	text-align: right;
+	padding: 9px 8px;
+	font-size: 11px;
+}
+
+.createSequence .panelContent .fields
+{
+	float: left;
+}
+
+.createSequence .panelContent .wrap
+{
+	padding: 4px 12px 6px;
+}
+
+.createSequence .panelContent .wrap .dropdownList,
+.createSequence .panelContent .wrap input:not(.notinput),
+.submitField input[type="text"],
+.dropdownList
+{
+	height: 11px;
+	width: 276px;
+	color: #444444;
+	font-size: 9px;
+	border: 1px solid #4d4d4d;
+	padding: 0px 0px 4px 4px;
+	box-sizing: content-box;
+	background-color: #fff;
+	z-index: 5;
+	position: relative;
+	display: inline-block;
+}
+
+.dropdownList::after
+{
+/*	display: block;
+	content: '';
+	width: 10px;
+	height: 10px;
+	background: #ff0;
+	background: url(img/contols.png) center center repeat no-repeat;
+	background-position: 1050px 410px;*/
+	display: block;
+	content: '';
+	background: url(img/contols.png);
+	background-position: -12px -170px;
+	width: 5px;
+	height: 5px;
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    margin: -2.5px 0 0 -25%;
+}
+
+.createSequence .panelContent .wrap input[type="checkbox"]
+{
+	display: inline-block;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	width: 16px;
+}
+
+.dropdownList .selected
+{
+	position: relative;
+}
+
+.dropdownList .dropdown
+{
+	position: absolute;
+	z-index: 10;
+	display: none;
+}
+
+.createSequence .panelContent .dropdownList .dropdown
+{
+	background-color: #fff;	
+	top: 18px;
+}
+
+.createSequence .panelContent .dropdownList .dropdown div
+{
+	background-color: #fff;		
+	z-index: 10;
+	position: relative;
+}
+
+.createSequence .panelContent .range
+{
+	display: none;
+}
+
+.ui-slider .ui-slider-range {
+    position: absolute;
+    z-index: 1;
+    font-size: .7em;
+    display: block;
+    border: 0;
+    background-position: 0 0;
+}
+
+.ui-slider {
+    position: relative;
+}
+
+/* Ползунок */
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 13px;   /* Задаем нужную ширину */
+    height: 13px;  /* и высоту */
+    background-color: #ffcc00; /* картинка изображающая ползунок. Или можно залить цветом, задать бордюр и скругления */
+    cursor: pointer;
+}
+
+.ui-slider .ui-slider-range {
+    background-color: #fff;
+    height: 5px;
+}
+
+.ui-slider {
+    position: relative;
+    background-color: #ffba00;
+    height: 5px;
+    border: 1px solid #fff;
+    margin-top: 9px;
+}
+
+.ui-slider .ui-slider-handle {
+    width: 9px;
+    height: 11px;
+    background-color: #ffcc00;
+    top: -3px;
+}
+
+.ui-slider-horizontal .ui-slider-range-min { 
+    left: 0;
+}
+
+.ui-slider-horizontal .ui-slider-range-max {
+    right: 0;
+}
+
+.notinput {
+	border: 0;
+	color: #f6931f;
+	font-weight: bold;
+	background-color: #2e2e2e;
+	color: #fff !important;
+	float: right;
+	width: 23px;
+	text-align: right;
+	font-size: 9px;
+}
+
+.submitField p {
+	font-size: 11px;
+	color: #fff;	
+}
+
+.submitField input[type="text"] {
+	width: 550px;
+}
+
+.submitField input[type="submit"] {
+	height: 17px;
+	font-size: 9px;
+	margin-top: 12px;
 }
