@@ -81,6 +81,7 @@ RowList.prototype.generateRowList = function()
 
             //
             newRow.setAttribute("data-row-id", i);
+            newRow.setAttribute("class", "ui-draggable ui-draggable-handle");
             image.setAttribute("src", (item.values["type"] != 'audio') ? item.values["path"] : "Images/3.png");
             image.setAttribute("alt", item.values["name"]);
             newRow.appendChild(image);
@@ -92,6 +93,13 @@ RowList.prototype.generateRowList = function()
             //
             $(newRow).click(function () {
                 rl.showRowInfo($(this).attr("data-row-id"));
+            });
+
+            $(newRow).draggable({
+                revert: true,
+                helper: 'clone',
+                scroll: false,
+                appendTo: '.squencePanel'
             });
         } else {
 

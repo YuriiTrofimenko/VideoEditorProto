@@ -377,7 +377,8 @@ $('#uploadFiles').on('change', function (e) {
                             canvas.height = this.videoHeight;
 
                             const context = canvas.getContext('2d');
-                            context.drawImage(currentVideo, 0, 0, this.videoWidth, this.videoHeight);
+                            //context.drawImage(currentVideo, 0, 0, this.videoWidth, this.videoHeight);
+                            context.drawImage(currentVideo, 0, 0, 124, 82);
 
                             const dataURL = canvas.toDataURL(); // вот и ссылка с превью
                             row2.values["path"] = dataURL;
@@ -443,7 +444,7 @@ $('#uploadFiles').on('change', function (e) {
                             canvas.height = this.naturalWidth;
 
                             const context = canvas.getContext('2d');
-                            context.drawImage(this, 0, 0);
+                            context.drawImage(this, 0, 0, 124, 82);
 
                             const dataURL = canvas.toDataURL(); // вот и ссылка с превью
                             row2.values["path"] = dataURL;
