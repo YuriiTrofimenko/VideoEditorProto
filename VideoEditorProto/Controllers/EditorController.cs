@@ -100,12 +100,12 @@ namespace VideoEditorProto.Controllers
         [HttpPost]
         public JsonResult GetUser()
         {
-            string name = Request["name"];//do not remove this tmp variable!
+            string email = Request["email"];//do not remove this tmp variable!
             string encodedPassword = StringsEncoder.MD5Hash(Request["password"]);
 
             var user =
                 from userItem in mRepository.User
-                where (userItem.Name == name
+                where (userItem.Email == email
                         && userItem.Password == encodedPassword)
                 select new {
                     id = userItem.Id

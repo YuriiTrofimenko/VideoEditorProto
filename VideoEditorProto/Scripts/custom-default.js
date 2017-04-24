@@ -1,7 +1,7 @@
 ﻿//Когда страница Default загрузилась
 jQuery(document).ready(function ($) {
     "use strict";
-    //localforage.clear();
+    localforage.clear();
     //JS Project Model
     var jsProjectModel = jsProjectModel || {};
 
@@ -57,18 +57,31 @@ jQuery(document).ready(function ($) {
     $("#signin-a").click(function myfunction(event) {
 
         event.preventDefault();
+
+        if ($(".signup").css("display") == "block") {
+
+            $(".signup").css("display", "none");
+        }
+
         $(".signin").css("display", "block");
     });
 
     $("#signup-a").click(function myfunction(event) {
 
         event.preventDefault();
+
+        if ($(".signin").css("display") == "block") {
+
+            $(".signin").css("display", "none");
+        }
+
         $(".signup").css("display", "block");
     });
 
     $('form.signup.modal input[name=submit]').click(function showSignUpPopUp(event) {
 
         event.preventDefault();
+        
         //
         var userName = '';
         //var userSurName = '';
@@ -120,7 +133,7 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     //
                     var resultJS = JSON.parse(JSON.stringify(result));
-                    console.dir(resultJS);
+                    //console.dir(resultJS);
                     resultJS = (resultJS[0] !== undefined) ? resultJS[0] : resultJS;
                     console.log("New user was created: "
                         + resultJS.id
@@ -135,7 +148,7 @@ jQuery(document).ready(function ($) {
                         localforage.getItem("user", function (err, blob) {
 
                             //
-                            console.log("New user in the local model: " + blob);
+                            console.log("New user is in the local model: " + blob);
 
                             $(".signup").css("display", "none");
 
@@ -153,25 +166,31 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    function showSignInPopUp()
-    {
-        var userName = '';
+    $('form.signin.modal input[name=submit]').click(function showSignInPopUp(event) {
+
+        event.preventDefault();
+
+        var userEMail = '';
         var userPassword = '';
-        while (userName == '') {
 
-            userName = prompt('Input your name:', '');
-        }
-        while (userPassword == '') {
+        userEMail = $('form.signin.modal input[name=mail]').val();
+        userPassword = $('form.signin.modal input[name=password]').val();
 
-            userPassword = prompt('Input password:', '');
-        }
+        //while (userName == '') {
+
+        //    userName = prompt('Input your name:', '');
+        //}
+        //while (userPassword == '') {
+
+        //    userPassword = prompt('Input password:', '');
+        //}
 
         //console.log("name: " + userName + " " + userPassword);
-        if (userName != '' && userPassword != '') {
+        if (userEMail != '' && userPassword != '') {
 
             var newUserFormData = new FormData();
 
-            newUserFormData.append("name", userName);
+            newUserFormData.append("email", userEMail);
             newUserFormData.append("password", userPassword);
 
             $.ajax({
@@ -184,34 +203,44 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     //
                     var resultJS = JSON.parse(JSON.stringify(result));
-                    console.log("New user was gotten: " + resultJS[0]);
+
+                    console.log("New user was gotten: " + resultJS);
+
                     if (resultJS == '') {
 
                         alert('User not exists');
                     } else {
 
-                        console.dir(resultJS[0]);
+                        console.dir(resultJS);
+
+                        resultJS = (resultJS[0] !== undefined) ? resultJS[0] : resultJS;
+
                         console.log("New user was gotten: "
-                            + resultJS[0].id
-                            + " " + resultJS[0].name
-                            + " " + resultJS[0].email
-                            + " " + resultJS[0].password
+                            + resultJS.id
+                            + " " + resultJS.name
+                            + " " + resultJS.email
+                            + " " + resultJS.password
                         );
-                    }
-                    
 
-                    localforage.setItem("user", resultJS[0], function (err, blob) {
-                        //nothing
-                    }).then(function () {
+                        localforage.setItem("user", resultJS, function (err, blob) {
+                            //nothing
+                        }).then(function () {
 
-                        localforage.getItem("user", function (err, blob) {
+                            localforage.getItem("user", function (err, blob) {
 
-                            //var localBlobUrl = window.URL.createObjectURL(blob);
+                                //var localBlobUrl = window.URL.createObjectURL(blob);
 
-                            jsProjectModel.user = blob;
-                            console.log("jsProjectModel.user: " + jsProjectModel.user);
+                                //jsProjectModel.user = blob;
+                                console.log("Existing user is in the local model: " + blob);
+
+                                $(".signin").css("display", "none");
+
+                                $("#edit-a").css("display", "block");
+                                $("#signin-a").css("display", "none");
+                                $("#signup-a").css("display", "none");
+                            });
                         });
-                    });
+                    }
                 },
                 error: function (xhr, status, p3) {
                     //
@@ -219,7 +248,7 @@ jQuery(document).ready(function ($) {
                 }
             });
         }
-    }
+    });
 
     function showProjectsPopUp() {
         //alert('Projects');
