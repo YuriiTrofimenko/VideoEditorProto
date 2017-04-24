@@ -445,6 +445,11 @@ footer a {
 
 }
 
+#edit-a
+{
+    display:none
+}
+
 @media (max-width:1560px) {
     .user {
         /*display:none;*/

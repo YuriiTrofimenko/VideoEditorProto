@@ -50,9 +50,9 @@
 
     <section class="browser">
         <h3>браузер - все что вам нужно!</h3>
-        <!--<a href="@Url.Action("Index", "Editor")">начать редактировать</a>-->
-        <a href="#">Войти</a>
-        <a href="#">Зарегистрироваться</a>
+        <a id="edit-a" href="@Url.Action("Index", "Editor")">начать редактировать</a>
+        <a id="signin-a" href="#">Войти</a>
+        <a id="signup-a" href="#">Зарегистрироваться</a>
         <div class="block">без скачиваний<img src="img/check.png" alt=""></div>
         <div class="block">бесплатно<img src="img/check.png" alt=""></div>
         <div class="block">без установок<img src="img/check.png" alt=""></div>
@@ -149,5 +149,6 @@
     </footer>
     <script src="@Url.Content("~/Scripts/jquery-2.2.0.min.js")" type="text/javascript" defer></script>
     <script src="@Url.Content("~/Scripts/validate.js")" type="text/javascript" defer></script>
+    <script src="@Url.Content("~/Scripts/custom-default.js")" type="text/javascript" defer></script>
 </body>
 </html>

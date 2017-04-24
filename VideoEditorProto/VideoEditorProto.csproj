@@ -229,6 +229,7 @@
     <Content Include="img\vk.png" />
     <Content Include="img\yt.png" />
     <Content Include="Scripts\baron.min.js" />
+    <Content Include="Scripts\custom-default.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
