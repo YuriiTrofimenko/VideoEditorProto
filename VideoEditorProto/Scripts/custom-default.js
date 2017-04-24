@@ -1,4 +1,4 @@
-﻿//Когда страница Index загрузилась
+﻿//Когда страница Default загрузилась
 jQuery(document).ready(function ($) {
     "use strict";
     //localforage.clear();
@@ -29,15 +29,18 @@ jQuery(document).ready(function ($) {
         } else {
 
             //showProjectsPopUp();
+            $("#edit-a").css("display", "block");
+            $("#signin-a").css("display", "none");
+            $("#signup-a").css("display", "none");
         }
     });
 
     function showRequestAccountPopUp() {
 
         var result = '';
-        $("edit-a").css("display", "none");
-        $("signin-a").css("display", "block");
-        $("signup-a").css("display", "block");
+        $("#edit-a").css("display", "none");
+        $("#signin-a").css("display", "block");
+        $("#signup-a").css("display", "block");
         //while (result == '') {
 
         //    result = prompt('Input 1 for SignIn or 2 for SignUp: ', '');
@@ -50,6 +53,18 @@ jQuery(document).ready(function ($) {
         //    showSignUpPopUp();
         //}
     }
+
+    $("#signin-a").click(function myfunction(event) {
+
+        event.preventDefault();
+        $(".signin").css("display", "block");
+    });
+
+    $("#signup-a").click(function myfunction(event) {
+
+        event.preventDefault();
+        $(".signup").css("display", "block");
+    });
 
     function showSignUpPopUp() {
         //alert('SignUp');

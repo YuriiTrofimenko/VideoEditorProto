@@ -432,17 +432,16 @@ footer a {
     width: 100%;
     height: 100%;
     position: fixed;
-
+    /*Temporary*/
+    z-index: -1;
 }
 
-.signin
-{
-
+.signin {
+    display: none
 }
 
-.signup
-{
-
+.signup {
+    display: none
 }
 
 #edit-a
