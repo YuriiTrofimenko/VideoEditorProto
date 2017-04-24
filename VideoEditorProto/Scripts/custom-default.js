@@ -6,18 +6,18 @@ jQuery(document).ready(function ($) {
     var jsProjectModel = jsProjectModel || {};
 
     //проверяем, есть ли в локальном хранилище информация о пользователе
-        //если есть -
-            //проверяем, есть ли на сервере проекты с ИД пользователя, показываем список проектов, создать проект
-                //при загрузке проекта -
-                    //1. аякс со списком of items like this: "тип объекта - id - версия",
-                    //2. на сервере смотрим все записи в БД по проекту, возвращаем джейсон
-                        //с объектами, которых нет на клиенте, или у которых версии устарели
-                    //3. на клиенте визуализируем текущее состояние проекта
-        //если нет - предлагаем:
-            //1. sign in / зарегистрироваться (поп - ап окно: имя, е-мэйл, пароль) -
-                //аякс(создаем запись в БД, возвращаем объект Пользователь)
-            //2. создать проект (поп - ап окно: пустой список проектов, создать проект(передаем юзера)) -
-                //аякс(создаем запись в БД, возвращаем объект Проект)
+    //если есть -
+    //проверяем, есть ли на сервере проекты с ИД пользователя, показываем список проектов, создать проект
+    //при загрузке проекта -
+    //1. аякс со списком of items like this: "тип объекта - id - версия",
+    //2. на сервере смотрим все записи в БД по проекту, возвращаем джейсон
+    //с объектами, которых нет на клиенте, или у которых версии устарели
+    //3. на клиенте визуализируем текущее состояние проекта
+    //если нет - предлагаем:
+    //1. sign in / зарегистрироваться (поп - ап окно: имя, е-мэйл, пароль) -
+    //аякс(создаем запись в БД, возвращаем объект Пользователь)
+    //2. создать проект (поп - ап окно: пустой список проектов, создать проект(передаем юзера)) -
+    //аякс(создаем запись в БД, возвращаем объект Проект)
     localforage.getItem("user", function (err, blob) {
 
         //
@@ -25,7 +25,7 @@ jQuery(document).ready(function ($) {
 
         if (blob == null) {
 
-            showRequestAccountPopUp();
+            showRequestAccountHrefs();
         } else {
 
             //showProjectsPopUp();
@@ -35,9 +35,9 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    function showRequestAccountPopUp() {
+    function showRequestAccountHrefs() {
 
-        var result = '';
+        //var result = '';
         $("#edit-a").css("display", "none");
         $("#signin-a").css("display", "block");
         $("#signup-a").css("display", "block");
@@ -66,26 +66,43 @@ jQuery(document).ready(function ($) {
         $(".signup").css("display", "block");
     });
 
-    function showSignUpPopUp() {
-        //alert('SignUp');
+    $('form.signup.modal input[name=submit]').click(function showSignUpPopUp(event) {
+
+        event.preventDefault();
+        //
         var userName = '';
+        //var userSurName = '';
         var userEMail = '';
         var userPassword = '';
-        while (userName == '') {
+        var userPassword1 = '';
 
-            userName = prompt('Input your name:', '');
-        }
-        while (userEMail == '') {
+        //while (userName == '') {
 
-            userEMail = prompt('Input e-mail:', '');
-        }
-        while (userPassword == '') {
+        //    userName = prompt('Input your name:', '');
+        //}
+        //while (userEMail == '') {
 
-            userPassword = prompt('Input password:', '');
-        }
+        //    userEMail = prompt('Input e-mail:', '');
+        //}
+        //while (userPassword == '') {
+
+        //    userPassword = prompt('Input password:', '');
+        //}
+
+        userName = $('form.signup.modal input[name=name]').val();
+        //userSurName = $('form.signup.modal input[name=surname]').val();
+        userEMail = $('form.signup.modal input[name=mail]').val();
+        userPassword = $('form.signup.modal input[name=password]').val();
+        userPassword1 = $('form.signup.modal input[name=password1]').val();
 
         //console.log("name: " + userName + " " + userEMail + " " + userPassword);
-        if (userName != '' && userEMail != '' && userPassword != '') {
+
+        if (userName != ''
+            && userEMail != ''
+            && userPassword != ''
+            && (userPassword == userPassword1)) {
+
+            console.log("name: " + userName + " " + userEMail + " " + userPassword);
 
             var newUserFormData = new FormData();
 
@@ -95,31 +112,36 @@ jQuery(document).ready(function ($) {
 
             $.ajax({
                 type: "POST",
-                //url: '/Default/Upload',
                 url: '/Editor/CreateUser',
                 dataType: 'json',
                 contentType: false,
                 processData: false,
                 data: newUserFormData,
                 success: function (result) {
-                    //a
+                    //
                     var resultJS = JSON.parse(JSON.stringify(result));
+                    console.dir(resultJS);
+                    resultJS = (resultJS[0] !== undefined) ? resultJS[0] : resultJS;
                     console.log("New user was created: "
-                        + resultJS[0].id
-                        + " " + resultJS[0].name
-                        + " " + resultJS[0].email
-                        + " " + resultJS[0].password
+                        + resultJS.id
+                        + " " + resultJS.name
+                        + " " + resultJS.email
+                        + " " + resultJS.password
                     );
-                    localforage.setItem("user", resultJS[0], function (err, blob) {
+                    localforage.setItem("user", resultJS, function (err, blob) {
                         //nothing
                     }).then(function () {
 
                         localforage.getItem("user", function (err, blob) {
 
-                            //var localBlobUrl = window.URL.createObjectURL(blob);
+                            //
+                            console.log("New user in the local model: " + blob);
 
-                            jsProjectModel.user = blob;
-                            console.log("jsProjectModel.user: " + jsProjectModel.user);
+                            $(".signup").css("display", "none");
+
+                            $("#edit-a").css("display", "block");
+                            $("#signin-a").css("display", "none");
+                            $("#signup-a").css("display", "none");
                         });
                     });
                 },
@@ -129,7 +151,7 @@ jQuery(document).ready(function ($) {
                 }
             });
         }
-    }
+    });
 
     function showSignInPopUp()
     {
