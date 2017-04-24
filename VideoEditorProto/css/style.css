@@ -376,55 +376,56 @@ footer h3 {
     color:#fff;
     margin-bottom:80px;
 }
-footer input[type="text"], footer input[type="subject"], footer input[type="email"] {
-    width: 420px;
-    height: 28px;
-    border: none;
+footer input[type="text"], footer input[type="email"] {
+    width:180px;
+    height:28px;
+    border:none;
     background: #fff;
-    color: #c2c2c2;
-    box-shadow: inset 0 0 10px rgba(0,0,0,.4);
+    padding:0 10px;
+    color:#c2c2c2;
+    box-shadow:inset 0 0 10px rgba(0,0,0,.4);
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight:300;
     font-size: 16px;
-    margin-top: 5px;
+    margin-top:5px;
 }
-
 footer textarea {
-    width: 420px;
-    height: 130px;
-    display: block;
+    width:420px;
+    height:130px;
+    display:block;
     background: #fff;
-    border: none;
-    box-shadow: inset 0 0 10px rgba(0,0,0,.4);
+    border:none;
+    box-shadow:inset 0 0 10px rgba(0,0,0,.4);
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight:300;
     font-size: 16px;
-    margin: 10px auto;
+    margin:10px auto;
     resize: none;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight:300;
     font-size: 16px;
-    color: #c2c2c2;
+    color:#c2c2c2;
 }
-    
-footer button[type="submit"] {
-    display: inline-block;
-    width: 110px;
-    height: 26px;
+footer input[type="text"] {
+    margin-right:20px;
+}
+footer input[type="submit"] {
+    display:inline-block;
+    width:110px;
+    height:26px;
     border-radius: 5px;
     text-decoration: none;
     background: #ffba12;
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     line-height: 26px;
-    color: #848484;
-    border: none;
-    margin-bottom: 5px;
+    color:#848484;
+    border:none;
+    margin-bottom:5px;
     text-shadow: 1px 1px 1px #fff;
 }
-
 footer a {
-    margin: 4px;
+    margin:4px;
 }
 
 .mask
@@ -432,6 +433,7 @@ footer a {
     width: 100%;
     height: 100%;
     position: fixed;
+<<<<<<< Updated upstream
     /*Temporary*/
     z-index: -1;
 }
@@ -447,11 +449,78 @@ footer a {
 #edit-a
 {
     display:none
+=======
+    background-color: rgba(0,0,0,0.7);
+    z-index: 10;
+    display: none;
+}
+
+.modal
+{
+    position: fixed;
+    z-index: 15;
+    top: 10%;
+    left: 50%;
+    margin-left: -150px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.modal .panel
+{
+    width: 256px;
+    padding: 23px;  
+    background-color: #ffb901;
+    border-radius: 3px;  
+}
+
+.modal label
+{
+    color: #3c3c3c;
+    font-size: 16px;
+    margin-bottom: 24px;
+    display: block;
+}
+
+.modal input
+{
+    display: block;
+    width: 186px;
+    border-radius: 3px;
+    border: 1px solid #fd8400;
+    color: #ff8400;
+    font-size: 11px;
+    padding: 8px 10px;
+    margin-top: 10px;
+}
+
+.modal input[type="submit"]
+{
+    width: 257px;
+    border: none;
+    color: #454545;
+    font-size: 19px;
+    margin-top: 4px;
+}
+
+.modal input:placeholder
+{
+    color: #fd8400; 
+}
+
+.signin
+{
+    display: none;
+}
+
+.signup
+{
+    display: none;
+>>>>>>> Stashed changes
 }
 
 @media (max-width:1560px) {
     .user {
-        /*display:none;*/
+        display:none;
     }
     header {
         min-height:600px;
@@ -607,59 +676,4 @@ footer a {
     .screen1 p, .screen2 p {
         font-size:20px;
     }
-}
-
-/* ============================
-Forms
-============================= */
-
-/* --- contact form  ---- */
-
-form#contactform .validation {
-    font-size: 11px;
-}
-
-.validation {
-    color: red;
-    display: none;
-    margin: 0 0 20px;
-    font-weight: 400;
-    font-size: 13px;
-}
-
-#sendmessage {
-    width: 420px;
-    color: green;
-    border: 1px solid green;
-    display: none;
-    text-align: center;
-    padding: 15px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#errormessage {
-    width: 420px;
-    color: red;
-    display: none;
-    border: 1px solid red;
-    text-align: center;
-    padding: 15px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-    #sendmessage.show, #errormessage.show, .show {
-        display: block;
-    }
-
-#loadImg {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    z-index: 3000;
-    display: none
 }
