@@ -83,7 +83,9 @@ namespace VideoEditorProto.Controllers
             {
                 Id = newProjectId,
                 Name = Request["name"],
-                IdUser = Request["userid"]
+                IdUser = Request["userid"],
+                Width = Decimal.Parse(Request["width"]),
+                Height = Decimal.Parse(Request["height"])
             };
             var result = mRepository.SaveProject(newProject);
 

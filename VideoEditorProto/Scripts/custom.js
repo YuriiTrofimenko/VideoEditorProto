@@ -4,6 +4,9 @@ jQuery(document).ready(function ($) {
 
     //localforage.clear();
 
+    //
+    var userId;
+
     //проверяем, есть ли в локальном хранилище информация о пользователе
         //если есть -
             //проверяем, есть ли на сервере проекты с ИД пользователя, показываем список проектов, создать проект
@@ -28,13 +31,38 @@ jQuery(document).ready(function ($) {
             document.location.href = "/Default";
         } else {
 
-            showProjectsPopUp();
+            //Если в хранилище браузера есть модель проекта -
+            //скрываем диалоговое окно создания проекта
+            //: проверить соответствие версий моделей проекта в браузере и на сервере,
+            //при необходимости - синхронизировать
+            //: визуализировать проект на странице
+            localforage.getItem("project", function (err, blob) {
+
+                //
+                console.log("project: " + blob);
+
+                if (blob == null) {
+
+                    //если модели проекта в хранилище браузера нет -
+                    //запускаем механизм загрузки проекта с сервера / создания нового проекта
+                    showProjectsPopUp();
+                } else {
+
+                    //Если в хранилище браузера есть модель проекта -
+                    //скрываем диалоговое окно создания проекта
+                    //: проверить соответствие версий моделей проекта в браузере и на сервере,
+                    //при необходимости - синхронизировать
+                    //: визуализировать проект на странице
+                    //Hide CreateProject dialog
+                    $("form.modal.createSequence").css("display", "none");
+                    $(".mask").css("display", "none");
+                }
+            });
         }
     });
 
     function showProjectsPopUp() {
-        //
-        var userId;
+
         localforage.getItem("user", function (err, blob) {
 
             //Getting user's project names
@@ -54,11 +82,8 @@ jQuery(document).ready(function ($) {
                     if (resultJS == '') {
 
                         //Projects not exists -
-                        //Show CreateProject dialog
+                        //Do not hide CreateProject dialog
                     } else {
-
-                        //Hide CreateProject dialog
-                        $("form.modal.createSequence").css("display", "none");
 
                         console.log("Projects was gotten: " + resultJS);
                         //console.dir(resultJS);
@@ -80,6 +105,10 @@ jQuery(document).ready(function ($) {
                                 localforage.getItem("project", function (err, blob) {
 
                                     console.log("Project Model: " + blob);
+
+                                    //Hide CreateProject dialog
+                                    $("form.modal.createSequence").css("display", "none");
+                                    $(".mask").css("display", "none");
                                 });
                             });
                         }                        
@@ -111,6 +140,8 @@ jQuery(document).ready(function ($) {
 
             newProjectFormData.append("userid", userId);
             newProjectFormData.append("name", projectName);
+            newProjectFormData.append("width", width);
+            newProjectFormData.append("height", height);
 
             $.ajax({
                 type: "POST",
@@ -135,11 +166,10 @@ jQuery(document).ready(function ($) {
 
                             //var localBlobUrl = window.URL.createObjectURL(blob);
 
-                            jsProjectModel.user = blob;
-                            console.log("jsProjectModel.user: " + jsProjectModel.user);
+                            console.log("ProjectModel: " + blob);
 
-                            $( ".mask" ).fadeOut();
-                            $( ".createSequence" ).fadeOut();
+                            $(".mask").fadeOut();
+                            $(".createSequence").fadeOut();
                         });
                     });
                 },

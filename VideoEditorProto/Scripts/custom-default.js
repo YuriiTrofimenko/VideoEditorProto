@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
     "use strict";
 
     //
-    localforage.clear();
+    //localforage.clear();
     
     //проверяем, есть ли на сервере проекты с ИД пользователя, показываем список проектов, создать проект
     //при загрузке проекта -
