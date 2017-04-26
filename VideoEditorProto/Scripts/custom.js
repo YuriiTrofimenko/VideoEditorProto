@@ -1,9 +1,8 @@
 ﻿//Когда страница редактирования загрузилась
 jQuery(document).ready(function ($) {
     "use strict";
+
     //localforage.clear();
-    //JS Project Model
-    var jsProjectModel = jsProjectModel || {};
 
     //проверяем, есть ли в локальном хранилище информация о пользователе
         //если есть -
@@ -25,168 +24,20 @@ jQuery(document).ready(function ($) {
 
         if (blob == null) {
 
-            showRequestAccountPopUp();
+            //showRequestAccountPopUp();
+            document.location.href = "/Default";
         } else {
 
             showProjectsPopUp();
         }
     });
 
-    function showRequestAccountPopUp() {
-
-        var result = '';
-        while (result == '') {
-
-            result = prompt('Input 1 for SignIn or 2 for SignUp: ', '');
-        }
-        if (result == 1) {
-
-            showSignInPopUp();
-        } else if (result == 2) {
-
-            showSignUpPopUp();
-        }
-    }
-
-    function showSignUpPopUp() {
-        //alert('SignUp');
-        var userName = '';
-        var userEMail = '';
-        var userPassword = '';
-        while (userName == '') {
-
-            userName = prompt('Input your name:', '');
-        }
-        while (userEMail == '') {
-
-            userEMail = prompt('Input e-mail:', '');
-        }
-        while (userPassword == '') {
-
-            userPassword = prompt('Input password:', '');
-        }
-
-        //console.log("name: " + userName + " " + userEMail + " " + userPassword);
-        if (userName != '' && userEMail != '' && userPassword != '') {
-
-            var newUserFormData = new FormData();
-
-            newUserFormData.append("name", userName);
-            newUserFormData.append("email", userEMail);
-            newUserFormData.append("password", userPassword);
-
-            $.ajax({
-                type: "POST",
-                //url: '/Default/Upload',
-                url: '/Editor/CreateUser',
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                data: newUserFormData,
-                success: function (result) {
-                    //a
-                    var resultJS = JSON.parse(JSON.stringify(result));
-                    console.log("New user was created: "
-                        + resultJS[0].id
-                        + " " + resultJS[0].name
-                        + " " + resultJS[0].email
-                        + " " + resultJS[0].password
-                    );
-                    localforage.setItem("user", resultJS[0], function (err, blob) {
-                        //nothing
-                    }).then(function () {
-
-                        localforage.getItem("user", function (err, blob) {
-
-                            //var localBlobUrl = window.URL.createObjectURL(blob);
-
-                            jsProjectModel.user = blob;
-                            console.log("jsProjectModel.user: " + jsProjectModel.user);
-                        });
-                    });
-                },
-                error: function (xhr, status, p3) {
-                    //
-                    console.log("Error: " + xhr.responseText);
-                }
-            });
-        }
-    }
-
-    function showSignInPopUp()
-    {
-        var userName = '';
-        var userPassword = '';
-        while (userName == '') {
-
-            userName = prompt('Input your name:', '');
-        }
-        while (userPassword == '') {
-
-            userPassword = prompt('Input password:', '');
-        }
-
-        //console.log("name: " + userName + " " + userPassword);
-        if (userName != '' && userPassword != '') {
-
-            var newUserFormData = new FormData();
-
-            newUserFormData.append("name", userName);
-            newUserFormData.append("password", userPassword);
-
-            $.ajax({
-                type: "POST",
-                url: '/Editor/GetUser',
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                data: newUserFormData,
-                success: function (result) {
-                    //
-                    var resultJS = JSON.parse(JSON.stringify(result));
-                    console.log("New user was gotten: " + resultJS[0]);
-                    if (resultJS == '') {
-
-                        alert('User not exists');
-                    } else {
-
-                        console.dir(resultJS[0]);
-                        console.log("New user was gotten: "
-                            + resultJS[0].id
-                            + " " + resultJS[0].name
-                            + " " + resultJS[0].email
-                            + " " + resultJS[0].password
-                        );
-                    }
-                    
-
-                    localforage.setItem("user", resultJS[0], function (err, blob) {
-                        //nothing
-                    }).then(function () {
-
-                        localforage.getItem("user", function (err, blob) {
-
-                            //var localBlobUrl = window.URL.createObjectURL(blob);
-
-                            jsProjectModel.user = blob;
-                            console.log("jsProjectModel.user: " + jsProjectModel.user);
-                        });
-                    });
-                },
-                error: function (xhr, status, p3) {
-                    //
-                    console.log("Error: " + xhr.responseText);
-                }
-            });
-        }
-    }
-
     function showProjectsPopUp() {
-        //alert('Projects');
+        //
         var userId;
         localforage.getItem("user", function (err, blob) {
 
-            //console.log("user: " + blob.id);
+            //Getting user's project names
             userId = blob.id;
             $.ajax({
                 type: "POST",
@@ -197,88 +48,42 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     //
                     var resultJS = JSON.parse(JSON.stringify(result));
+
                     console.log("The projects was gotten: " + resultJS);
+
                     if (resultJS == '') {
 
-                        alert('Projects not exists');
-                        if (confirm('Do you want to create the new project?')) {
-
-                            var projectName = prompt('Input project name: ', '');
-                            if (projectName != '') {
-
-                                //send ajax post request for create new project
-                                //and get his data from response
-
-                                var newProjectFormData = new FormData();
-
-                                newProjectFormData.append("userid", userId);
-                                newProjectFormData.append("name", projectName);
-
-                                $.ajax({
-                                    type: "POST",
-                                    url: '/Editor/CreateProject',
-                                    dataType: 'json',
-                                    contentType: false,
-                                    processData: false,
-                                    data: newProjectFormData,
-                                    success: function (result) {
-                                        //
-                                        var resultJS = JSON.parse(JSON.stringify(result));
-                                        console.log("New project was created: "
-                                            + resultJS.id
-                                            + " " + resultJS.name
-                                            + " " + resultJS.userid
-                                        );
-                                        localforage.setItem("project", resultJS, function (err, blob) {
-                                            //nothing
-                                        }).then(function () {
-
-                                            localforage.getItem("project", function (err, blob) {
-
-                                                //var localBlobUrl = window.URL.createObjectURL(blob);
-
-                                                jsProjectModel.user = blob;
-                                                console.log("jsProjectModel.user: " + jsProjectModel.user);
-                                            });
-                                        });
-                                    },
-                                    error: function (xhr, status, p3) {
-                                        //
-                                        console.log("Error: " + xhr.responseText);
-                                    }
-                                });
-                            }
-                        }
-
+                        //Projects not exists -
+                        //Show CreateProject dialog
                     } else {
 
-                        console.log("The projects was gotten: " + resultJS);
+                        //Hide CreateProject dialog
+                        $("form.modal.createSequence").css("display", "none");
+
+                        console.log("Projects was gotten: " + resultJS);
                         //console.dir(resultJS);
                         if (resultJS.length > 0) {
 
                             resultJS.forEach(function (item, i, resultJS) {
 
-                                console.log("The project #"
+                                console.log("Project #"
                                     + i
                                     + ": " + item.Id
                                     + "; " + item.Name
                                 );
                             });
+
+                            localforage.setItem("project", resultJS[0], function (err, blob) {
+                                //nothing
+                            }).then(function () {
+
+                                localforage.getItem("project", function (err, blob) {
+
+                                    console.log("Project Model: " + blob);
+                                });
+                            });
                         }                        
                     }
-
-                    /*localforage.setItem("user", resultJS, function (err, blob) {
-                        //nothing
-                    }).then(function () {
-
-                        localforage.getItem("user", function (err, blob) {
-
-                            var localBlobUrl = window.URL.createObjectURL(blob);
-
-                            jsProjectModel.user = localBlobUrl;
-                            console.log("jsProjectModel.user: " + jsProjectModel.user);
-                        });
-                    });*/
                 },
                 error: function (xhr, status, p3) {
                     //
@@ -287,6 +92,64 @@ jQuery(document).ready(function ($) {
             });
         });
     }
+
+    //Ajax POST: submit CreateProject form
+    $("div.submitField input.right").click(function submitCreateProject(event) {
+
+        event.preventDefault();
+
+        var projectName = $('div.submitField input[name=projectName]').val();
+        var width = $("form.modal.createSequence input[name=width]").val();
+        var height = $("form.modal.createSequence input[name=height]").val();
+
+        if (projectName != '') {
+
+            //send ajax post request for create new project
+            //and get his data from response
+
+            var newProjectFormData = new FormData();
+
+            newProjectFormData.append("userid", userId);
+            newProjectFormData.append("name", projectName);
+
+            $.ajax({
+                type: "POST",
+                url: '/Editor/CreateProject',
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                data: newProjectFormData,
+                success: function (result) {
+                    //
+                    var resultJS = JSON.parse(JSON.stringify(result));
+                    console.log("New project was created: "
+                        + resultJS.id
+                        + " " + resultJS.name
+                        + " " + resultJS.userid
+                    );
+                    localforage.setItem("project", resultJS, function (err, blob) {
+                        //nothing
+                    }).then(function () {
+
+                        localforage.getItem("project", function (err, blob) {
+
+                            //var localBlobUrl = window.URL.createObjectURL(blob);
+
+                            jsProjectModel.user = blob;
+                            console.log("jsProjectModel.user: " + jsProjectModel.user);
+
+                            $( ".mask" ).fadeOut();
+                            $( ".createSequence" ).fadeOut();
+                        });
+                    });
+                },
+                error: function (xhr, status, p3) {
+                    //
+                    console.log("Error: " + xhr.responseText);
+                }
+            });
+        }
+    });
 });
 
 /*function showMessage() {

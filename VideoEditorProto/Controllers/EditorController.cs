@@ -31,15 +31,17 @@ namespace VideoEditorProto.Controllers
 
         //localhost:50015/editor/createProject?_projectId=1
         [HttpGet]
-        public JsonResult createProject(string _projectId)
+        public JsonResult CreateProject(string _projectId)
         {
             //TODO добавить поля name и description в модель "Проект",
             //поле version - во все модели (для синхронизации клиента и сервера)
-            Project newProject = new Project();
-            newProject.Id = "1";
-            newProject.IdUser = "1";
-            newProject.Width = 600;
-            newProject.Height = 480;
+            Project newProject = new Project()
+            {
+                Id = "1",
+                IdUser = "1",
+                Width = 600,
+                Height = 480
+            };
             var result = new { result = mRepository.SaveProject(newProject) };
             
             return Json (result, JsonRequestBehavior.AllowGet);
@@ -47,7 +49,7 @@ namespace VideoEditorProto.Controllers
 
         //localhost:50015/editor/getProjectById?_projectId=1
         [HttpGet]
-        public JsonResult getProjectById(string _projectId)
+        public JsonResult GetProjectById(string _projectId)
         {
             //TODO add fields: name, description, version
             var result =
@@ -73,60 +75,16 @@ namespace VideoEditorProto.Controllers
         /*Production POST actions for AJAX*/
 
         [HttpPost]
-        public JsonResult CreateUser()
-        {
-            string newUserId = IdCreator.createUserGuid();
-            string encodedPassword = StringsEncoder.MD5Hash(Request["password"]);
-
-            User newUser = new Domain.User();
-            newUser.Id = newUserId;
-            newUser.Name = Request["name"];
-            newUser.Email = Request["email"];
-            newUser.Password = encodedPassword;
-
-            var result = mRepository.SaveUser(newUser);
-                //from user in mRepository.User
-                //where (user.Id == newUserId)
-                //select new { item.Id, item.User, item.Width, item.Height };
-
-            return Json(
-                new { id = result.Id
-                    ,name = result.Name
-                    , email = result.Email
-                    , password = result.Password
-                });
-        }
-
-        [HttpPost]
-        public JsonResult GetUser()
-        {
-            string email = Request["email"];//do not remove this tmp variable!
-            string encodedPassword = StringsEncoder.MD5Hash(Request["password"]);
-
-            var user =
-                from userItem in mRepository.User
-                where (userItem.Email == email
-                        && userItem.Password == encodedPassword)
-                select new {
-                    id = userItem.Id
-                    , name = userItem.Name
-                    , email = userItem.Email
-                    , password = userItem.Password
-                };
-
-            return Json(user);
-        }
-
-        [HttpPost]
         public JsonResult CreateProject()
         {
             string newProjectId = IdCreator.createProjectGuid();
 
-            Project newProject = new Domain.Project();
-            newProject.Id = newProjectId;
-            newProject.Name = Request["name"];
-            newProject.IdUser = Request["userid"];
-
+            Project newProject = new Domain.Project()
+            {
+                Id = newProjectId,
+                Name = Request["name"],
+                IdUser = Request["userid"]
+            };
             var result = mRepository.SaveProject(newProject);
 
             return Json(
@@ -139,7 +97,7 @@ namespace VideoEditorProto.Controllers
         }
 
         [HttpPost]
-        public JsonResult getProjectNamesByUserId(string _userId)
+        public JsonResult GetProjectNamesByUserId(string _userId)
         {
             var result =
                 from projectItem in mRepository.Project
@@ -149,7 +107,7 @@ namespace VideoEditorProto.Controllers
         }
 
         [HttpPost]
-        public JsonResult getProjectsByUserId(string _userId)
+        public JsonResult GetProjectsByUserId(string _userId)
         {
             var result =
                 from projectItem in mRepository.Project

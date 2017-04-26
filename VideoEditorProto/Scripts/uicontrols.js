@@ -14,9 +14,9 @@ $(function () {
     });
     $( "#slider-range + p > input" ).val( $( "#slider-range" ).slider( "value" ) + "%" );
 
-    $( '.submitField input[type="submit"]' ).click(function (event) {
-    	event.preventDefault();
-    	$( ".mask" ).fadeOut();
-    	$( ".createSequence" ).fadeOut();
-    });
+    //$( '.submitField input[type="submit"]' ).click(function (event) {
+    //	event.preventDefault();
+    //	$( ".mask" ).fadeOut();
+    //	$( ".createSequence" ).fadeOut();
+    //});
 });
