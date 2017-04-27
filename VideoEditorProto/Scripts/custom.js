@@ -153,6 +153,7 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     //
                     var resultJS = JSON.parse(JSON.stringify(result));
+                    resultJS = (resultJS[0] !== undefined) ? resultJS[0] : resultJS;
                     console.log("New project was created: "
                         + resultJS.id
                         + " " + resultJS.name
