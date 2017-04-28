@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -112,6 +113,51 @@ namespace VideoLib
             }
             proc.Close();
             return resultString;
+        }
+
+        //
+        public static String processLayoutChange(List<ResourceModel> _resModelList, int _begin, int _end, String _resourcesPath, String _outputPath)
+        {
+            /*String resultString = "";
+            //Создаем объект процесса для запуска внешнего исполняемого файла
+            Process proc = new Process();
+            //Получаем путь к внешнему исполняемому файлу (утилите обработки видео)
+            String ffmpegPath =
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg\\ffmpeg.exe")
+                    .Replace("VideoEditorProto\\ffmpeg", "VideoLib\\ffmpeg");
+            //Устанавливаем имя файла для запуска
+            proc.StartInfo.FileName = ffmpegPath;
+            //Устанавливаем аргументы командной строки
+            //-i "_resourcesPath\video\_fileName" -s 320x240 "_outputPath\video\_fileName"
+            proc.StartInfo.Arguments =
+                "-i "
+                + "\"" + _resourcesPath + "video\\" + _fileName + "\""
+                + " -s 320x240 "
+                + "\"" + _outputPath + "video\\" + _fileName + "\"";
+            proc.StartInfo.RedirectStandardError = true;
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.CreateNoWindow = true;
+            if (!proc.Start())
+            {
+                //Console.WriteLine("Error starting");
+                //resultString = "Error";
+                resultString = "Error:\n";
+                //return resultString;
+            }
+            else
+            {
+                //proc.WaitForExit();
+            }
+            //Выводим отладочную информацию - ответ утилиты
+            StreamReader reader = proc.StandardError;
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                //Console.WriteLine(line);
+                resultString += line + "\n";
+            }
+            proc.Close();*/
+            return null;
         }
     }
 }

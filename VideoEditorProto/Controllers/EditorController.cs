@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using VideoEditorProto.Domain;
 using VideoEditorProto.Domain.Abstract;
 using VideoEditorProto.Utils;
+using VideoLib;
 
 namespace VideoEditorProto.Controllers
 {
@@ -115,7 +116,24 @@ namespace VideoEditorProto.Controllers
                 from projectItem in mRepository.Project
                 where (projectItem.IdUser == _userId)
                 select new { projectItem.Id, projectItem.User, projectItem.Width, projectItem.Height };
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult processLayoutChange(int _begin, int _end, string[] _rowIds)
+        {
+            //var result =
+            //    from projectItem in mRepository.Project
+            //    where (projectItem.IdUser == _userId)
+            //    select new { projectItem.Id, projectItem.User, projectItem.Width, projectItem.Height };
+            List<ResourceModel> resModelList = null;
+            //
+            String inputPath = Server.MapPath("~/Uploads/");
+            //
+            String outputPath = Server.MapPath("~/Downloads/");
+
+            VideoLib.VideoProcessor.processLayoutChange(resModelList, _begin, _end, inputPath, outputPath);
+            return null;
         }
 
         //Демо-действие загрузки медиа-файлов на сервер

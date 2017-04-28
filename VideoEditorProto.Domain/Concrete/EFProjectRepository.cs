@@ -78,6 +78,33 @@ namespace VideoEditorProto.Domain.Concrete
             return result;
         }
 
+        public Project SaveLayer(Layer _layer)
+        {
+            Layer layer = null;
+            try
+            {
+                Layer dbEntry = context.Layers.Find(_layer.Id);
+                //Если запись существует - обновляем ее данные
+                if (dbEntry != null)
+                {
+                    dbEntry.Muted_Showed = _layer.Muted_Showed;
+                    dbEntry.Blocked = _layer.Blocked;
+                }
+                //Если нет - создаем запись
+                else
+                {
+                    context.Layers.Add(_project);
+                }
+                context.SaveChanges();
+                result = context.Projects.Find(_project.Id);
+            }
+            catch (Exception)
+            {
+
+            }
+            return result;
+        }
+
         IQueryable<AudioCodec> IProjectRepository.AudioCodecs { get => context.AudioCodecs; }
 
         IQueryable<VideoCodec> IProjectRepository.VideoCodecs { get => context.VideoCodecs; }

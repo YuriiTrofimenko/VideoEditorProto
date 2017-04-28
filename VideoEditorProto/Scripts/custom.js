@@ -519,4 +519,11 @@ $('#menu-delete-item').click(function () {
     console.log("delete");
 });
 
-function getData() { }
+/*Изменения на слое - эмуляция при нажатии клавиш*/
+$('html').keydown(function (eventObject) {
+    alert('Клавиша клавиатуры приведена в нажатое состояние. Код вводимого символа - ' + eventObject.which);
+    console.log(eventObject.which);
+    if (eventObject.which == '17') {
+        console.log(eventObject.which);
+    }
+});
