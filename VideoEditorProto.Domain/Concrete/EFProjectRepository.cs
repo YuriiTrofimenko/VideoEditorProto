@@ -78,9 +78,9 @@ namespace VideoEditorProto.Domain.Concrete
             return result;
         }
 
-        public Project SaveLayer(Layer _layer)
+        public Layer SaveLayer(Layer _layer)
         {
-            Layer layer = null;
+            Layer result = null;
             try
             {
                 Layer dbEntry = context.Layers.Find(_layer.Id);
@@ -93,10 +93,10 @@ namespace VideoEditorProto.Domain.Concrete
                 //Если нет - создаем запись
                 else
                 {
-                    context.Layers.Add(_project);
+                    context.Layers.Add(_layer);
                 }
                 context.SaveChanges();
-                result = context.Projects.Find(_project.Id);
+                result = context.Layers.Find(_layer.Id);
             }
             catch (Exception)
             {
@@ -104,6 +104,8 @@ namespace VideoEditorProto.Domain.Concrete
             }
             return result;
         }
+
+        IQueryable<Layer> IProjectRepository.Layers { get => context.Layers; }
 
         IQueryable<AudioCodec> IProjectRepository.AudioCodecs { get => context.AudioCodecs; }
 

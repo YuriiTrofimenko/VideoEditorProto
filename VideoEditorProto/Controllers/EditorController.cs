@@ -119,13 +119,39 @@ namespace VideoEditorProto.Controllers
             return Json(result);
         }
 
+        //Обработка изменений на слое монтажной последовательности
         [HttpPost]
-        public JsonResult processLayoutChange(int _begin, int _end, string[] _rowIds)
+        public JsonResult processLayoutChange(
+            int _begin
+            , int _end
+            , string _projectId
+            , string _layerId
+            , string[] _rowIds)
         {
-            //var result =
-            //    from projectItem in mRepository.Project
-            //    where (projectItem.IdUser == _userId)
-            //    select new { projectItem.Id, projectItem.User, projectItem.Width, projectItem.Height };
+            //Проверяем, есть ли в БД слой с таким ИД
+            var layer =
+                (Layer)
+                from layerItem in mRepository.Layers
+                where (layerItem.Id == _layerId)
+                select new Layer()
+                {
+                    Id = layerItem.Id,
+                    IdProject = layerItem.Id
+                };
+
+            if (layer == null)
+            {
+                string newProjectId = IdCreator.createProjectGuid();
+                //Если нет - создаем
+                Layer newLayer = new Layer()
+                {
+                    Id = IdCreator.createLayerGuid(),
+                    IdProject = _projectId
+                };
+                layer = mRepository.SaveLayer(newLayer);
+            }
+            
+
             List<ResourceModel> resModelList = null;
             //
             String inputPath = Server.MapPath("~/Uploads/");

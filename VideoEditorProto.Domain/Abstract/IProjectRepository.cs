@@ -13,6 +13,9 @@ namespace VideoEditorProto.Domain.Abstract
         IQueryable<User> User { get; }
         User SaveUser(User _user);
 
+        IQueryable<Layer> Layers { get; }
+        Layer SaveLayer(Layer _layer);
+
         IQueryable<AudioCodec> AudioCodecs { get; }
 
         IQueryable<VideoCodec> VideoCodecs { get; }
