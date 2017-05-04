@@ -31,5 +31,10 @@ namespace VideoEditorProto.Utils
         {
             return createGuid("r-");
         }
+
+        public static string createFileGuid()
+        {
+            return createGuid("f-");
+        }
     }
 }

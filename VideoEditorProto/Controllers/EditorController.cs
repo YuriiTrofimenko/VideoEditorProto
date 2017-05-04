@@ -171,9 +171,17 @@ namespace VideoEditorProto.Controllers
             String inputPath = Server.MapPath("~/Uploads/");
             //
             String outputPath = Server.MapPath("~/Downloads/");
+            //
+            String previewFileName = IdCreator.createFileGuid();
 
-            VideoLib.VideoProcessor.processLayoutChange(resModelList, 0, 0, inputPath, outputPath);
-            return Json(fileNamesArray);
+            VideoLib.VideoProcessor.processLayoutChange(
+                resModelList
+                , 0
+                , 0
+                , inputPath
+                , outputPath
+                , previewFileName);
+            return Json("/Uploads/video/" + previewFileName);
         }
 
         //Демо-действие загрузки медиа-файлов на сервер
