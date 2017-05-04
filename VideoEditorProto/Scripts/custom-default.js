@@ -45,28 +45,21 @@ jQuery(document).ready(function ($) {
         $("#signup-a").css("display", "block");
     }
 
-    $("#signin-a").click(function myfunction(event) {
-
+    $("a#signin-a").click(function (event) {
         event.preventDefault();
-
-        if ($(".signup").css("display") == "block") {
-
-            $(".signup").css("display", "none");
-        }
-
-        $(".signin").css("display", "block");
+        $(".signin.modal").fadeIn();
+        $(".mask").fadeIn();
     });
 
-    $("#signup-a").click(function myfunction(event) {
-
+    $("a#signup-a").click(function (event) {
         event.preventDefault();
+        $(".signup.modal").fadeIn();
+        $(".mask").fadeIn();
+    });
 
-        if ($(".signin").css("display") == "block") {
-
-            $(".signin").css("display", "none");
-        }
-
-        $(".signup").css("display", "block");
+    $(".mask").click(function () {
+        $(".modal").fadeOut();
+        $(".mask").fadeOut();
     });
 
     $('form.signup.modal input[name=submit]').click(function showSignUpPopUp(event) {
