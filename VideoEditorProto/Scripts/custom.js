@@ -553,43 +553,56 @@ $('html').keydown(function (eventObject) {
 //Изменения на слое -
 //handle layout rows adding and removing
 //TODO handle layout rows moving
+
+var canHandle = true;
+
 $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
 
-    var fileNames = [];
+    if (canHandle) {
 
-    var layouts = $(".videoLayout").has(".videoRow");
+        var fileNames = [];
 
-    jQuery.each(layouts, function (i, layout) {
+        var layouts = $(".videoLayout").has(".videoRow");
 
-        console.log(layout);
+        console.log(e.target);
 
-        var layoutRows = $(layout).find(".videoRow");
+        jQuery.each(layouts, function (i, layout) {
 
-        jQuery.each(layoutRows, function (i, row) {
+            console.log(layout);
 
-            console.log(row);
-            console.log($(row).find("img").attr("alt"));
-            fileNames.push($(row).find("img").attr("alt"));
+            var layoutRows = $(layout).find(".videoRow");
+
+            jQuery.each(layoutRows, function (i, row) {
+
+                console.log(row);
+                console.log($(row).find("img").attr("alt"));
+                fileNames.push($(row).find("img").attr("alt"));
+            });
         });
-    });
 
-    var data = new FormData();
-    data.append("file" + x, files[x]);
+        var data = new FormData();
+        data.append("file_names", fileNames);
 
-    $.ajax({
-        type: "POST",
-        //url: '/Editor/Upload',
-        url: '/Editor/CreateRow',
-        contentType: false,
-        processData: false,
-        data: data,
-        success: function (result) {
-            //alert(result);
-            applyChanges(result);
-            //console.log("call applyChanges()");
-        },
-        error: function (xhr, status, p3) {
-            alert(xhr.responseText);
-        }
-    });
+        $.ajax({
+            type: "POST",
+            //url: '/Editor/Upload',
+            url: '/Editor/ProcessLayoutChange',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (result) {
+                //alert(result);
+                //applyChanges(result);
+                //console.log("call applyChanges()");
+                console.log(result);
+            },
+            error: function (xhr, status, p3) {
+                alert(xhr.responseText);
+            }
+        });
+        canHandle = false;
+        setTimeout(function () { canHandle = true; }, 500);
+    }
+
+    
 });

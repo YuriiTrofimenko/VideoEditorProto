@@ -127,13 +127,17 @@ namespace VideoEditorProto.Controllers
             , string _projectId
             , string _layerId
             , string[] _rowIds)*/
-        public JsonResult processLayoutChange()
+        public JsonResult ProcessLayoutChange()
         {
 
-            //Request["name"]
+            String fileNamesString = Request["file_names"];
+
+            string[] fileNamesArray = fileNamesString.Split(',');
+
+            Console.WriteLine(fileNamesArray);
 
             //Проверяем, есть ли в БД слой с таким ИД
-            var layer =
+            /*var layer =
                 (Layer)
                 from layerItem in mRepository.Layers
                 where (layerItem.Id == _layerId)
@@ -153,17 +157,23 @@ namespace VideoEditorProto.Controllers
                     IdProject = _projectId
                 };
                 layer = mRepository.SaveLayer(newLayer);
-            }
+            }*/
             
 
-            List<ResourceModel> resModelList = null;
+            List<ResourceModel> resModelList = new List<ResourceModel>();
+            foreach (string fileName in fileNamesArray)
+            {
+                ResourceModel rm = new ResourceModel();
+                rm.fileName = fileName;
+                resModelList.Add(rm);
+            }
             //
             String inputPath = Server.MapPath("~/Uploads/");
             //
             String outputPath = Server.MapPath("~/Downloads/");
 
-            VideoLib.VideoProcessor.processLayoutChange(resModelList, _begin, _end, inputPath, outputPath);
-            return null;
+            VideoLib.VideoProcessor.processLayoutChange(resModelList, 0, 0, inputPath, outputPath);
+            return Json(fileNamesArray);
         }
 
         //Демо-действие загрузки медиа-файлов на сервер
