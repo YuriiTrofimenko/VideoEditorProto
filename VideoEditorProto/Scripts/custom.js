@@ -521,9 +521,75 @@ $('#menu-delete-item').click(function () {
 
 /*Изменения на слое - эмуляция при нажатии клавиш*/
 $('html').keydown(function (eventObject) {
-    alert('Клавиша клавиатуры приведена в нажатое состояние. Код вводимого символа - ' + eventObject.which);
-    console.log(eventObject.which);
-    if (eventObject.which == '17') {
-        console.log(eventObject.which);
-    }
+    /*alert('Клавиша клавиатуры приведена в нажатое состояние. Код вводимого символа - ' + eventObject.which);*/
+    /*console.log(eventObject.which);*/
+    //if (eventObject.which == '17') {
+
+    //    console.log(eventObject.which);
+    //    console.log($(".videoLayout").has(".videoRow"));
+
+    //    var fileNames = [];
+
+    //    var layouts = $(".videoLayout").has(".videoRow");
+
+    //    jQuery.each(layouts, function (i, layout) {
+
+    //        console.log(layout);
+
+    //        var layoutRows = $(layout).find(".videoRow");
+
+    //        jQuery.each(layoutRows, function (i, row) {
+
+    //            console.log(row);
+    //            console.log($(row).find("img").attr("alt"));
+    //            fileNames.push($(row).find("img").attr("alt"));
+    //        });
+    //    });
+
+
+    //}
+});
+
+//Изменения на слое -
+//handle layout rows adding and removing
+//TODO handle layout rows moving
+$(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
+
+    var fileNames = [];
+
+    var layouts = $(".videoLayout").has(".videoRow");
+
+    jQuery.each(layouts, function (i, layout) {
+
+        console.log(layout);
+
+        var layoutRows = $(layout).find(".videoRow");
+
+        jQuery.each(layoutRows, function (i, row) {
+
+            console.log(row);
+            console.log($(row).find("img").attr("alt"));
+            fileNames.push($(row).find("img").attr("alt"));
+        });
+    });
+
+    var data = new FormData();
+    data.append("file" + x, files[x]);
+
+    $.ajax({
+        type: "POST",
+        //url: '/Editor/Upload',
+        url: '/Editor/CreateRow',
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function (result) {
+            //alert(result);
+            applyChanges(result);
+            //console.log("call applyChanges()");
+        },
+        error: function (xhr, status, p3) {
+            alert(xhr.responseText);
+        }
+    });
 });

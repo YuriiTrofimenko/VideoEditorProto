@@ -121,13 +121,17 @@ namespace VideoEditorProto.Controllers
 
         //Обработка изменений на слое монтажной последовательности
         [HttpPost]
-        public JsonResult processLayoutChange(
+        /*public JsonResult processLayoutChange(
             int _begin
             , int _end
             , string _projectId
             , string _layerId
-            , string[] _rowIds)
+            , string[] _rowIds)*/
+        public JsonResult processLayoutChange()
         {
+
+            //Request["name"]
+
             //Проверяем, есть ли в БД слой с таким ИД
             var layer =
                 (Layer)
