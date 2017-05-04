@@ -149,12 +149,35 @@ header.mainHeader:before
     text-decoration: none;
     line-height: 1em;
     font-family: MSRS;
+    position: relative;	
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    outline: none;
 }
 
 .mainHeader ul li:hover a
 {
 	background-color: #ffba00;
+}
+
+.mainHeader ul li a ul
+{
+	display: none;
+	position: absolute;
+	z-index: 10;
+	top: 26px;
+	left: 0px;
+}
+
+.mainHeader ul li a ul li
+{
+	height: 14px;
+	border-bottom: 1px solid #606060;
+	width: 99px;
+	background-color: #4d4d4d;
+	font-size: 9px;
+	padding: 6px 0px 0px 6px;
+	border-top: 1px solid #474747;
+	cursor: pointer;
 }
 
 .player
@@ -644,14 +667,22 @@ header.mainHeader:before
 
 #files form label,
 .form-head label,
-.submitField input[type="submit"]
+.submitField input[type="submit"],
+.openSequence .secondaryInfo .loadButton,
+.openSequence .newProject
 {
-    width: 124px;
     background-color: #ffd800;
 	background: -moz-linear-gradient(top,  #ffd800 0%, #ffba00 100%);
 	background: -webkit-linear-gradient(top,  #ffd800 0%,#ffba00 100%);
 	background: linear-gradient(to bottom,  #ffd800 0%,#ffba00 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd800', endColorstr='#ffba00',GradientType=0 );
+}
+
+#files form label,
+.form-head label,
+.submitField input[type="submit"]
+{
+    width: 124px;
     height: 14px;
     font-size: 11px;
     text-align: center;
@@ -1303,6 +1334,7 @@ header.mainHeader:before
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 3;
+	display: none;
 }
 
 .modal
@@ -1313,6 +1345,169 @@ header.mainHeader:before
 	top: 50%;
 }
 
+.openSequence
+{
+	width: 870px;
+	background-color: #444444;
+	padding: 22px 25px; 
+	margin-top: -309px;
+	margin-left: -435px;
+	height: 618px;
+	padding: 0px;
+	display: none;
+}
+
+.openSequence header
+{
+	width: 100%;
+	height: 67px;
+	background-color: #fff;
+	font-size: 22px;
+	text-transform: uppercase;
+	color: #444444;
+	overflow: hidden;
+}
+
+.openSequence header p
+{
+	padding-top: 23px;
+	margin-left: 53px;
+	display: block;	
+	float: left;
+}
+
+.openSequence .logo
+{
+	width: 68px;
+	height: 25px;
+	display: block;
+	float: left;
+	margin: 0px;
+	margin-left: 35px;
+	padding-top: 23px;
+}
+
+.openSequence .projects
+{
+	width: 800px;
+	height: 485px;
+	/*overflow-y: scroll;*/
+	margin: 39px 28px;
+}
+
+.openSequence .projects li
+{
+	width: 100%;
+	min-height: 90px;
+	margin-bottom: 20px;
+}
+
+.openSequence .projects li .img
+{
+	width: 152px;
+	height: 90px;
+	float: left;
+}
+
+.openSequence .projects li .img img
+{
+	width: 100%;
+	height: 100%;
+}
+
+.openSequence .projects li .info,
+.openSequence .projects li .info > div
+{
+	float: left;
+	width: 630px;
+	color: #fff;
+	font-family: MSRS;
+}
+
+.openSequence .projects .mainInfo
+{
+	height: 12px;
+	width: 612px;
+	padding: 9px 19px 13px;
+	background-color: #2e2e2e;
+	border-bottom: 2px solid #fff;
+	font-family: MSRS;
+}
+
+.openSequence .secondaryInfo table
+{
+	display: block;
+	float: left;
+}
+
+.openSequence .secondaryInfo .loadButton
+{
+	width: 110px;
+	height: 22px;
+	float: left;
+	margin: 13px 0px 0px 21px;
+	text-align: center;
+	padding-top: 7px;
+	cursor: pointer;
+}
+
+.openSequence .projects .mainInfo .name
+{
+	width: 523px;
+	float: left;
+	color: #ffba00;
+	font-size: 15px;
+	font-family: MSRS;
+}
+.openSequence .projects .mainInfo .date
+{
+	font-family: MSRS;
+	float: right;
+}
+
+.openSequence .projects table
+{
+	border-collapse: collapse;
+}
+
+.openSequence .projects td
+{
+	height: 26px;
+	width: 124px;
+	font-size: 13px;
+	border: 1px solid #2e2e2e;
+	font-family: MSRS ;
+	text-align: center;
+	background-color: #636363;
+}
+
+.openSequence .projects table tr:first-child td {
+	border-top: none;
+}
+.openSequence .projects table tr:last-child td{
+	border-bottom: none;
+}
+.openSequence .projects table tr td:first-child{
+	border-left: none;
+}
+.openSequence .projects table tr td:last-child{
+	border-right: none;
+}
+
+.openSequence .newProject
+{
+	height: 36px;
+	width: 275px;
+	text-align: center;
+	font-size: 24px;
+	padding-top: 11px;
+	color: #fff;
+	cursor: pointer;
+	left: 50%;
+	margin-left: -137px;
+	position: absolute;
+}
+
 .createSequence
 {
 	width: 556px;
@@ -1320,6 +1515,7 @@ header.mainHeader:before
 	padding: 22px 25px; 
 	margin-top: -280px;
 	margin-left: -303px;
+	display: none;
 }
 
 .createSequence .panelTitle
