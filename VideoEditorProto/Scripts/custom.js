@@ -585,7 +585,6 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
 
         $.ajax({
             type: "POST",
-            //url: '/Editor/Upload',
             url: '/Editor/ProcessLayoutChange',
             contentType: false,
             processData: false,

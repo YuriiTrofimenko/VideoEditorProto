@@ -181,7 +181,7 @@ namespace VideoEditorProto.Controllers
                 , inputPath
                 , outputPath
                 , previewFileName);
-            return Json("/Uploads/video/" + previewFileName);
+            return Json("/Uploads/video/" + previewFileName + ".mp4");
         }
 
         //Демо-действие загрузки медиа-файлов на сервер
@@ -209,7 +209,7 @@ namespace VideoEditorProto.Controllers
             return Json("/Uploads/video/" + fileName);
         }
 
-        //Демо-действие загрузки медиа-файлов на сервер
+        //Действие загрузки медиа-файлов на сервер
         [HttpPost]
         public JsonResult CreateRow()
         {

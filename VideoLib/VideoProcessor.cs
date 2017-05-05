@@ -65,9 +65,16 @@ namespace VideoLib
             while ((line = reader.ReadLine()) != null)
             {
                 //Console.WriteLine(line);
+                if (line == "")
+                {
+                    break;
+                }
                 resultString += line + "\n";
             }
-            proc.Close();
+
+            reader.Close();
+            if (proc != null && proc.HasExited == false) proc.Kill();
+            //proc.Close();
             return resultString;
         }
 
@@ -110,9 +117,17 @@ namespace VideoLib
             while ((line = reader.ReadLine()) != null)
             {
                 //Console.WriteLine(line);
+                if (line == "")
+                {
+                    break;
+                }
                 resultString += line + "\n";
             }
-            proc.Close();
+
+            reader.Close();
+            if (proc != null && proc.HasExited == false) proc.Kill();
+            //proc.Close();
+
             //Eager preparing mpg file in the new thread
             //Task.Run(() =>
             //{
@@ -141,7 +156,7 @@ namespace VideoLib
                 createTmpVideo(rm.fileName, _outputPath);
 
                 filesString +=
-                    _outputPath + "video\\" + rm.fileName.Remove(rm.fileName.Length - 3) + "mpg" + "\"";
+                    _outputPath + "video\\" + rm.fileName.Remove(rm.fileName.Length - 3) + "mpg" + "|";
             }
             filesString = filesString.Remove(filesString.Length - 1) + "\"";
 
@@ -172,9 +187,18 @@ namespace VideoLib
             while ((line = reader.ReadLine()) != null)
             {
                 //Console.WriteLine(line);
+                if (line == "")
+                {
+                    break;
+                }
                 resultString += line + "\n";
             }
-            proc.Close();
+            reader.Close();
+            if (proc != null && proc.HasExited == false) proc.Kill();
+
+            //
+            mpgToMp4(_previewFileName, _outputPath);
+
             return null;
         }
 
@@ -205,9 +229,67 @@ namespace VideoLib
             string line;
             while ((line = reader.ReadLine()) != null)
             {
+                if (line == "")
+                {
+                    break;
+                }
                 resultString += line + "\n";
             }
-            proc.Close();
+            reader.Close();
+            if (proc != null && proc.HasExited == false) proc.Kill();
+            //proc.Close();
+
+            //if (!proc.HasExited)
+            //{
+            //    proc.WaitForExit(1000);
+            //    if (!proc.HasExited)
+            //    {
+            //        proc.Kill();
+            //    }
+            //}
+
+            //proc.Kill();
+
+            return resultString;
+        }
+
+        //
+        private static String mpgToMp4(String _fileName, String _outputPath)
+        {
+            String resultString = "";
+            Process proc = new Process();
+            String ffmpegPath =
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg\\ffmpeg.exe")
+                    .Replace("VideoEditorProto\\ffmpeg", "VideoLib\\ffmpeg");
+            proc.StartInfo.FileName = ffmpegPath;
+            //аргументы командной строки
+            //-i "E:\Projects\CS\ASP.NET\ASP.NET MVC\VideoEditorProto\VideoResources\intermediate_all.mpg" -qscale:v 2 "E:\Projects\CS\ASP.NET\ASP.NET MVC\VideoEditorProto\VideoResources\output.mp4"
+            proc.StartInfo.Arguments =
+                "-i "
+                + "\"" + _outputPath + "video\\" + _fileName + "\""
+                + " -qscale:v 2 "
+                + "\"" + _outputPath + "video\\" + _fileName.Remove(_fileName.Length - 3) + "mp4" + "\"";
+            proc.StartInfo.RedirectStandardError = true;
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.CreateNoWindow = true;
+            if (!proc.Start())
+            {
+                resultString = "Error:\n";
+            }
+            else {/*proc.WaitForExit();*/}
+            StreamReader reader = proc.StandardError;
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line == "")
+                {
+                    break;
+                }
+                resultString += line + "\n";
+            }
+            reader.Close();
+            if (proc != null && proc.HasExited == false) proc.Kill();
+
             return resultString;
         }
     }
