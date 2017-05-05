@@ -481,8 +481,7 @@ function applyChanges(_returnedUrl) {
         'dataType': 'binary',
         //data: data,
         success: function (result) {
-            //alert(result);
-            //applyChanges(result);
+            //
             setData(result);
         },
         error: function (xhr, status, p3) {
@@ -591,7 +590,7 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
             data: data,
             success: function (result) {
                 //alert(result);
-                //applyChanges(result);
+                applyChanges(result);
                 //console.log("call applyChanges()");
                 console.log(result);
             },
@@ -602,6 +601,4 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
         canHandle = false;
         setTimeout(function () { canHandle = true; }, 500);
     }
-
-    
 });

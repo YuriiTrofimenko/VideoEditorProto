@@ -134,7 +134,7 @@ namespace VideoEditorProto.Controllers
 
             string[] fileNamesArray = fileNamesString.Split(',');
 
-            Console.WriteLine(fileNamesArray);
+            //Console.WriteLine(fileNamesArray);
 
             //Проверяем, есть ли в БД слой с таким ИД
             /*var layer =
@@ -181,10 +181,11 @@ namespace VideoEditorProto.Controllers
                 , inputPath
                 , outputPath
                 , previewFileName);
-            return Json("/Uploads/video/" + previewFileName + ".mp4");
+            return Json("/Downloads/video/" + previewFileName + ".mp4");
         }
 
         //Демо-действие загрузки медиа-файлов на сервер
+        //(больше не используется, рабочую реализацию смотри ниже)
         [HttpPost]
         public JsonResult Upload()
         {

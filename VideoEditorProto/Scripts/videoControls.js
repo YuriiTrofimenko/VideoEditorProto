@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function()
     }
 
     video.addEventListener('click', toggleVideo);
+
     controls.playPause.click(function(e){
     	e.preventDefault();
     	toggleVideo($(this));

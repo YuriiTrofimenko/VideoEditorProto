@@ -197,7 +197,7 @@ namespace VideoLib
             if (proc != null && proc.HasExited == false) proc.Kill();
 
             //
-            mpgToMp4(_previewFileName, _outputPath);
+            mpgToMp4(_previewFileName + ".mpg", _outputPath);
 
             return null;
         }
