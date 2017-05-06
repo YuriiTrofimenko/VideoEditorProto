@@ -485,7 +485,7 @@ header.mainHeader:before
 	cursor: pointer;
 }
 
-.mainHeader .save
+.mainHeader .saveResult
 {
 	background-position: -1038px -7px;
 }

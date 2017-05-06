@@ -99,7 +99,7 @@ $(function()
 		generateScale(this.duration);
     	});
 
-    $('.save')[0].addEventListener('click', function()
+    /*$('.save')[0].addEventListener('click', function()
     {
         var rows = {};
 
@@ -109,7 +109,7 @@ $(function()
 
             console.dir(rl.getRowInfo(index));
         });
-    });
+    });*/
 
 	$(layoutSelector).droppable({
 		drop: function( event, ui ) 

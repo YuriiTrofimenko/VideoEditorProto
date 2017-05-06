@@ -1,4 +1,7 @@
 ﻿var loadAnim = $('.load-anim');
+
+var resultFile = "";
+
 function toggleAnim () {
 
     console.log("display: " + loadAnim.css('display'));
@@ -620,6 +623,8 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
                 applyChanges(result);
                 //console.log("call applyChanges()");
                 console.log(result);
+                resultFile = result;
+                //$('button.save').attr('href', result);
                 toggleAnim();
             },
             error: function (xhr, status, p3) {
@@ -630,5 +635,15 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
         canHandle = false;
         setTimeout(function () { canHandle = true; }, 500);
     }
-    
+
+    //Download result
+    $('button.saveResult').click(function(e) {
+
+        e.preventDefault();
+        if (resultFile != "") {
+
+            downloadFile(resultFile);
+            //window.location.href = resultFile;
+        }
+    });
 });
