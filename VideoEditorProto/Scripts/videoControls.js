@@ -29,15 +29,23 @@ document.addEventListener('DOMContentLoaded', function()
 
     function toggleVideo(elem)
     {
-		(video.paused) ? video.play() : video.pause();
+        (video.paused === false) ? video.pause() : video.play();
+        console.log(video.paused);
         elem.toggleClass("paused");
     }
 
-    video.addEventListener('click', toggleVideo);
+    video.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggleVideo($(this));
+        
+    });
 
     controls.playPause.click(function(e){
     	e.preventDefault();
-    	toggleVideo($(this));
+        toggleVideo($(this));
+        
+        return false;
+        
     });
 
     function timeFormat (time)
