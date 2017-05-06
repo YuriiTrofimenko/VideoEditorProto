@@ -99,7 +99,9 @@ jQuery(document).ready(function ($) {
                     if (resultJS == '') {
 
                         //Projects not exists -
-                        //Do not hide CreateProject dialog
+                        //Show CreateProject dialog
+                        $("form.modal.createSequence").css("display", "block");
+                        $(".mask").css("display", "block");
                     } else {
 
                         console.log("Projects was gotten: " + resultJS);
