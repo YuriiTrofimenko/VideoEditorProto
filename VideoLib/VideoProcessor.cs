@@ -21,8 +21,15 @@ namespace VideoLib
             //Если файл - видео
             if (extString.Equals("mp4") || extString.Equals("avi"))
             {
-                resultString = extractAudio(_fileName, _resourcesPath, _outputPath);
-                resultString += createPreviewVideo(_fileName, _resourcesPath, _outputPath);
+                if (!File.Exists(_outputPath + "audio\\" + _fileName.Remove(_fileName.Length - 3) + "mp3"))
+                {
+                    resultString = extractAudio(_fileName, _resourcesPath, _outputPath);
+                }
+                if (!File.Exists(_outputPath + "video\\" + _fileName))
+                {
+                    resultString += createPreviewVideo(_fileName, _resourcesPath, _outputPath);
+                }
+                
             }
             return resultString;
         }
@@ -153,7 +160,11 @@ namespace VideoLib
             String filesString = "concat:\"";
             foreach (ResourceModel rm in _resModelList)
             {
-                createTmpVideo(rm.fileName, _outputPath);
+                if (!File.Exists(_outputPath + "video\\" + rm.fileName.Remove(rm.fileName.Length - 3) + "mpg"))
+                {
+                    createTmpVideo(rm.fileName, _outputPath);
+                }
+                
 
                 filesString +=
                     _outputPath + "video\\" + rm.fileName.Remove(rm.fileName.Length - 3) + "mpg" + "|";

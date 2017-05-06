@@ -1,11 +1,28 @@
-﻿//Когда страница редактирования загрузилась
+﻿var loadAnim = $('.load-anim');
+function toggleAnim () {
+
+    console.log("display: " + loadAnim.css('display'));
+    if (loadAnim.css('display') == 'none') {
+
+        loadAnim.css('display', 'block')
+    } else {
+
+        loadAnim.css('display', 'none')
+    }
+}
+
+//Когда страница редактирования загрузилась
 jQuery(document).ready(function ($) {
     "use strict";
 
     //localforage.clear();
 
+    
+
     //
     var userId;
+
+    
 
     //проверяем, есть ли в локальном хранилище информация о пользователе
         //если есть -
@@ -195,6 +212,7 @@ window.URL = window.URL || window.webkitURL;
 //выбран(ы) медиафайл(ы) в стандартном диалоге,
 //открывающемся по клику на кнопке "Импорт"
 $('#uploadFiles').on('change', function (e) {
+    toggleAnim();
     //получаем массив файлов
     var files = this.files;
     //если массив не пуст
@@ -317,9 +335,11 @@ $('#uploadFiles').on('change', function (e) {
                                 //alert(result);
                                 applyChanges(result);
                                 //console.log("call applyChanges()");
+                                toggleAnim();
                             },
                             error: function (xhr, status, p3) {
                                 alert(xhr.responseText);
+                                toggleAnim();
                             }
                         });
                     } else if (currentFileType == 'image') {
@@ -465,10 +485,11 @@ $('#uploadFiles').on('change', function (e) {
         //console.dir(rl);
         
     }
+    //toggleAnim();
 });
 
 function applyChanges(_returnedUrl) {
-
+    toggleAnim();
     //console.log(_returnedUrl);
     $.ajax({
         type: "GET",
@@ -483,11 +504,14 @@ function applyChanges(_returnedUrl) {
         success: function (result) {
             //
             setData(result);
+            toggleAnim();
         },
         error: function (xhr, status, p3) {
             alert(xhr.responseText);
+            toggleAnim();
         }
     });
+    //toggleAnim();
 }
 
 function setData(_data) {
@@ -520,6 +544,7 @@ $('#menu-delete-item').click(function () {
 
 /*Изменения на слое - эмуляция при нажатии клавиш*/
 $('html').keydown(function (eventObject) {
+    //toggleAnim();
     /*alert('Клавиша клавиатуры приведена в нажатое состояние. Код вводимого символа - ' + eventObject.which);*/
     /*console.log(eventObject.which);*/
     //if (eventObject.which == '17') {
@@ -556,7 +581,7 @@ $('html').keydown(function (eventObject) {
 var canHandle = true;
 
 $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
-
+    toggleAnim();
     if (canHandle) {
 
         var fileNames = [];
@@ -593,12 +618,15 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
                 applyChanges(result);
                 //console.log("call applyChanges()");
                 console.log(result);
+                toggleAnim();
             },
             error: function (xhr, status, p3) {
-                alert(xhr.responseText);
+                console.log(xhr.responseText);
+                toggleAnim();
             }
         });
         canHandle = false;
         setTimeout(function () { canHandle = true; }, 500);
     }
+    
 });
