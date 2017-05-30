@@ -45,9 +45,9 @@ namespace VideoEditorProto.Domain.Concrete
                 context.SaveChanges();
                 result = context.Users.Find(_user.Id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                
             }
             return result;
         }
@@ -71,7 +71,7 @@ namespace VideoEditorProto.Domain.Concrete
                 context.SaveChanges();
                 result = context.Projects.Find(_project.Id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }

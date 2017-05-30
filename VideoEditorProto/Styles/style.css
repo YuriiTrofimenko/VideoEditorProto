@@ -914,14 +914,13 @@ header.mainHeader:before
     padding-bottom: 13px;
     background-position: 0px 10px;
     width: 893px;
-	overflow: hidden;
+    overflow: hidden;
     height: 28px;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
-.scale ul
-{
-	background: url(img/progress_bar.png) center center repeat no-repeat;
+.scale ul {
+    background: url(img/progress_bar.png) center center repeat no-repeat;
     background-position: 0px 12px;
     height: 32px;
 }
@@ -970,7 +969,7 @@ header.mainHeader:before
 {
 	width: 914px;
     height: 120px;
-    overflow-x: scroll;
+    overflow-x: hidden !important;
 }
 
 .audioLayouts::-webkit-scrollbar,

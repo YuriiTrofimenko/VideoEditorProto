@@ -52,8 +52,7 @@
           <Property Name="AudioFreq" Type="varchar" MaxLength="32" />
           <Property Name="AudioChanells" Type="varchar" MaxLength="16" />
           <Property Name="AudioBitrate" Type="varchar" MaxLength="16" />
-          <Property Name="Name" Type="varchar" MaxLength="64" />
-          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />          
           <Property Name="VersionNum" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Row">
@@ -315,7 +314,6 @@
           <Property Name="AudioChanells" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="AudioBitrate" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="VersionNum" Type="Int64" Nullable="false" />
           <NavigationProperty Name="AudioCodec" Relationship="Self.FK_IdAudioCodec" FromRole="Project" ToRole="AudioCodecs" />
           <NavigationProperty Name="Layers" Relationship="Self.FK_IdProject" FromRole="Project" ToRole="Layer" />
@@ -588,7 +586,6 @@
                 <ScalarProperty Name="AudioChanells" ColumnName="AudioChanells" />
                 <ScalarProperty Name="AudioBitrate" ColumnName="AudioBitrate" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
               </MappingFragment>
             </EntityTypeMapping>

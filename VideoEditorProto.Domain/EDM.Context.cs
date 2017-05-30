@@ -16,11 +16,8 @@ namespace VideoEditorProto.Domain
     public partial class Entities : DbContext
     {
         public Entities()
-            : base("name=edoEntities")
+            : base("name=Entities")
         {
-            //Отключаем режим "ленивой загрузки"
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -80,14 +80,13 @@ namespace VideoEditorProto.Controllers
         {
             string newProjectId = IdCreator.createProjectGuid();
 
-            Project newProject = new Domain.Project()
-            {
-                Id = newProjectId,
-                Name = Request["name"],
-                IdUser = Request["userid"],
-                Width = Decimal.Parse(Request["width"]),
-                Height = Decimal.Parse(Request["height"])
-            };
+
+            Project newProject = new Domain.Project();
+            newProject.Name = Request["name"];
+            newProject.IdUser = Request["userid"];
+            newProject.Width = Decimal.Parse(Request["width"] == ""? "150" : Request["width"] );
+            newProject.Height = Decimal.Parse(Request["height"] == "" ? "100" : Request["width"]);
+            newProject.Id = @newProjectId;
             var result = mRepository.SaveProject(newProject);
 
             return Json(

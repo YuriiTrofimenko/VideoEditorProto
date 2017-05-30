@@ -179,14 +179,10 @@ $(function() {
         });*/
     });
 
-	/*rl.list.push(row1);
-
-	rl.generateRowList();
-
 	$('.filesTile li').click(function() 
 	{
 		rl.showRowInfo($(this).attr("data-row-id"));
-	});*/
+	});
 
 //	var csrftoken = document.cookie.substring(10, );
 //

@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "E:\Projects\CS\ASP.NET\ASP.NET MVC\gitdir\VideoEditorProto\VideoEditorProto.Domain\EDM.edmx" включено. 
+﻿// Создание кода T4 для модели "D:\Web\Git\EDO\VideoEditorProto\VideoEditorProto\VideoEditorProto.Domain\EDM.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

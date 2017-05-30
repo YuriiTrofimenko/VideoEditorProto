@@ -11,55 +11,51 @@ $(function()
 	});
 	
 	function setScrollbars() {
-		baron({
-			root: '.tab',
-	        scroller: '.filesTile',
-	        bar: '.scroller',
-	       	direction: 'v',
-			scrollingCls: '_scrolling',
-	        draggingCls: '_dragging'
-		}).controls({
-			track: '.tabScrollPanel'
-		});
+        baron({
+            root: '.tab',
+            scroller: '.filesTile',
+            bar: '.scroller',
+            direction: 'v',
+            scrollingCls: '_scrolling',
+            draggingCls: '_dragging'
+        }).controls({
+            track: '.tabScrollPanel'
+        });
 
-		var myScrollbar = baron({
-			root: '.controlAudioPanel',
-			scroller: '.audioLayouts',
-			bar: '.scrollbar',
-			direction: 'h',
-			scrollingCls: '_scrolling',
-	        draggingCls: '_dragging'
-		}).controls({
-			track: '.sequenceScrollbar'
-		});
+        var myScrollbar = baron({
+            root: '.controlAudioPanel',
+            scroller: '.audioLayouts',
+            bar: '.scrollbar',
+            direction: 'h',
+            scrollingCls: '_scrolling',
+            draggingCls: '_dragging'
+        }).controls({
+            track: '.sequenceScrollbar'
+        });
 
-		myScrollbar.onmouseup = function()
-		{
-			var offset = $(this).css('left'),
-			    width = $(this).width(),
-				parentWidth = $(this).parent().width();
+        myScrollbar.onmouseup = function () {
+            var offset = $(this).css('left'),
+                width = $(this).width(),
+                parentWidth = $(this).parent().width();
 
-			$('.videoLayouts').scrollLeft(offset/width * parentWidth);
-		};
+            $('.videoLayouts').scrollLeft(offset / width * parentWidth);
+        };
 
-		var click = false;
+        var click = false;
 
-		myScrollbar.onclick = function()
-		{
-		    click = true;
-		};
+        myScrollbar.onclick = function () {
+            click = true;
+        };
 
-		myScrollbar.onmousemove = function()
-		{
-		    if (click)
-		    {
+        myScrollbar.onmousemove = function () {
+            if (click) {
                 var offset = $(this).css('left'),
                     width = $(this).width(),
                     parentWidth = $(this).parent().width();
 
-                $('.videoLayouts').scrollLeft(offset/width * parentWidth);
+                $('.videoLayouts').scrollLeft(offset / width * parentWidth);
             }
-		};
+        };
 	}
 
 	$('.showHide, .blockUnblock, .muteSound').click(function()
@@ -69,28 +65,27 @@ $(function()
 
 	function generateScale(duration)
 	{
-		var 	timeScaleSize = 130,
-			iters = Math.ceil(Math.ceil(duration) / 5) + 1,
-			scale = $('.scale ul'),
-			timeElement = document.createElement('li'),
-			sequenceWidth = iters * timeScaleSize + "px";
-			
-		timeElement.innerHTML = "00:00:01";
-		scale[0].appendChild(timeElement);
+        var timeScaleSize = 130,
+            iters = Math.ceil(Math.ceil(duration) / 5) + 1,
+            scale = $('.scale ul'),
+            timeElement = document.createElement('li'),
+            sequenceWidth = iters * timeScaleSize + "px";
 
-		for (var i=1, seconds = 5, mins = 0, secs = 0; i<iters; i++, seconds += 5)
-		{
-			timeElement = document.createElement('li');			
-			mins = Math.floor(seconds / 60);
-			secs = seconds % 60;
-			timeElement.innerHTML = "00:" + ((mins < 10)? "0" + mins : mins) + ":" 
-						+ ((secs < 10)? "0" + secs : secs);			
-			scale[0].appendChild(timeElement);			
-		}
+        timeElement.innerHTML = "00:00:01";
+        scale[0].appendChild(timeElement);
 
-		scale.css('width', sequenceWidth);
-		$('.videoLayout, .audioLayout').css('width', sequenceWidth);
-		setScrollbars();
+        for (var i = 1, seconds = 5, mins = 0, secs = 0; i < iters; i++ , seconds += 5) {
+            timeElement = document.createElement('li');
+            mins = Math.floor(seconds / 60);
+            secs = seconds % 60;
+            timeElement.innerHTML = "00:" + ((mins < 10) ? "0" + mins : mins) + ":"
+                + ((secs < 10) ? "0" + secs : secs);
+            scale[0].appendChild(timeElement);
+        }
+
+        scale.css('width', sequenceWidth);
+        $('.videoLayout, .audioLayout').css('width', sequenceWidth);
+        setScrollbars();
 	}
 
 	var vid = $('#videoPlayer video')[0];
