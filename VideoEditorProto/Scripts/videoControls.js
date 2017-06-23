@@ -74,6 +74,11 @@ document.addEventListener('DOMContentLoaded', function()
         controls.currentTime.text(timeFormat(video.currentTime));
     });
 
+    video.addEventListener("ended", function () {
+        console.log("end");
+        toggleClass(controls.playPause);
+    });
+
     controls.runner.draggable({
         axis: "x",
         containment: ".progressBar"

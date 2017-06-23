@@ -16,6 +16,12 @@ namespace VideoEditorProto.Domain.Abstract
         IQueryable<Layer> Layers { get; }
         Layer SaveLayer(Layer _layer);
 
+        IQueryable<Row> Rows { get; }
+        Row SaveRows(Row _row);
+
+        IQueryable<Effect> Effects { get; }
+        Effect SaveEffect(Effect _effect);
+
         IQueryable<AudioCodec> AudioCodecs { get; }
 
         IQueryable<VideoCodec> VideoCodecs { get; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.Web;
 using System.Web.Mvc;
 using VideoEditorProto.Domain;
@@ -61,34 +62,26 @@ namespace VideoEditorProto.Controllers
             //return new JsonResult { };
         }
 
-        //localhost:50015/editor/getProjectsByUserId?_userId=1
-        /*[HttpGet]
-        public JsonResult getProjectsByUserId(string _userId)
-        {
-            var result =
-                from item in mRepository.Project
-                where (item.IdUser == _userId)
-                select new { item.Id, item.User, item.Width, item.Height };
-            return Json(result, JsonRequestBehavior.AllowGet);
-            //return new JsonResult { };
-        }*/
-
         /*Production POST actions for AJAX*/
 
         [HttpPost]
         public JsonResult CreateProject()
         {
             string newProjectId = IdCreator.createProjectGuid();
-
-
+            
             Project newProject = new Domain.Project();
             newProject.Name = Request["name"];
             newProject.IdUser = Request["userid"];
             newProject.Width = Decimal.Parse(Request["width"] == ""? "150" : Request["width"] );
             newProject.Height = Decimal.Parse(Request["height"] == "" ? "100" : Request["width"]);
+            newProject.AudioBitrate = Request["bitrate"];
+            newProject.FPS = Decimal.Parse(Request["fps"]);
+            //var vc = mRepository.VideoCodecs.Where(x => x.CodecName.Equals(Request["vCodec"]));
+            newProject.VideoCodec = null;
+            newProject.AudioCodec = null;
             newProject.Id = @newProjectId;
             var result = mRepository.SaveProject(newProject);
-
+                
             return Json(
                 new
                 {
@@ -114,7 +107,14 @@ namespace VideoEditorProto.Controllers
             var result =
                 from projectItem in mRepository.Project
                 where (projectItem.IdUser == _userId)
-                select new { projectItem.Id, projectItem.User, projectItem.Width, projectItem.Height };
+                select new
+                {
+                    projectItem.Id,
+                    projectItem.User,
+                    projectItem.Width,
+                    projectItem.Height,
+
+                };
             return Json(result);
         }
 
@@ -128,8 +128,8 @@ namespace VideoEditorProto.Controllers
             , string[] _rowIds)*/
         public JsonResult ProcessLayoutChange()
         {
-
             String fileNamesString = Request["file_names"];
+            Color rgb = Color.FromArgb(int.Parse(Request["red"]), int.Parse(Request["green"]), int.Parse(Request["blue"]));
 
             string[] fileNamesArray = fileNamesString.Split(',');
 
@@ -179,7 +179,8 @@ namespace VideoEditorProto.Controllers
                 , 0
                 , inputPath
                 , outputPath
-                , previewFileName);
+                , previewFileName
+                , rgb);
             return Json("/Downloads/video/" + previewFileName + ".mp4");
         }
 
@@ -231,6 +232,8 @@ namespace VideoEditorProto.Controllers
                     //Берем исходный медиа-файл и создаем его сжатую версию для предпросмотра
                     //TODO создавать отдельные каталоги для preview медиафайлов каждого пользователя
                     VideoLib.VideoProcessor.processResource(fileName, inputPath, outputPath);
+                    string rowID = IdCreator.createRowGuid();
+
                 }
             }
             return Json("/Downloads/video/" + fileName);

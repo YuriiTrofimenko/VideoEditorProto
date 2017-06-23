@@ -12,6 +12,17 @@ $(function () {
 			$( "#slider-range + p > input" ).val( ui.value + "%");
 		}
     });
+
+    $("#slider-range-blue, #slider-range-red, #slider-range-green").slider({
+        range: "max",
+        min: 1,
+        max: 255,
+        value: 1,
+        slide: function (event, ui) {
+            $(this).siblings("p").text(ui.value);
+        }
+    });
+
     $( "#slider-range + p > input" ).val( $( "#slider-range" ).slider( "value" ) + "%" );
 
     $( '.submitField input[type="submit"]' ).click(function (event) {
@@ -26,6 +37,13 @@ $(function () {
     });
 
     $(".openProjects").click(function () {
-    	
+        $(".openSequence").fadeIn();
+        $(".mask").fadeIn();
+        console.log("hui");
+    });
+
+    $(".mask").click(function () {
+        $(".openSequence").fadeOut();
+        $(".mask").fadeOut();
     });
 });

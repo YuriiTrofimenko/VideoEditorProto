@@ -16,19 +16,19 @@
 
     <form class="signin modal" action="" method="post">
     	<div class="panel">
-	        <label>E-mail<input type="text" name="mail" value="" /></label>
-	        <label>Пароль<input type="password" name="password" value="" /></label>
+	        <label>E-mail<input required pattern=".{7,64}" placeholder="Пожалуйста, введите ваш электронный адресс." type="text" name="mail" value="" /></label>
+	        <label>Пароль<input required pattern=".{3,16}" placeholder="Пожалуйста, введите ваш пароль." type="password" name="password" value="" /></label>
 	    </div>
         <input type="submit" name="submit" value="Войти" />
     </form>
 
 	<form class="signup modal" action="" method="post">
 		<div class="panel">
-			<label>Имя<input type="text" name="name" value="" /></label>
+			<label>Имя<input required pattern=".{2,24}" placeholder="Пожалуйста, введите ваше имя." type="text" name="name" value="" /></label>
 	        @*<label>Фамилия<input type="text" name="surname" value="" /></label>*@
-	        <label>E-mail<input type="email" name="mail" value="" /></label>
-	        <label>Пароль<input type="password" name="password" value="" /></label>
-	        <label>Повтор пароля<input type="password" name="password1" value="" /></label>
+	        <label>E-mail<input required pattern=".{7,64}" placeholder="Пожалуйста, введите ваш электронный адресс." type="email" name="mail" value="" /></label>
+	        <label>Пароль<input required pattern=".{3,16}" placeholder="Пожалуйста, введите ваш пароль." type="password" name="password" value="" /></label>
+	        <label>Повтор пароля<input pattern=".{3,16}" required placeholder="Пожалуйста, подтвердите ваш пароль." type="password" name="password1" value="" /></label>
 		</div>
         <input type="submit" name="submit" value="Зарегистрироваться" />
     </form>    

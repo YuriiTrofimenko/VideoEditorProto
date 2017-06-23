@@ -714,15 +714,17 @@ header.mainHeader:before
     padding: 15px;
 }
 
-.filesTile li
-{
+.filesTile li,
+li.ui-draggable.ui-draggable-handle {
     width: 124px;
     height: 82px;
-    position: relative;    float: left;
+    position: relative;
+    float: left;
     /*margin-right: 15px;*/
     margin-right: 7px;
     cursor: pointer;
     margin-bottom: 15px;
+    list-style: none;
     box-shadow: 0px 0px 17px -3px #000;
 }
 
@@ -738,8 +740,10 @@ header.mainHeader:before
 
 .filesTile li .videoTile,
 .filesTile li .audioTile,
-.filesTile li .imageTile
-{
+.filesTile li .imageTile,
+li.ui-draggable.ui-draggable-handle .videoTile,
+li.ui-draggable.ui-draggable-handle .audioTile,
+li.ui-draggable.ui-draggable-handle .imageTile {
     height: 28px;
     position: absolute;
     bottom: 0px;
@@ -751,29 +755,34 @@ header.mainHeader:before
 
 .filesTile li .videoTile:before,
 .filesTile li .audioTile:before,
-.filesTile li .imageTile:before
-{
-	width: 28px;
-	height: 28px;
-	content: "";
-	float: left;
-	border-right: 1px solid #b2b2b1;
-	margin-right: 3px;
-	display: inline-block;
-	background: url(img/contols.png) no-repeat no-repeat;
+.filesTile li .imageTile:before,
+li.ui-draggable.ui-draggable-handle .videoTile:before,
+li.ui-draggable.ui-draggable-handle .audioTile:before,
+li.ui-draggable.ui-draggable-handle .imageTile:before {
+    width: 28px;
+    height: 28px;
+    content: "";
+    float: left;
+    border-right: 1px solid #b2b2b1;
+    margin-right: 3px;
+    display: inline-block;
+    background: url(img/contols.png) no-repeat no-repeat;
 }
 
-.filesTile li .videoTile:before
+.filesTile li .videoTile:before,
+li.ui-draggable.ui-draggable-handle .videoTile:before
 {
 	background-position: -145px -191px;
 }
 
-.filesTile li .audioTile:before
+.filesTile li .audioTile:before,
+li.ui-draggable.ui-draggable-handle .audioTile:before
 {
 	background-position: -145px -231px;
 }
 
-.filesTile li .imageTile:before
+.filesTile li .imageTile:before,
+li.ui-draggable.ui-draggable-handle  .imageTile:before
 {
 	background-position: -145px -271px;
 }
@@ -923,6 +932,7 @@ header.mainHeader:before
     background: url(img/progress_bar.png) center center repeat no-repeat;
     background-position: 0px 12px;
     height: 32px;
+    min-width: 900px;
 }
 
 .controlVideoPanel,
@@ -985,6 +995,7 @@ header.mainHeader:before
     height: 38px;
     min-width: 1000px;
     background-color: #4d4d4d;
+    position: relative;
 	margin: 1px;
     word-spacing: 0px;
 }
@@ -999,7 +1010,7 @@ header.mainHeader:before
 	text-shadow: 1px 1px 8px #000;
 	display: inline-block;
 	padding: 3px 4px;
-	position: relative;
+	position: absolute;
 	text-transform: uppercase;
 	font-size: 11px;
 	top: 0px !important;
@@ -1280,9 +1291,10 @@ header.mainHeader:before
     color: #ffba00;
 }
 
-#effects .effectProperties .propertyPart .propertyContent
-{
-	display: none;
+#effects .effectProperties .propertyPart .propertyContent {
+    /*display: none;*/
+    color: #fff;
+    font-size: 10px;
 }
 
 .sequenceScrollbar

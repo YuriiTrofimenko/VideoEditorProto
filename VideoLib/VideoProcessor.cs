@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -85,7 +86,6 @@ namespace VideoLib
             return resultString;
         }
 
-        //
         private static String createPreviewVideo(String _fileName, String _resourcesPath, String _outputPath)
         {
             String resultString = "";
@@ -145,7 +145,8 @@ namespace VideoLib
         }
 
         //
-        public static String processLayoutChange(List<ResourceModel> _resModelList, int _begin, int _end, String _resourcesPath, String _outputPath, String _previewFileName)
+
+        public static String processLayoutChange(List<ResourceModel> _resModelList, int _begin, int _end, String _resourcesPath, String _outputPath, String _previewFileName, Color rgb)
         {
             String resultString = "";
             //Создаем объект процесса для запуска внешнего исполняемого файла
@@ -164,19 +165,26 @@ namespace VideoLib
                 {
                     createTmpVideo(rm.fileName, _outputPath);
                 }
-                
 
                 filesString +=
                     _outputPath + "video\\" + rm.fileName.Remove(rm.fileName.Length - 3) + "mpg" + "|";
             }
             filesString = filesString.Remove(filesString.Length - 1) + "\"";
 
+            //ffmpeg - i 1.mp4 -f lavfi - i "color=red:s=320x240" - filter_complex "[0:v]setsar=sar=1/1[s]; [s][1:v]blen
+            //d = shortest = 1:all_mode = screen:all_opacity = 0.7[out]" -map [out] -map 0:a output.mp4
+            //сверху наложение красного цвета на видео
+
             //Устанавливаем аргументы командной строки
             //-i "_resourcesPath\video\_fileName" -s 320x240 "_outputPath\video\_fileName"
             proc.StartInfo.Arguments =
                 "-i "
-                + filesString
-                + " -c copy "
+                + filesString;
+            /*if (!(rgb.R == 1 && rgb.G == 1 && rgb.B == 1))
+                proc.StartInfo.Arguments += " -f lavfi - i \"color=0x" + ColorTranslator.ToHtml(rgb).Remove(0, 1) + ":s = 320x240\" - filter_complex \"[0:v]setsar = sar = 1 / 1[s]; [s] [1:v] blen "
+                + "/d = shortest = 1:all_mode = screen:all_opacity = 0.7[out]\" - map[out] - map 0:a";*/
+
+            proc.StartInfo.Arguments += " -c copy "
                 + "\"" + _outputPath + "video\\" + _previewFileName + ".mpg" + "\"";
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.UseShellExecute = false;

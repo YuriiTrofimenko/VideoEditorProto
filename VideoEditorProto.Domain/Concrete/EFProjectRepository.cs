@@ -78,6 +78,7 @@ namespace VideoEditorProto.Domain.Concrete
             return result;
         }
 
+        IQueryable<Layer> Layers { get => context.Layers; }
         public Layer SaveLayer(Layer _layer)
         {
             Layer result = null;
@@ -105,10 +106,72 @@ namespace VideoEditorProto.Domain.Concrete
             return result;
         }
 
+
+        IQueryable<Row> Rows { get => context.Rows; }
+        public Row SaveRows(Row _row)
+        {
+            Row result = null;
+            try
+            {
+                Row dbRow = context.Rows.Find(_row.Id);
+                //Если запись о проекте существует - обновляем ее данные
+                if (dbRow != null)
+                {
+                    dbRow.Layer = _row.Layer;
+                    dbRow.MaterialFile = _row.MaterialFile;
+                    dbRow.VersionNum = _row.VersionNum;
+                }
+                //Если нет - создаем запись
+                else
+                {
+                    context.Rows.Add(_row);
+                }
+                context.SaveChanges();
+                result = context.Rows.Find(_row.Id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
+        IQueryable<Effect> Effects { get => context.Effects; }
+        public Effect SaveEffect(Effect _effect)
+        {
+            Effect result = null;
+            try
+            {
+                Effect dbEffect = context.Effects.Find(_effect.Id);
+                //Если запись о проекте существует - обновляем ее данные
+                if (dbEffect != null)
+                {
+                    dbEffect.Version = _effect.Version;
+                    dbEffect.VersionNum = _effect.VersionNum;
+                }
+                //Если нет - создаем запись
+                else
+                {
+                    context.Effects.Add(_effect);
+                }
+                context.SaveChanges();
+                result = context.Effects.Find(_effect.Id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
         IQueryable<Layer> IProjectRepository.Layers { get => context.Layers; }
 
         IQueryable<AudioCodec> IProjectRepository.AudioCodecs { get => context.AudioCodecs; }
 
         IQueryable<VideoCodec> IProjectRepository.VideoCodecs { get => context.VideoCodecs; }
+
+        IQueryable<Row> IProjectRepository.Rows => throw new NotImplementedException();
+
+        IQueryable<Effect> IProjectRepository.Effects => throw new NotImplementedException();
     }
 }

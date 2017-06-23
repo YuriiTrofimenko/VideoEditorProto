@@ -30,7 +30,6 @@ namespace VideoEditorProto.Utils
                 client.EnableSsl = true;
                 NetworkCredential networkCred =
                     new NetworkCredential(_from, _pswd);
-                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = true;
                 client.Credentials = networkCred;
 

@@ -16,7 +16,6 @@ namespace VideoEditorProto.Controllers
 
         public DefaultController(IProjectRepository _projectRepository)
         {
-
             mRepository = _projectRepository;
         }
 

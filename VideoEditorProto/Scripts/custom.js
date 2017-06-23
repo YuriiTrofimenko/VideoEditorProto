@@ -19,14 +19,9 @@ jQuery(document).ready(function ($) {
     "use strict";
 
     //localforage.clear();
-
-    
-
     //
     var userId;
-
     
-
     //проверяем, есть ли в локальном хранилище информация о пользователе
         //если есть -
             //проверяем, есть ли на сервере проекты с ИД пользователя, показываем список проектов, создать проект
@@ -149,9 +144,15 @@ jQuery(document).ready(function ($) {
 
         event.preventDefault();
 
-        var projectName = $('div.submitField input[name=projectName]').val();
-        var width = $("form.modal.createSequence input[name=width]").val();
-        var height = $("form.modal.createSequence input[name=height]").val();
+        var projectName = $('div.submitField input[name=projectName]').val(),
+            width = $("form.modal.createSequence input[name=width]").val(),
+            height = $("form.modal.createSequence input[name=height]").val(),
+            vCodec = $("form.modal.createSequence select[name=vCodec]").val(),
+            fps = $("form.modal.createSequence select[name=fps]").val(),
+            aCodec = $("form.modal.createSequence select[name=aCodec]").val(),
+            frequency = $("form.modal.createSequence select[name=frequency]").val(),
+            bitrate = $("form.modal.createSequence select[name=bitrate]").val(),
+            quality = $("form.modal.createSequence select[name=quality]").val();
 
         if (projectName != '') {
 
@@ -164,6 +165,11 @@ jQuery(document).ready(function ($) {
             newProjectFormData.append("name", projectName);
             newProjectFormData.append("width", width);
             newProjectFormData.append("height", height);
+            newProjectFormData.append("vCodec", vCodec);
+            newProjectFormData.append("fps", fps);
+            newProjectFormData.append("aCodec", frequency);
+            newProjectFormData.append("bitrate", bitrate);
+            newProjectFormData.append("quality", quality);
 
             $.ajax({
                 type: "POST",
@@ -256,8 +262,8 @@ $('#uploadFiles').on('change', function (e) {
                     });
                 }
                 
-                if (!rowExists) {
-
+                if (!rowExists)
+                {
                     const currentName = tmpName;
                     const currentExt = currentName.substr(currentName.length - 3, 3).toLowerCase();
                     
@@ -289,21 +295,22 @@ $('#uploadFiles').on('change', function (e) {
 
                             const canvas = document.createElement('canvas');
                             canvas.setAttribute("id", "canvas" + x);
-                            // необходимо установить те же размеры, что и у загруженного видео, иначе превью будет обрезано
-                            canvas.width = this.videoWidth;
-                            canvas.height = this.videoHeight;
+                            //canvas.width = this.videoWidth;
+                            //canvas.height = this.videoHeight;
+                            canvas.width = 124;
+                            canvas.height = 82;
 
                             const context = canvas.getContext('2d');
                             //context.drawImage(currentVideo, 0, 0, this.videoWidth, this.videoHeight);
                             context.drawImage(currentVideo, 0, 0, 124, 82);
 
                             const dataURL = canvas.toDataURL(); // вот и ссылка с превью
-                            row2.values["path"] = dataURL;
+                            row2.previewPath = dataURL;
 
-                            //console.log(this.duration); // а здесь длительность видео в секундах
-                            console.log(currentName);
+                            console.log("this |");
+                            console.dir(this);
                             row2.values["fileName"] = currentName;
-                            //row2.values["path"] = "Images/2.png";
+                            row2.values["duration"] = this.duration;
                             row2.values["type"] = "video";
                             row2.values["width"] = canvas.width;
                             //console.log(row2);
@@ -325,13 +332,10 @@ $('#uploadFiles').on('change', function (e) {
 
                         currentVideo.src = window.URL.createObjectURL(files[x]);
 
-
-
                         var data = new FormData();
                         data.append("file" + x, files[x]);
                         $.ajax({
                             type: "POST",
-                            //url: '/Editor/Upload',
                             url: '/Editor/CreateRow',
                             contentType: false,
                             processData: false,
@@ -347,7 +351,8 @@ $('#uploadFiles').on('change', function (e) {
                                 toggleAnim();
                             }
                         });
-                    } else if (currentFileType == 'image') {
+                    } else
+                    if (currentFileType == 'image') {
                         
                         const currentImage = document.createElement('img');
                         currentImage.setAttribute("id", "image" + x);
@@ -366,12 +371,14 @@ $('#uploadFiles').on('change', function (e) {
                             context.drawImage(this, 0, 0, 124, 82);
 
                             const dataURL = canvas.toDataURL(); // вот и ссылка с превью
-                            row2.values["path"] = dataURL;
+                            row2.previewPath = dataURL;
 
                             row2.values["fileName"] = currentName;
-                            //row2.values["path"] = "Images/2.png";
+                            //row2.previewPath = "Images/2.png";
+                            row2.values["duration"] = 5;
                             row2.values["type"] = "image";
                             row2.values["width"] = canvas.width;
+                            row2.values["height"] = canvas.height;
                             //console.log(row2);
                             rl.list.push(row2);
                             rl.generateRowList();
@@ -379,6 +386,7 @@ $('#uploadFiles').on('change', function (e) {
                             /*$('.filesTile li').click(function () {
                                 rl.showRowInfo($(this).attr("data-row-id"));
                             });*/
+                            toggleAnim();
                         };
 
                         currentImage.onerror = function () {
@@ -387,30 +395,12 @@ $('#uploadFiles').on('change', function (e) {
                             this.remove();
                             //div.innerHTML = "not image";
                             alert("Тип файла" + currentName + " не соответствует расширению");
+                            toggleAnim();
                         };
 
                         currentImage.src = window.URL.createObjectURL(files[x]);
-
-
-
-                        /*var data = new FormData();
-                        data.append("file" + x, files[x]);
-                        $.ajax({
-                            type: "POST",
-                            url: '/Default/Upload',
-                            contentType: false,
-                            processData: false,
-                            data: data,
-                            success: function (result) {
-                                //alert(result);
-                                applyChanges(result);
-                                //console.log("call applyChanges()");
-                            },
-                            error: function (xhr, status, p3) {
-                                alert(xhr.responseText);
-                            }
-                        });*/
-                    } else if (currentFileType == 'audio') {
+                    } else
+                    if (currentFileType == 'audio') {
                         
                         const currentAudio = document.createElement('audio');
                         currentAudio.setAttribute("id", "audio" + x);
@@ -419,20 +409,11 @@ $('#uploadFiles').on('change', function (e) {
 
                             row2 = new Row();
 
-                            //const canvas = document.createElement('canvas');
-                            //canvas.setAttribute("id", "canvas" + x);
-                            // необходимо установить те же размеры, что и у загруженного image, иначе превью будет обрезано
-                            //canvas.width = this.naturalWidth;
-                            //canvas.height = this.naturalWidth;
-
-                            //const context = canvas.getContext('2d');
-                            //context.drawImage(this, 0, 0);
-
-                            //const dataURL = canvas.toDataURL(); // вот и ссылка с превью
-                            row2.values["path"] = this.src;
+                            row2.previewPath = this.src;
 
                             row2.values["fileName"] = currentName;
-                            //row2.values["path"] = "Images/2.png";
+                            //row2.previewPath = "Images/2.png";
+                            row2.values["duration"] = this.duration;
                             row2.values["type"] = "audio";
                             row2.values["width"] = "";
                             console.log(row2);
@@ -453,29 +434,9 @@ $('#uploadFiles').on('change', function (e) {
                         };
 
                         currentAudio.src = window.URL.createObjectURL(files[x]);
-                        //currentAudio.load();
-
-
-                        /*var data = new FormData();
-                        data.append("file" + x, files[x]);
-                        $.ajax({
-                            type: "POST",
-                            url: '/Default/Upload',
-                            contentType: false,
-                            processData: false,
-                            data: data,
-                            success: function (result) {
-                                //alert(result);
-                                applyChanges(result);
-                                //console.log("call applyChanges()");
-                            },
-                            error: function (xhr, status, p3) {
-                                alert(xhr.responseText);
-                            }
-                        });*/
                     } else {
-
                         alert("Неизвестный тип файла " + currentName);
+                        toggleAnim();
                     }                    
                 } else {
 
@@ -523,7 +484,6 @@ function setData(_data) {
 
     localforage.setItem("tmpvideo", _data, function (err, blob) {
 
-
     }).then(function() {
 
         //console.log("_data: " + _data);
@@ -547,38 +507,6 @@ $('#menu-delete-item').click(function () {
     console.log("delete");
 });
 
-/*Изменения на слое - эмуляция при нажатии клавиш*/
-$('html').keydown(function (eventObject) {
-    //toggleAnim();
-    /*alert('Клавиша клавиатуры приведена в нажатое состояние. Код вводимого символа - ' + eventObject.which);*/
-    /*console.log(eventObject.which);*/
-    //if (eventObject.which == '17') {
-
-    //    console.log(eventObject.which);
-    //    console.log($(".videoLayout").has(".videoRow"));
-
-    //    var fileNames = [];
-
-    //    var layouts = $(".videoLayout").has(".videoRow");
-
-    //    jQuery.each(layouts, function (i, layout) {
-
-    //        console.log(layout);
-
-    //        var layoutRows = $(layout).find(".videoRow");
-
-    //        jQuery.each(layoutRows, function (i, row) {
-
-    //            console.log(row);
-    //            console.log($(row).find("img").attr("alt"));
-    //            fileNames.push($(row).find("img").attr("alt"));
-    //        });
-    //    });
-
-
-    //}
-});
-
 //Изменения на слое -
 //handle layout rows adding and removing
 //TODO handle layout rows moving
@@ -590,27 +518,31 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
     if (canHandle) {
 
         var fileNames = [];
-
         var layouts = $(".videoLayout").has(".videoRow");
 
         console.log(e.target);
 
         jQuery.each(layouts, function (i, layout) {
-
             console.log(layout);
-
             var layoutRows = $(layout).find(".videoRow");
 
             jQuery.each(layoutRows, function (i, row) {
-
                 console.log(row);
                 console.log($(row).find("img").attr("alt"));
                 fileNames.push($(row).find("img").attr("alt"));
             });
         });
 
+        var blue = parseInt($(".propertyPart #slider-range-blue").siblings("p").text()),
+            red = parseInt($(".propertyPart #slider-range-red").siblings("p").text()),
+            green = parseInt($(".propertyPart #slider-range-green").siblings("p").text());
+            
+
         var data = new FormData();
         data.append("file_names", fileNames);
+        data.append("red", red);
+        data.append("green", green);
+        data.append("blue", blue);
 
         $.ajax({
             type: "POST",
@@ -619,12 +551,9 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
             processData: false,
             data: data,
             success: function (result) {
-                //alert(result);
                 applyChanges(result);
-                //console.log("call applyChanges()");
                 console.log(result);
                 resultFile = result;
-                //$('button.save').attr('href', result);
                 toggleAnim();
             },
             error: function (xhr, status, p3) {
@@ -643,7 +572,6 @@ $(".videoLayout").bind('DOMNodeInserted DOMNodeRemoved', function (e) {
         if (resultFile != "") {
 
             downloadFile(resultFile);
-            //window.location.href = resultFile;
         }
     });
 });

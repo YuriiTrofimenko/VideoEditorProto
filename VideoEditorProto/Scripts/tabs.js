@@ -1,7 +1,8 @@
 function Row ()
 {
 	this.fields = [];
-	this.values = [];
+    this.values = [];
+    this.previewPath = "";
 }
 
 Row.prototype.defineFields = function()
@@ -82,7 +83,7 @@ RowList.prototype.generateRowList = function()
             //
             newRow.setAttribute("data-row-id", i);
             newRow.setAttribute("class", "ui-draggable ui-draggable-handle");
-            image.setAttribute("src", (item.values["type"] != 'audio') ? item.values["path"] : "Images/3.png");
+            image.setAttribute("src", (item.values["type"] != 'audio') ? item.previewPath : "Images/3.png");
             image.setAttribute("alt", item.values["name"]);
             newRow.appendChild(image);
             fileInfo.className = item.values["type"] + "Tile";
@@ -128,8 +129,19 @@ RowList.prototype.getRowInfo = function(index)
 			'values': this.list[index].values};
 }
 
-	//
-	rl = new RowList();
+RowList.prototype.getSumDuration = function ()
+{
+    var result = 0;
+
+    if (this.list != undefined && this.list != null)
+    for (var i = 0; i < this.list.length; i++)
+    {
+        result += parseInt(this.list[i].values["duration"]);
+    }
+    return result;
+}
+
+rl = new RowList();
 
 $(function() {
 	$(".tabPanel").tabs();
@@ -184,40 +196,4 @@ $(function() {
 		rl.showRowInfo($(this).attr("data-row-id"));
 	});
 
-//	var csrftoken = document.cookie.substring(10, );
-//
-//	function csrfSafeMethod(method) {
-//		return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-//	}
-
-//	$.ajaxSetup({
-//		beforeSend: function(xhr, settings) {
-//			if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-//				xhr.setRequestHeader('X-CSRFToken', csrftoken);
-//			}
-//		}
-//	});
-//
-//	$('#files form').submit(function(e) {
-//		var f = new FormData($(this)[0]);
-//
-//		$.ajax({
-//			url: '/load_row_file/',
-//			type: 'POST',
-//			data: f,
-//			async: false,
-//			success: function (data) {
-//				alert(data);
-//			},
-//			error: function(xhr, status, error) {
-//				console.log(xhr);
-//				console.log(status);
-//				console.log(error);
-//			},
-//			cache: false,
-//			contentType: false,
-//			processData: false
-//		});
-//		return false;
-//	});
 });
